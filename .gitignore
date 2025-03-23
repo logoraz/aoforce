@@ -1,0 +1,14 @@
+# Main
+/ocicl/*
+
+# core
+/core/ocicl/*
+
+# rcfiles
+/rcfiles/ocicl/*
+
+# xdg-config
+/xdg-config/ocicl/*
+
+# notes
+/notes/ocicl/*
