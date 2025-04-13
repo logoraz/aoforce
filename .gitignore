@@ -4,11 +4,13 @@
 # core
 /core/ocicl/*
 
+# libraries
+/libraries/ocicl/*
+/libraries/learncl/ocicl/*
+/libraries/notes/ocicl/*
+
 # rcfiles
 /rcfiles/ocicl/*
 
 # xdg-config
 /xdg-config/ocicl/*
-
-# notes
-/notes/ocicl/*

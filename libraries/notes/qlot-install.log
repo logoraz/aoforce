@@ -1,0 +1,29 @@
+# https://github.com/fukamachi/qlot
+
+## Automatic Installer (recommended)
+$ curl -L https://qlot.tech/installer | sh
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:--  0:00:02 --:--:--     0
+  0     0    0     0    0     0      0      0 --:--:--  0:00:03 --:--:--     0
+100  3797  100  3797    0     0    761      0  0:00:04  0:00:04 --:--:--  7387
+Welcome to Qlot automatic installer!
+
+Installation path: /home/logoraz/.local/share/qlot
+Already have an archive: /home/logoraz/.local/share/qlot/tmp/qlot.tar.gz
+done
+Setting it up. This may take a while...
+sh: line 113: [: : integer expression expected
+sh: line 121: [: : integer expression expected
+
+Qlot v1.6.0 has been successfully installed under '/home/logoraz/.local/share/qlot'.
+
+The executable script is located at '/home/logoraz/.local/share/qlot/bin/qlot'.
+To make it runnable by your shell, please add '/home/logoraz/.local/share/qlot/bin' to '$PATH'.
+
+    export PATH="/home/logoraz/.local/share/qlot/bin:$PATH"
+
+Enjoy!
+
+## Uninstall
+$ ~/.qlot/qlot/scripts/qlot-uninstaller.sh

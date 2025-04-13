@@ -27,5 +27,4 @@
 (defun symlinkp (pathname)
   (sb-posix:s-islnk (sb-posix:stat-mode (sb-posix:lstat pathname))))
 
-
 (sb-ext:quit)

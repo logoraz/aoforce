@@ -9,23 +9,23 @@ fi
 
 ## General Env
 export LC_COLLATE=C
-#export EDITOR=lem
-#export BROWSER=nyxt
-# legacy defaults
 export EDITOR=emacs
 export BROWSER=zen
+# Experimental alternatives
+#export EDITOR=lem
+#export BROWSER=nyxt
 
 ## XDG Env
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_DATA_HOME=$HOME/.local/share
 
-## PATHS
+## Update PATH - Common Lisp Utilities/Applications
 
-###Qlot Source
-qlot=$HOME/.qlot/bin
+### Qlot Source
+qlot=$XDG_DATA_HOME/qlot/bin
 
-#### Lem Source
+#### Lem Source (local install)
 lem=$XDG_DATA_HOME/common-lisp/lem
 
-#### Common Lisp Development and Lem Hacking!
+# Update PATH
 export PATH="$qlot:$lem:$PATH"
