@@ -1,0 +1,29 @@
+# https://github.com/fukamachi/qlot
+
+
+logoraz@fedora:~$ curl -L https://qlot.tech/installer | sh
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:--  0:00:01 --:--:--     0
+  0     0    0     0    0     0      0      0 --:--:--  0:00:02 --:--:--     0
+100  3797  100  3797    0     0   1263      0  0:00:03  0:00:03 --:--:--     0
+Welcome to Qlot automatic installer!
+
+Installation path: /home/logoraz/.local/share/qlot
+Downloading an archive from 'https://github.com/fukamachi/qlot/releases/download/1.7.2/qlot-1.7.2.tar.gz'...done
+Setting it up. This may take a while...
+sh: line 113: [: : integer expression expected
+sh: line 121: [: : integer expression expected
+
+Qlot v1.7.2 has been successfully installed under '/home/logoraz/.local/share/qlot'.
+
+The executable script is located at '/home/logoraz/.local/bin/qlot'.
+To make it runnable by your shell, please add '/home/logoraz/.local/bin' to '$PATH'.
+
+    export PATH="/home/logoraz/.local/bin:$PATH"
+
+Enjoy!
+
+
+## Uninstall
+$ ~/.qlot/qlot/scripts/qlot-uninstaller.sh
