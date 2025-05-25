@@ -11,6 +11,7 @@
                #:local-time
                #:cl-interpol
                #:cl-ppcre
+               #:osicat
                #:confer/setup
                #:confer/core/all
                #:confer/libraries/utils/all
@@ -21,7 +22,7 @@
                #:confer/libraries/learncl/all)
   :in-order-to ((test-op (test-op #:confer-test))))
 
-;; setup/config
+;; setup/config 'script'
 (register-system-packages "confer/setup" '(#:setup))
 
 ;; Core
