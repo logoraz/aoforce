@@ -8,13 +8,14 @@
   :depends-on (#:bordeaux-threads
                #:lparallel
                #:closer-mop
+               #:alexandria
+               #:serapeum
                #:local-time
                #:cl-interpol
                #:cl-ppcre
                #:osicat
                #:confer/setup
                #:confer/core/all
-               #:confer/libraries/utils/all
                #:confer/libraries/juego-clos/all
                #:confer/libraries/cl-bexp/all
                #:confer/libraries/website/all
@@ -22,14 +23,13 @@
                #:confer/libraries/learncl/all)
   :in-order-to ((test-op (test-op #:confer-test))))
 
-;; setup/config 'script'
+;; setup/config (setup script)
 (register-system-packages "confer/setup" '(#:setup))
 
-;; Core
+;; Core (aka src)
 (register-system-packages "confer/core/all" '(#:confer))
 
 ;; Libraries
-(register-system-packages "confer/libraries/utils/all"      '(#:utils))
 (register-system-packages "confer/libraries/learncl/all"    '(#:learncl))
 (register-system-packages "confer/libraries/website/all"    '(#:web))
 (register-system-packages "confer/libraries/chembook/all"   '(#:chembook))

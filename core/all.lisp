@@ -2,4 +2,5 @@
 (uiop:define-package #:confer/core/all
   (:nicknames #:confer #:confr)
   (:use #:cl)
-  (:use-reexport #:confer/core/confer))
+  (:use-reexport #:confer/core/utils/base
+                 #:confer/core/confer))

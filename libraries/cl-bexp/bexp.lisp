@@ -5,7 +5,8 @@
                 #:regex-replace)
   (:import-from #:local-time
                 #:now)
-  (:export #:test-fn))
+  (:export #:test-fn)
+  (:documentation "Build Expressions for Common Lisp."))
 (in-package #:confer/libraries/cl-bexp/bexp)
 
 ;;; Notes:

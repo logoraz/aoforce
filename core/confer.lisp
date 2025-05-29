@@ -1,8 +1,9 @@
 (defpackage #:confer/core/confer
   (:use #:cl
-        #:confer/libraries/utils/base)
+        #:confer/core/utils/base)
   (:export #:simple-test
-           #:test-utils))
+           #:test-utils)
+  (:documentation "Main package of Confer."))
 (in-package #:confer/core/confer)
 
 

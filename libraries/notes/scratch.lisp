@@ -21,3 +21,12 @@
 (defun Y (f)
   (lambda (&rest args)
     (apply f (Y f) args)))
+
+#+(or)
+(defun random-tree (depth)
+  "Generate a random tree to climb!"
+  (case (random 3)
+    ((0) 'x)
+    ((1) 'y)
+    (t (list (random-tree (1- depth))
+             (random-tree (1- depth))))))

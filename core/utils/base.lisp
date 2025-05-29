@@ -1,24 +1,21 @@
-(defpackage #:confer/libraries/utils/base
+(defpackage #:confer/core/utils/base
   (:use #:cl
         #:uiop)
   (:import-from #:cl-interpol)
-  #+(or)
   (:import-from #:osicat
-                #:make-link)
-  (:import-from #:sb-posix
-                #:s-islnk
-                #:stat-mode
-                #:lstat
-                #:symlink)
+                #:make-link
+                #:file-kind)
   (:export #:*shell-program*
            #:concat
            #:run-prog
            #:run-prog-collect-output
            #:getuid
            #:dir-pathname
+           #:ensure-dir
            #:symlinkp
-           #:create-symlink))
-(in-package #:confer/libraries/utils/base)
+           #:create-symlink)
+  (:documentation "Base utilities."))
+(in-package #:confer/core/utils/base)
 
 ;; String manipulation
 (defun concat (&rest strings)
@@ -26,30 +23,34 @@
   (apply #'concatenate 'string strings))
 
 
-;; Symlinks
+;; Environment
+(defun getuid ()
+  (sb-posix:getuid))
+
+;; Pathnames
 (defun dir-pathname (pathspec)
   "Converts the non-wild pathname designator PATHSPEC to directory form."
   (uiop:ensure-directory-pathname pathspec))
 
-(defun getuid ()
-  (sb-posix:getuid))
 
+;; directory creation/manipulation
+;; Create directories (if they do no already exist)
+(defun ensure-dir (pathspec &key (mode #o700))
+  "Ensure directory in PATHSPEC exists"
+  (let ((dir (dir-pathname pathspec)))
+    (ensure-directories-exist dir :mode mode)))
+
+
+;; Symlinks
 (defun symlinkp (pathspec)
   "Test whether PATHSPEC is a symlink."
-  (sb-posix:s-islnk (sb-posix:stat-mode (sb-posix:lstat pathspec))))
+  (eq (osicat:file-kind pathspec) :symbolic-link))
 
-(defun create-symlink (src lnk)
+(defun create-symlink (src link &key (dir nil))
   "Create a symlink for SRC to LINK."
-  (let ((src-dir (dir-pathname src))
-        (lnk-dir (dir-pathname lnk)))
-    (sb-posix:symlink src-dir lnk-dir)
-    lnk-dir))
-
-#+(or)
-(defun create-symlink (src link)
-  "Create a symlink for SRC to LINK."
-  (let ((src-dir (dir-pathname src))
-        (osicat:make-link link :target src :hard nil))))
+  (let ((src-dir (dir-pathname src)))
+    (if dir (osicat:make-link link :target src-dir)
+        (osicat:make-link link :target src))))
 
 
 ;; Shell utilities (from StumpWM)
