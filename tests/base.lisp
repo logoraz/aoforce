@@ -1,6 +1,7 @@
 (defpackage #:confer-test/tests/base
   (:use #:cl
-        #:fiveam)
+        #:confer
+        #:5am)
   (:export #:root-suite))
 (in-package #:confer-test/tests/base)
 
@@ -8,7 +9,7 @@
 ;; https://github.com/lispci/fiveam/blob/master/t/example.lisp
 
 
- (def-suite root-suite
+(def-suite root-suite
   :description "Root Test Suite.")
 
 (def-suite read-file-as-string

@@ -9,3 +9,5 @@
   :perform (test-op (op c) 
                     (symbol-call 'fiveam 'run!
                                  (find-symbol* 'root-suite 'tests))))
+
+(register-system-packages "fiveam" '(#:fiveam #:5am))

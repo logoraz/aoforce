@@ -3,7 +3,7 @@
   :author "Erik P Almaraz <erikalmaraz@fastmail.com"
   :license "BSD 3-Clause"
   :version (:read-file-form "version.sexp")
-  ;; :defsystem-depends-on (:asdf-package-system)
+  :defsystem-depends-on (:asdf-package-system)
   :class :package-inferred-system
   :depends-on (#:bordeaux-threads
                #:lparallel
@@ -37,9 +37,5 @@
 (register-system-packages "confer/libraries/juego-clos/all" '(#:juego))
 
 ;; Externals
-(register-system-packages "closer-mop"
-                          '(#:c2mop
-                            #:closer-common-lisp 
-                            #:c2cl 
-                            #:closer-common-lisp-user
-                            #:c2cl-user))
+(register-system-packages "closer-mop" '(#:closer-mop #:c2cl-user))
+(register-system-packages "alexandria" '(#:alexandria #:alexandria-2))
