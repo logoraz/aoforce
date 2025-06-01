@@ -17,18 +17,18 @@
 (defun cl-rcfile-slnks (pathspec &key (clasp nil))
   "Function to setup Common Lisp symlinks to repo PATHSPEC.
 P"
-  (create-symlink "~/Work/cl-confer/rcfiles/dot-sbclrc.lisp"
+  (create-symlink "~/cl-confer/rcfiles/dot-sbclrc.lisp"
                   "~/.sbclrc")
   (if clasp
-      (create-symlink "~/Work/cl-confer/rcfiles/dot-clasprc.lisp"
+      (create-symlink "~/cl-confer/rcfiles/dot-clasprc.lisp"
                       "~/.clasprc"))
   t)
 
 (defun bash-rcfile-slnks ()
   "Function to setup .bashrc & .bash_profile rcfiles."
-  (create-symlink "~/Work/cl-confer/rcfiles/dot-bashrc.sh"
+  (create-symlink "~/cl-confer/rcfiles/dot-bashrc.sh"
                   "~/.bashrc")
-  (create-symlink "~/Work/cl-confer/rcfiles/dot-bash_profile.sh"
+  (create-symlink "~/cl-confer/rcfiles/dot-bash_profile.sh"
                   "~/.bash_profile")
    t)
 

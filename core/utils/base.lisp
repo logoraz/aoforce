@@ -7,9 +7,6 @@
                 #:file-kind)
   (:export #:*shell-program*
            #:concat
-           #:run-prog
-           #:run-prog-collect-output
-           #:getuid
            #:dir-pathname
            #:ensure-dir
            #:symlinkp
@@ -24,8 +21,7 @@
 
 
 ;; Environment
-(defun getuid ()
-  (sb-posix:getuid))
+
 
 ;; Pathnames
 (defun dir-pathname (pathspec)
@@ -57,6 +53,7 @@
 (defvar *shell-program* "/bin/sh"
   "The shell program used by @code{run-shell-command}.")
 
+#+ (or)
 (defun run-prog (prog &rest opts &key args output (wait t) &allow-other-keys)
   "Common interface to shell. Does not return anything useful."
   (remf opts :args)
@@ -64,8 +61,8 @@
   (remf opts :wait)
   (let ((env (sb-ext:posix-environ)))
     (apply #'sb-ext:run-program prog args :output (if output output t)
-           :error t :wait wait :environment env opts)))
-
+                                          :error t :wait wait :environment env opts)))
+#+ (or)
 (defun run-prog-collect-output (prog &rest args)
   "run a command and read its output."
   (with-output-to-string (s)

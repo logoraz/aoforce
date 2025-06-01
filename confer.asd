@@ -8,8 +8,6 @@
   :depends-on (#:bordeaux-threads
                #:lparallel
                #:closer-mop
-               #:alexandria
-               #:serapeum
                #:local-time
                #:cl-interpol
                #:cl-ppcre
@@ -38,4 +36,3 @@
 
 ;; Externals
 (register-system-packages "closer-mop" '(#:closer-mop #:c2cl-user))
-(register-system-packages "alexandria" '(#:alexandria #:alexandria-2))

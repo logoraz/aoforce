@@ -1,5 +1,9 @@
 ;;;; dot-clasprc.lisp -> .clasprc - Clasp Initialization File
 
+(ignore-errors (require 'asdf)
+               (require 'uiop))
+
+;;; Enable OCICL
 ;; Preserving existing /home/logoraz/.local/share/ocicl/ocicl-registry.cfg
 ;; Use setup's --force option to override.
 
@@ -10,7 +14,9 @@
 ;; (eg. sbcl --userinit init.lisp)
 
 #-ocicl
-(when (probe-file #P"/home/logoraz/.local/share/ocicl/ocicl-runtime.lisp")
-  (load #P"/home/logoraz/.local/share/ocicl/ocicl-runtime.lisp"))
-(asdf:initialize-source-registry
- (list :source-registry (list :directory (uiop:getcwd)) :inherit-configuration))
+(progn
+  (when (probe-file #P"/home/loraz/.local/share/ocicl/ocicl-runtime.lisp")
+    (load #P"/home/loraz/.local/share/ocicl/ocicl-runtime.lisp"))
+  (asdf:initialize-source-registry
+   (list :source-registry
+         (list :directory (uiop:getcwd)) :inherit-configuration)))

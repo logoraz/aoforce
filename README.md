@@ -67,6 +67,17 @@ learning tool (a cons cell visual aid) in this project as follows:
  - Develop a Common Lisp Command Line tool to create Fedora RPM's for Common Lisp Libraries/Systems
  - TBD
 
+
+## Building Clasp (on Fedora 42)
+
+Build dependencies (Minimal)
+
+```bash
+$ sudo dnf install sbcl ninja-build clang19-devel llvm19-devel elfutils-devel \
+                   boost-devel fmt-devel gmp-devel libunwind-devel binutils-gold \
+                   redhat-rpm-config
+```
+
 ## Changelog
 
 ### 0.0.3 (WIP)
