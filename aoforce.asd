@@ -12,8 +12,10 @@
                #:cl-interpol
                #:cl-ppcre
                #:osicat
+               ;; AOFORCE
                #:aoforce/setup
                #:aoforce/core/all
+               ;; Systems
                #:aoforce/libraries/juego-clos/all
                #:aoforce/libraries/cl-bexp/all
                #:aoforce/libraries/website/all
@@ -27,12 +29,14 @@
 ;; Core (aka src)
 (register-system-packages "aoforce/core/all" '(#:aoforce))
 
-;; Libraries
+;; Libraries (Systems)
 (register-system-packages "aoforce/libraries/learncl/all"    '(#:learncl))
 (register-system-packages "aoforce/libraries/website/all"    '(#:web))
 (register-system-packages "aoforce/libraries/chembook/all"   '(#:chembook))
 (register-system-packages "aoforce/libraries/cl-bexp/all"    '(#:bexp))
 (register-system-packages "aoforce/libraries/juego-clos/all" '(#:juego))
 
-;; Externals
-(register-system-packages "closer-mop" '(#:closer-mop #:c2cl-user))
+;; External Systems
+(register-system-packages "closer-mop" '(#:closer-mop #:c2mop
+                                         #:closer-common-lisp #:c2cl
+                                         #:closer-common-lisp-user #:c2cl-user))

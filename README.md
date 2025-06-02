@@ -62,9 +62,8 @@ learning tool (a cons cell visual aid) in this project as follows:
 ```
 
 ## TODOs (Wish List)
-
- - Create a Common Lisp setup script to scaffold my prefered develop environment
- - Develop a Common Lisp Command Line tool to create Fedora RPM's for Common Lisp Libraries/Systems
+ - Create a CL setup script to scaffold my prefered develop environment
+ - Develop a CL Command Line tool to create Fedora RPM's for CL Libraries/Systems
  - TBD
 
 
@@ -78,29 +77,31 @@ $ sudo dnf install sbcl ninja-build clang19-devel llvm19-devel elfutils-devel \
                    redhat-rpm-config
 ```
 
+
 ## Changelog
 
-### 0.0.3 (WIP)
-
+### 0.0.4 (Wish List)
   - Create simple database to track installed configuration elements (sqlite?)
+  - Create command-line application
+
+### 0.0.3 (WIP)
+  - Project name finalization: confer -> `:aoforce` `(:aofor)`
+  - Create AOFORCE Logo svg
   - Create common lisp setup script
-  - Create command line application
-  - Project name finalization confer -> `:aoforce` `(:aofor)`
+  - Build base of utilities/helpers
+  - Make Clasp compliant (target CL implementations: SBCL & CLASP)
 
 ### 0.0.2
-
   - Refactor/Clean-up project scaffold
   - Create System alias `:aofor` & set to package nickname
   - Add unit-testing framework template (FiveAM)
   - Update README & Revision Bump
 
 ### 0.0.1
-
   - Initial commit
   - Added basic project scaffold
 
    
 ## References:
-
  - TBD
 
