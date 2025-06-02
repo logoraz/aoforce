@@ -1,4 +1,4 @@
-(defpackage #:confer/notes/cl-functional-calculator 
+(defpackage #:aoforce/notes/cl-functional-calculator
   (:use #:cl)
   (:export #:make-calculator
            #:add!
@@ -7,7 +7,7 @@
            #:divide!
            #:clear!
            #:get-result))
-(in-package #:confer/notes/cl-functional-calculator)
+(in-package #:aoforce/notes/cl-functional-calculator)
 
 ;; See: https://gigamonkeys.com/book/functions
 

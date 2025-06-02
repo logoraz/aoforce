@@ -1,6 +1,6 @@
-(defpackage #:confer/notes/cl-sicp
+(defpackage #:aoforce/notes/cl-sicp
   (:use #:cl))
-(in-package #:confer/notes/cl-sicp)
+(in-package #:aoforce/notes/cl-sicp)
 
 ;;; Structure and Interpretation of Computer Programs (SICP)
 ;; Define a procedure 'doubles' that takes a procedure of one argument as an

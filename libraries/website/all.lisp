@@ -1,5 +1,5 @@
-(uiop:define-package #:confer/libraries/web/all
+(uiop:define-package #:aoforce/libraries/web/all
   (:nicknames #:web)
   (:use #:cl)
   (:use-reexport
-   #:confer/libraries/website/web))
+   #:aoforce/libraries/website/web))

@@ -1,4 +1,4 @@
-(defpackage #:confer/core/utils/base
+(defpackage #:aoforce/core/utils/base
   (:use #:cl
         #:uiop)
   (:import-from #:cl-interpol)
@@ -12,7 +12,7 @@
            #:symlinkp
            #:create-symlink)
   (:documentation "Base utilities."))
-(in-package #:confer/core/utils/base)
+(in-package #:aoforce/core/utils/base)
 
 ;; String manipulation
 (defun concat (&rest strings)

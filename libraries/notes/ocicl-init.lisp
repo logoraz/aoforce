@@ -1,10 +1,10 @@
 ;;;; OCICL Init/Setup
 ;;; This file generated via $ ocicl setup > ocicl-init.lisp
-(defpackage #:confer/notes/ocicl-init
+(defpackage #:aoforce/notes/ocicl-init
   (:use #:cl))
-(in-package #:confer/notes/ocicl-init)
+(in-package #:aoforce/notes/ocicl-init)
 
-;; Preserving existing /home/logoraz/.local/share/ocicl/ocicl-registry.cfg
+;; Preserving existing /home/loraz/.local/share/ocicl/ocicl-registry.cfg
 ;; Use setup's --force option to override.
 
 ;; Present the following code to your LISP system at startup, either
@@ -14,7 +14,7 @@
 ;; (eg. sbcl --userinit init.lisp)
 
 #-ocicl
-(when (probe-file #P"/home/logoraz/.local/share/ocicl/ocicl-runtime.lisp")
-  (load #P"/home/logoraz/.local/share/ocicl/ocicl-runtime.lisp"))
+(when (probe-file #P"/home/loraz/.local/share/ocicl/ocicl-runtime.lisp")
+  (load #P"/home/loraz/.local/share/ocicl/ocicl-runtime.lisp"))
 (asdf:initialize-source-registry
  (list :source-registry (list :directory (uiop:getcwd)) :inherit-configuration))

@@ -1,4 +1,4 @@
-(defpackage #:confer/libraries/cl-bexp/bexp
+(defpackage #:aoforce/libraries/cl-bexp/bexp
   (:use #:cl)
   (:import-from #:cl-interpol)
   (:import-from #:cl-ppcre
@@ -7,7 +7,7 @@
                 #:now)
   (:export #:test-fn)
   (:documentation "Build Expressions for Common Lisp."))
-(in-package #:confer/libraries/cl-bexp/bexp)
+(in-package #:aoforce/libraries/cl-bexp/bexp)
 
 ;;; Notes:
 ;;;

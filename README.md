@@ -1,4 +1,4 @@
-# CL Conf*iguration* E*nvironment* R*esource* (`:confer`)
+# AOFORCE - A Collection of Common Lisp Resources
 
 
 <p align="center">
@@ -26,7 +26,7 @@ The test(s) can be executed, in the project directory, via:
 
 ```lisp
 
-* (asdf:test-system 'confer-test)
+* (asdf:test-system 'aoforce-test)
 
 ```
 
@@ -38,9 +38,9 @@ learning tool (a cons cell visual aid) in this project as follows:
 
 ```lisp
 
-(asdf:load-system 'confer)
+(asdf:load-system 'aoforce)
 ;; or
-;; (asdf:load-system :confr) ; system alias
+;; (asdf:load-system :aofrc) ; system alias
 ;;...
 
 (learncl:sdraw '(This (is a (test!))))
@@ -85,12 +85,12 @@ $ sudo dnf install sbcl ninja-build clang19-devel llvm19-devel elfutils-devel \
   - Create simple database to track installed configuration elements (sqlite?)
   - Create common lisp setup script
   - Create command line application
-  - TBD
+  - Project name finalization confer -> `:aoforce` `(:aofor)`
 
 ### 0.0.2
 
   - Refactor/Clean-up project scaffold
-  - Create System alias `:confr` & set to package nickname
+  - Create System alias `:aofor` & set to package nickname
   - Add unit-testing framework template (FiveAM)
   - Update README & Revision Bump
 

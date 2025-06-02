@@ -1,6 +1,6 @@
-(uiop:define-package #:confer/libraries/learncl/all 
+(uiop:define-package #:aoforce/libraries/learncl/all
   (:nicknames #:learncl #:lcl)
   (:use #:cl)
   (:use-reexport
-   #:confer/libraries/learncl/sdraw
-   #:confer/libraries/learncl/dtrace))
+   #:aoforce/libraries/learncl/sdraw
+   #:aoforce/libraries/learncl/dtrace))

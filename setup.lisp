@@ -1,34 +1,34 @@
 ;;;; Common Lisp Environment Setup
 
-(defpackage #:confer/setup
+(defpackage #:aoforce/setup
   (:nicknames #:setup)
   (:use #:cl
-        #:confer/core/utils/base)
+        #:aoforce/core/utils/base)
   (:export #:create-symlink
            #:dir-pathname
            #:cl-rcfile-slnks
            #:bash-rcfile-slnks
            #:cl-data-home-dir)
   (:documentation "Setup script to scaffold CL configuration/environment."))
-(in-package #:confer/setup)
+(in-package #:aoforce/setup)
 
 
 ;; Setup RC Files symlnks
 (defun cl-rcfile-slnks (pathspec &key (clasp nil))
   "Function to setup Common Lisp symlinks to repo PATHSPEC.
 P"
-  (create-symlink "~/cl-confer/rcfiles/dot-sbclrc.lisp"
+  (create-symlink "~/.config/aoforce/rcfiles/dot-sbclrc.lisp"
                   "~/.sbclrc")
   (if clasp
-      (create-symlink "~/cl-confer/rcfiles/dot-clasprc.lisp"
+      (create-symlink "~/.config/aoforce/rcfiles/dot-clasprc.lisp"
                       "~/.clasprc"))
   t)
 
 (defun bash-rcfile-slnks ()
   "Function to setup .bashrc & .bash_profile rcfiles."
-  (create-symlink "~/cl-confer/rcfiles/dot-bashrc.sh"
+  (create-symlink "~/.config/aoforce/rcfiles/dot-bashrc.sh"
                   "~/.bashrc")
-  (create-symlink "~/cl-confer/rcfiles/dot-bash_profile.sh"
+  (create-symlink "~/.config/aoforce/rcfiles/dot-bash_profile.sh"
                   "~/.bash_profile")
    t)
 

@@ -1,10 +1,10 @@
-(defpackage #:confer/core/confer
+(defpackage #:aoforce/core/aoforce
   (:use #:cl
-        #:confer/core/utils/base)
+        #:aoforce/core/utils/base)
   (:export #:simple-test
            #:test-utils)
   (:documentation "Main package of Confer."))
-(in-package #:confer/core/confer)
+(in-package #:aoforce/core/aoforce)
 
 
 (defun simple-test (&optional (n 11))

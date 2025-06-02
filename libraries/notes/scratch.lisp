@@ -1,6 +1,6 @@
-(defpackage #:confer/libraries/notes/scratch 
+(defpackage #:aoforce/libraries/notes/scratch
   (:use #:cl))
-(in-package #:confer/libraries/notes/scratch)
+(in-package #:aoforce/libraries/notes/scratch)
 
 ;; Figure out how to use mapcar!
 (mapcar (lambda (x) (+ x 1)) '(1 2 3 4 5))

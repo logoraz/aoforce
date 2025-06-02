@@ -1,6 +1,6 @@
 ;;;; All general interfaces + common core of pure and stateful data structures
-(uiop:define-package #:confer/core/all
-  (:nicknames #:confer #:confr)
+(uiop:define-package #:aoforce/core/all
+  (:nicknames #:aoforce #:aofrc)
   (:use #:cl)
-  (:use-reexport #:confer/core/utils/base
-                 #:confer/core/confer))
+  (:use-reexport #:aoforce/core/utils/base
+                 #:aoforce/core/aoforce))

@@ -1,6 +1,6 @@
 ;;;;; All tests
-(defpackage #:confer-test/tests/all
+(defpackage #:aoforce-test/tests/all
   (:nicknames #:tests)
   (:use #:cl
-        #:confer-test/tests/base)
+        #:aoforce-test/tests/base)
   (:export #:root-suite))
