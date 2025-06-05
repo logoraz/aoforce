@@ -33,3 +33,8 @@
     ((1) 'y)
     (t (list (random-tree (1- depth))
              (random-tree (1- depth))))))
+
+
+;;; GNOME disable touchpad when external mouse connected
+;; gsettings set org.gnome.desktop.peripherals.touchpad send-events \
+;;           disabled-on-external-mouse

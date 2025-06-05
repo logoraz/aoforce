@@ -15,8 +15,7 @@
 
 ;; Setup RC Files symlnks
 (defun cl-rcfile-slnks (pathspec &key (clasp nil))
-  "Function to setup Common Lisp symlinks to repo PATHSPEC.
-P"
+  "Function to setup Common Lisp symlinks to repo PATHSPEC."
   (create-symlink "~/.config/aoforce/rcfiles/dot-sbclrc.lisp"
                   "~/.sbclrc")
   (if clasp

@@ -20,14 +20,14 @@
 ;;;   *sdraw-leading-arrow*   Initially nil.  Set to t to get leading arrows.
 ;;;
 
-(defpackage #:aoforce/libraries/learncl/sdraw
+(defpackage #:aoforce/libraries/learn-cl/sdraw
   (:use #:cl)
   (:export #:sdraw
            #:sdraw-loop
            #:scrawl
            #:*sdraw-print-circle*
            #:*sdraw-leading-arrow*))
-(in-package #:aoforce/libraries/learncl/sdraw)
+(in-package #:aoforce/libraries/learn-cl/sdraw)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

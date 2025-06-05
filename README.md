@@ -66,10 +66,48 @@ learning tool (a cons cell visual aid) in this project as follows:
  - Develop a CL Command Line tool to create Fedora RPM's for CL Libraries/Systems
  - TBD
 
+## Core Development Environment (Fedora 42)
+```bash
+$ sudo dnf install sbcl gnome-themes-extra redhat-rpm-config sbcl cmake
 
-## Building Clasp (on Fedora 42)
+```
 
-Build dependencies (Minimal)
+## Building Lem (Fedora 42)
+ - qlot "automatic installer"
+
+```bash
+ $ curl -L https://qlot.tech/installer | sh
+ # uninstall
+ $ ~/.qlot/qlot/scripts/qlot-uninstaller.sh
+```
+
+ - Lem dependencies
+
+```bash
+$ sudo dnf install sbcl ncurses-devel make automake gcc gcc-c++ \
+                   sdl2-compat-devel SDL2_image-devel SDL2_ttf-devel fd-find \
+                   redhat-rpm-config
+
+$ cd /path/to/lem
+# Build lem ncurses+sdl2
+$ make lem
+```
+
+## Building Nyxt (Fedora 42)
+ - Nyxt (Electron) dependencies
+
+```bash
+$ sudo dnf install sbcl openssl-devel libfixposix-devel libsqlite3x-devel \
+                   wl-clipboard enchant-devel npm redhat-rpm-config
+
+$ cd /path/to/nyxt
+$ make all NYXT_RENDERER=electron
+```
+
+
+## Building Clasp (Fedora 42)
+
+- Build dependencies (Minimal)
 
 ```bash
 $ sudo dnf install sbcl ninja-build clang19-devel llvm19-devel elfutils-devel \

@@ -38,14 +38,16 @@ the function will return NIL in that case."
 
 ;; Our first "base" case: we read a file that contains "hello".
 (test read-file-as-string-normal-file
-      (let ((result (read-file-as-string "~/.config/aoforce/tests/tmp/hello.txt")))
+      (let ((result (read-file-as-string
+                     (uiop:xdg-config-home #P"aoforce/tests/tmp/hello.txt"))))
         ;; Tip: put the expected value as the first argument of = or equal, string= etc.
         ;; FiveAM generates a more readable report following this convention.
         (is (string= "hello" result))))
 
 ;; We read an empty file.
 (test read-file-as-string-empty-file
-      (let ((result (read-file-as-string "~/.config/aoforce/tests/tmp/empty.txt")))
+      (let ((result (read-file-as-string
+                     (uiop:xdg-config-home #P"aoforce/tests/tmp/empty.txt"))))
         (is (not (null result)))
         ;; The reason can be used to provide formatted text.
         (is (= 0 (length result)))
@@ -53,12 +55,14 @@ the function will return NIL in that case."
 
 ;; Now we test that reading a non-existing file signals our condition.
 (test read-file-as-string-non-existing-file
-      (let ((result (read-file-as-string "~/.config/aoforce/tests/tmp/non-existing-file.txt"
-                                         :error-if-not-exists nil)))
+      (let ((result (read-file-as-string
+                     (uiop:xdg-config-home #P"aoforce/tests/tmp/non-existing-file.txt")
+                     :error-if-not-exists nil)))
         (is (null result)
             "Reading a file should return NIL when :ERROR-IF-NOT-EXISTS is set to NIL"))
       ;; SIGNALS accepts the unquoted name of a condition and a body to evaluate.
       ;; Here it checks if FILE-NOT-EXISTING-ERROR is signaled.
       (signals file-not-existing-error
-               (read-file-as-string "~/.config/aoforce/tests/tmp/non-existing-file.txt"
-                                    :error-if-not-exists t)))
+               (read-file-as-string
+                (uiop:xdg-config-home #P"aoforce/tests/tmp/non-existing-file.txt")
+                :error-if-not-exists t)))

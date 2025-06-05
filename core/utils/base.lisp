@@ -2,6 +2,8 @@
   (:use #:cl
         #:uiop)
   (:import-from #:cl-interpol)
+  (:import-from #:cl-ppcre)
+  (:import-from #:local-time)
   (:import-from #:osicat
                 #:make-link
                 #:file-kind)

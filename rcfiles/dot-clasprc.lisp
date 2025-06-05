@@ -4,7 +4,7 @@
                (require 'uiop))
 
 ;;; Enable OCICL
-;; Preserving existing /home/logoraz/.local/share/ocicl/ocicl-registry.cfg
+;; Preserving existing (uiop:xdg-data-home #P"ocicl/ocicl-registry.cfg")
 ;; Use setup's --force option to override.
 
 ;; Present the following code to your LISP system at startup, either
@@ -15,8 +15,8 @@
 
 #-ocicl
 (progn
-  (when (probe-file #P"/home/loraz/.local/share/ocicl/ocicl-runtime.lisp")
-    (load #P"/home/loraz/.local/share/ocicl/ocicl-runtime.lisp"))
+  (when (probe-file (uiop:xdg-data-home #P"ocicl/ocicl-runtime.lisp"))
+    (load (uiop:xdg-data-home #P"ocicl/ocicl-runtime.lisp")))
   (asdf:initialize-source-registry
    (list :source-registry
          (list :directory (uiop:getcwd)) :inherit-configuration)))
