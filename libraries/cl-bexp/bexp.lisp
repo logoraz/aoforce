@@ -1,13 +1,13 @@
-(defpackage #:aoforce/libraries/cl-bexp/bexp
-  (:use #:cl)
-  (:import-from #:cl-interpol)
-  (:import-from #:cl-ppcre
-                #:regex-replace)
-  (:import-from #:local-time
-                #:now)
+(defpackage :aoforce/libraries/cl-bexp/bexp
+  (:use :cl)
+  (:import-from :cl-interpol)
+  (:import-from :cl-ppcre
+                :regex-replace)
+  (:import-from :local-time
+                :now)
   (:export #:test-fn)
   (:documentation "Build Expressions for Common Lisp."))
-(in-package #:aoforce/libraries/cl-bexp/bexp)
+(in-package :aoforce/libraries/cl-bexp/bexp)
 
 ;;; Notes:
 ;;;

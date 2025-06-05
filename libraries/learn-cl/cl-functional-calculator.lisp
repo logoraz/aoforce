@@ -1,13 +1,14 @@
-(defpackage #:aoforce/notes/cl-functional-calculator
-  (:use #:cl)
+(defpackage :aoforce/libraries/learn-cl/cl-functional-calculator
+  (:use :cl)
   (:export #:make-calculator
            #:add!
            #:subtract!
            #:multiply!
            #:divide!
            #:clear!
-           #:get-result))
-(in-package #:aoforce/notes/cl-functional-calculator)
+           #:get-result)
+  (:documentation "A functional calculator example in CL"))
+(in-package :aoforce/libraries/learn-cl/cl-functional-calculator)
 
 ;; See: https://gigamonkeys.com/book/functions
 

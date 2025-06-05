@@ -1,6 +1,6 @@
-(defpackage #:aoforce/libraries/notes/scratch
-  (:use #:cl))
-(in-package #:aoforce/libraries/notes/scratch)
+(defpackage :aoforce/libraries/notes/scratch
+  (:use :cl))
+(in-package :aoforce/libraries/notes/scratch)
 
 ;; Find System version
 (asdf:component-version (asdf:find-system 'aoforce))
@@ -33,3 +33,8 @@
     ((1) 'y)
     (t (list (random-tree (1- depth))
              (random-tree (1- depth))))))
+
+
+;;; GNOME disable touchpad when external mouse connected
+;; gsettings set org.gnome.desktop.peripherals.touchpad send-events \
+;;           disabled-on-external-mouse

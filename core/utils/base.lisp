@@ -1,8 +1,10 @@
-(defpackage #:aoforce/core/utils/base
-  (:use #:cl
-        #:uiop)
-  (:import-from #:cl-interpol)
-  (:import-from #:osicat
+(defpackage :aoforce/core/utils/base
+  (:use :cl
+        :uiop)
+  (:import-from :cl-interpol)
+  (:import-from :cl-ppcre)
+  (:import-from :local-time)
+  (:import-from :osicat
                 #:make-link
                 #:file-kind)
   (:export #:*shell-program*
@@ -12,7 +14,7 @@
            #:symlinkp
            #:create-symlink)
   (:documentation "Base utilities."))
-(in-package #:aoforce/core/utils/base)
+(in-package :aoforce/core/utils/base)
 
 ;; String manipulation
 (defun concat (&rest strings)

@@ -11,6 +11,27 @@ and a playground to develop new systems. It's in a very early stage, so not
 much functionality as a 'tool' here just yet, just a working project to store my
 work at the moment...
 
+## Project Scaffold
+```lisp
+
+  ~/.config/aoforce/
+    |- aoforce.asd
+    |- aoforce-test.asd
+    |- aofrc.asd
+    |- setup.lisp
+    |- assests/
+    |- core/
+    |- libraries/
+    |- tests/
+    |- files/
+    |- *rcfiles/
+    |- *xdg-config/
+```
+
+## Setup, Building & Testing
+
+
+
 Currently, the setup of this project itself acts as a template on how to scaffold
 a modern Common Lisp system using the ASDF `package-inferred-system` along with a testing
 framework (FiveAM). The Common Lisp code written herein also acts as a 'style guide' on my
@@ -26,7 +47,7 @@ The test(s) can be executed, in the project directory, via:
 
 ```lisp
 
-* (asdf:test-system 'aoforce-test)
+* (asdf:test-system :aoforce/test)
 
 ```
 
@@ -38,14 +59,14 @@ learning tool (a cons cell visual aid) in this project as follows:
 
 ```lisp
 
-(asdf:load-system 'aoforce)
+(asdf:load-system :aoforce)
 ;; or
 ;; (asdf:load-system :aofrc) ; system alias
 ;;...
 
-(learncl:sdraw '(This (is a (test!))))
+(lcl:sdraw '(This (is a (test!))))
 ;; or
-;; (lcl:sdraw '(This (is a (test!)))) ; short alias
+;; (learncl:sdraw '(This (is a (test!)))) ; short alias
 ;;
 ;; =>
 ;; [*|*]--->[*|*]--->NIL
@@ -66,10 +87,48 @@ learning tool (a cons cell visual aid) in this project as follows:
  - Develop a CL Command Line tool to create Fedora RPM's for CL Libraries/Systems
  - TBD
 
+## Core Development Environment (Fedora 42)
+```bash
+$ sudo dnf install sbcl gnome-themes-extra redhat-rpm-config sbcl cmake
 
-## Building Clasp (on Fedora 42)
+```
 
-Build dependencies (Minimal)
+## Building Lem (Fedora 42)
+ - qlot "automatic installer"
+
+```bash
+ $ curl -L https://qlot.tech/installer | sh
+ # uninstall
+ $ ~/.qlot/qlot/scripts/qlot-uninstaller.sh
+```
+
+ - Lem dependencies
+
+```bash
+$ sudo dnf install sbcl ncurses-devel make automake gcc gcc-c++ \
+                   sdl2-compat-devel SDL2_image-devel SDL2_ttf-devel fd-find \
+                   redhat-rpm-config
+
+$ cd /path/to/lem
+# Build lem ncurses+sdl2
+$ make lem
+```
+
+## Building Nyxt (Fedora 42)
+ - Nyxt (Electron) dependencies
+
+```bash
+$ sudo dnf install sbcl openssl-devel libfixposix-devel libsqlite3x-devel \
+                   wl-clipboard enchant-devel npm redhat-rpm-config
+
+$ cd /path/to/nyxt
+$ make all NYXT_RENDERER=electron
+```
+
+
+## Building Clasp (Fedora 42)
+
+- Build dependencies (Minimal)
 
 ```bash
 $ sudo dnf install sbcl ninja-build clang19-devel llvm19-devel elfutils-devel \

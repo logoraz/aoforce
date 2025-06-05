@@ -14,16 +14,17 @@
 ;;;   DTRACE  - same syntax as TRACE
 ;;;   DUNTRACE - same syntax as UNTRACE
 
-(defpackage #:aoforce/libraries/learncl/dtrace
-  (:use #:cl)
+(defpackage :aoforce/libraries/learn-cl/dtrace
+  (:use :cl)
   (:export #:dtrace
            #:duntrace
 	   #:*dtrace-print-length*
            #:*dtrace-print-level*
 	   #:*dtrace-print-circle*
            #:*dtrace-print-pretty*
-	   #:*dtrace-print-array*))
-(in-package #:aoforce/libraries/learncl/dtrace)
+	   #:*dtrace-print-array*)
+  (:documentation "DTRACE example from Practical Common Lisp"))
+(in-package :aoforce/libraries/learn-cl/dtrace)
 
 (eval-when (:load-toplevel :execute)
   (shadowing-import '(dtrace duntrace) (find-package :common-lisp-user)))

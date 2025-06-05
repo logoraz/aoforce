@@ -1,22 +1,21 @@
 ;;;; Common Lisp Environment Setup
 
-(defpackage #:aoforce/setup
-  (:nicknames #:setup)
-  (:use #:cl
-        #:aoforce/core/utils/base)
+(defpackage :aoforce/setup
+  (:nicknames :setup)
+  (:use :cl
+        :aoforce/core/utils/base)
   (:export #:create-symlink
            #:dir-pathname
            #:cl-rcfile-slnks
            #:bash-rcfile-slnks
            #:cl-data-home-dir)
   (:documentation "Setup script to scaffold CL configuration/environment."))
-(in-package #:aoforce/setup)
+(in-package :aoforce/setup)
 
 
 ;; Setup RC Files symlnks
 (defun cl-rcfile-slnks (pathspec &key (clasp nil))
-  "Function to setup Common Lisp symlinks to repo PATHSPEC.
-P"
+  "Function to setup Common Lisp symlinks to repo PATHSPEC."
   (create-symlink "~/.config/aoforce/rcfiles/dot-sbclrc.lisp"
                   "~/.sbclrc")
   (if clasp

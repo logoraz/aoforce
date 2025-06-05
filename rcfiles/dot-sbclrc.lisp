@@ -11,7 +11,7 @@
 #+aclrepl
 (progn
   "From sb-aclrepl example: see ch 17.1 sbcl manual..."
-  (setq sb-aclrepl:*max-history* 500)
+  (setq sb-aclrepl:*max-history* 1000)
   (setf (sb-aclrepl:alias "asdc")
         #'(lambda (sys) (asdf:operate 'asdf:compile-op sys)))
   (sb-aclrepl:alias "l" (sys) (asdf:operate 'asdf:load-op sys))
@@ -28,19 +28,19 @@
   )
 
 ;;; Enable OCICL
-;; Preserving existing /home/loraz/.local/share/ocicl/ocicl-registry.cfg
+;; Preserving existing (uiop:xdg-data-home #P"ocicl/ocicl-registry.cfg")
 ;; Use setup's --force option to override.
 
 ;; Present the following code to your LISP system at startup, either
 ;; by adding it to your implementation's startup file
-;; (~/.sbclrc, ~/.eclrc, ~/.abclrc, ~/.clinit.cl, or ~/.roswell/init.lisp)
+;; (~/.sbclrc, ~/.eclrc, ~/.clasprc  ~/.abclrc, ~/.clinit.cl, or ~/.roswell/init.lisp)
 ;; or overriding it completely on the command line
 ;; (eg. sbcl --userinit init.lisp)
 
 #-ocicl
 (progn
-  (when (probe-file #P"/home/loraz/.local/share/ocicl/ocicl-runtime.lisp")
-    (load #P"/home/loraz/.local/share/ocicl/ocicl-runtime.lisp"))
+  (when (probe-file (uiop:xdg-data-home #P"ocicl/ocicl-runtime.lisp"))
+    (load (uiop:xdg-data-home #P"ocicl/ocicl-runtime.lisp")))
   (asdf:initialize-source-registry
    (list :source-registry
          (list :directory (uiop:getcwd)) :inherit-configuration)))
