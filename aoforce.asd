@@ -25,10 +25,8 @@
                "aoforce/libraries/learn-cl/all")
   :in-order-to ((test-op (test-op "aoforce/test")))
   :long-description "
-
-Long Description here...
-
-")
+A collection of Common Lisp development environment configuration resources,
+tools, and a playground for building new projects.")
 
 
 (defsystem "aoforce/test"

@@ -129,6 +129,7 @@ $ make all NYXT_RENDERER=electron
 ## Building Clasp (Fedora 42)
 
 - Build dependencies (Minimal)
+- Clasp upgrade to llvm20 -> clang20
 
 ```bash
 $ sudo dnf install sbcl ninja-build clang19-devel llvm19-devel elfutils-devel \
@@ -136,11 +137,16 @@ $ sudo dnf install sbcl ninja-build clang19-devel llvm19-devel elfutils-devel \
                    redhat-rpm-config
 ```
 
+## Building CCL & ECL
+Simply follow their instructions, builds with the above dependencies installed
+above...
+- CCL (Clozure CL): https://github.com/Clozure/ccl/releases/tag/v1.13
+- ECL (Embedable CL): https://common-lisp.net/project/ecl/static/manual/Building-ECL.htm
+
 
 ## Changelog
 
 ### 0.0.4 (Wish List)
-  - Create simple database to track installed configuration elements (sqlite?)
   - Create command-line application
 
 ### 0.0.3 (WIP)
@@ -148,7 +154,7 @@ $ sudo dnf install sbcl ninja-build clang19-devel llvm19-devel elfutils-devel \
   - Create AOFORCE Logo svg
   - Create common lisp setup script
   - Build base of utilities/helpers
-  - Make Clasp compliant (target CL implementations: SBCL & CLASP)
+  - Create simple in-memory database to track installed configuration elements
 
 ### 0.0.2
   - Refactor/Clean-up project scaffold

@@ -1,22 +1,14 @@
-(defpackage :aoforce/libraries/notes/ocicl-init
-  (:use :cl))
-(in-package :aoforce/libraries/notes/ocicl-init)
-
-(ignore-errors (require :asdf)
-               (require :uiop))
-
-;; Preserving existing (uiop:xdg-data-home #P"ocicl/ocicl-registry.cfg")
+;; Preserving existing /home/logoraz/.local/share/ocicl/ocicl-registry.cfg
 ;; Use setup's --force option to override.
 
 ;; Present the following code to your LISP system at startup, either
 ;; by adding it to your implementation's startup file
-;; (~/.sbclrc, ~/.eclrc, ~/.clasprc  ~/.abclrc, ~/.clinit.cl, or ~/.roswell/init.lisp)
+;; (~/.sbclrc, ~/.eclrc, ~/.abclrc, ~/.clinit.cl, or ~/.roswell/init.lisp)
 ;; or overriding it completely on the command line
 ;; (eg. sbcl --userinit init.lisp)
 
 #-ocicl
-(when (probe-file (uiop:xdg-data-home #P"ocicl/ocicl-runtime.lisp"))
-  (load (uiop:xdg-data-home #P"ocicl/ocicl-runtime.lisp")))
+(when (probe-file #P"/home/logoraz/.local/share/ocicl/ocicl-runtime.lisp")
+  (load #P"/home/logoraz/.local/share/ocicl/ocicl-runtime.lisp"))
 (asdf:initialize-source-registry
- (list :source-registry
-       (list :directory (uiop:getcwd)) :inherit-configuration))
+  (list :source-registry (list :directory (uiop:getcwd)) :inherit-configuration))
