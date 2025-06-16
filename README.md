@@ -5,11 +5,19 @@
   <img src="assets/yin-yang-lisp-logo_512_svg.png" width="200" />
 </p>
 
-This is my Commmon Lisp configuration tool project. It servers as a general
-resource for custom libraries, RC Files, ASDF configuration settings
-and a playground to develop new systems. It's in a very early stage, so not
-much functionality as a 'tool' here just yet, just a working project to store my
-work at the moment...
+This is my Commmon Lisp configuration resource tool project. This was started as
+an idea to store my various common lisp libraries, each separately deployable
+from one system, hence setting it up using ASDF 3 `package-inferred-system`. I
+also want it to setup my Common Lisp linux environment, i.e. deploy rcfiles,
+dotfiles etc. that pertain to my workflow - a means of having a reproducible
+Common Lisp environment. This is not intented to be useful to anyone besides
+myself for now and the incentive of its creation was mainly inspired for
+learning purposes.
+
+The plan is that ideas/tools started here may later manifest themselves into
+projects of their own. So this project is really just my Common Lisp
+playground...
+
 
 ## Project Scaffold
 ```lisp
@@ -28,17 +36,17 @@ work at the moment...
     |- *xdg-config/
 ```
 
+
 ## Setup, Building & Testing
-
-
 
 Currently, the setup of this project itself acts as a template on how to scaffold
 a modern Common Lisp system using the ASDF `package-inferred-system` along with a testing
 framework (FiveAM). The Common Lisp code written herein also acts as a 'style guide' on my
 functional/aesthetic preferences. I also use [ocicl](https://github.com/ocicl/ocicl) for
 a modern approach for Common Lisp Systems Management - its a great tool (highly preferred
-over quicklisp, qlot, roswell, CLPM, etc.) - really wish the community would adopt this
-solution over the others!
+over quicklisp, qlot, roswell, CLPM, and vend which is discriminatory towards those using
+ASDF's `package-inferred-system`) - really wish the community would adopt this solution
+over the others!
 
 The most recent addition is a testing framework (FiveAM) that has an example test template
 borrowed from 
@@ -61,12 +69,12 @@ learning tool (a cons cell visual aid) in this project as follows:
 
 (asdf:load-system :aoforce)
 ;; or
-;; (asdf:load-system :aofrc) ; system alias
+;; (asdf:load-system :aofrc) ; system short alias
 ;;...
 
 (lcl:sdraw '(This (is a (test!))))
 ;; or
-;; (learncl:sdraw '(This (is a (test!)))) ; short alias
+;; (learncl:sdraw '(This (is a (test!))))
 ;;
 ;; =>
 ;; [*|*]--->[*|*]--->NIL
