@@ -1,4 +1,5 @@
-(defpackage :aoforce/libraries/learn-cl/cl-functional-calculator
+(defpackage :aoforce/libraries/learn-cl/fcalc
+  (:nicknames :fcalc)
   (:use :cl)
   (:export #:make-calculator
            #:add!
@@ -8,7 +9,7 @@
            #:clear!
            #:get-result)
   (:documentation "A functional calculator example in CL"))
-(in-package :aoforce/libraries/learn-cl/cl-functional-calculator)
+(in-package :aoforce/libraries/learn-cl/fcalc)
 
 ;; See: https://gigamonkeys.com/book/functions
 

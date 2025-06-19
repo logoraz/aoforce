@@ -21,13 +21,14 @@
 ;;;
 
 (defpackage :aoforce/libraries/learn-cl/sdraw
+  (:nicknames :sdraw)
   (:use :cl)
   (:export #:sdraw
            #:sdraw-loop
            #:scrawl
            #:*sdraw-print-circle*
            #:*sdraw-leading-arrow*)
-  (:documentation "SDRAW example from Practical Common Lisp"))
+  (:documentation "SDRAW  - draws cons cell structures."))
 (in-package :aoforce/libraries/learn-cl/sdraw)
 
 

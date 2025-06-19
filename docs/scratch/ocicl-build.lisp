@@ -1,6 +1,6 @@
-(defpackage :aoforce/libraries/notes/ocicl-build
+(defpackage :aoforce/docs/scratch/ocicl-build
   (:use :cl))
-(in-package :aoforce/libraries/notes/ocicl-build)
+(in-package :aoforce/docs/scratch/ocicl-build)
 
 (or
  (when (find-package '#:OCICL-RUNTIME)

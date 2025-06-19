@@ -1,6 +1,5 @@
 (defpackage :aoforce/core/utils/base
-  (:use :cl
-        :uiop)
+  (:use :cl :uiop)
   (:import-from :cl-interpol)
   (:import-from :cl-ppcre)
   (:import-from :local-time)

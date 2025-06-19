@@ -1,6 +1,6 @@
-(defpackage :aoforce/libraries/notes/scratch
+(defpackage :aoforce/docs/scratch/scratch
   (:use :cl))
-(in-package :aoforce/libraries/notes/scratch)
+(in-package :aoforce/docs/scratch/scratch)
 
 ;; Find System version
 (asdf:component-version (asdf:find-system 'aoforce))

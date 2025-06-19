@@ -1,6 +1,6 @@
 (defsystem "aoforce"
   :description "A Common Lisp Configuration Environment Resource"
-  :author "Erik P Almaraz <erikalmaraz@fastmail.com"
+  :author "Erik P Almaraz <erikalmaraz@fastmail.com>"
   :license "MIT"
   :version (:read-file-form "version.sexp" :at (0 1))
   :class :package-inferred-system
@@ -20,9 +20,10 @@
                ;; AOFORCE
                "aoforce/setup"
                "aoforce/core/all"
-               "aoforce/libraries/cl-bexp/all"
+               ;; Libraries
+               "aoforce/libraries/learn-cl/all"
                "aoforce/libraries/webs-cl/all"
-               "aoforce/libraries/learn-cl/all")
+               "aoforce/libraries/cl-bexp/all")
   :in-order-to ((test-op (test-op "aoforce/test")))
   :long-description "
 A collection of Common Lisp development environment configuration resources,
@@ -35,6 +36,10 @@ tools, and a playground for building new projects.")
   :perform (test-op (op c)
                     (symbol-call :fiveam :run!
                                  (find-symbol* :root-suite :aoforce/test))))
+
+(defsystem "aoforce/docs"
+  :depends-on ())
+
 ;;; Register Systems
 ;;; The function `register-system-packages' must be called to register packages
 ;;; used or provided by your system when the name of the system/file that 
