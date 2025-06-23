@@ -199,7 +199,7 @@ $ sudo dnf install sbcl ninja-build clang19-devel llvm19-devel elfutils-devel \
 ## Building CCL & ECL
 Simply follow their instructions. CCL is the most beautiful bootstrap I've seen, builds
 with everything it ships with (i.e. it's minimal lisp image kernel). ECL builds with the
-above dependencies installed above.
+dependencies installed above.
 
 
 - CCL (Clozure CL): https://github.com/Clozure/ccl/releases/tag/v1.13

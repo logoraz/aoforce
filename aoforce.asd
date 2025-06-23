@@ -22,7 +22,7 @@
                "aoforce/core/all"
                ;; Libraries
                "aoforce/libraries/learn-cl/all"
-               "aoforce/libraries/webs-cl/all"
+               "aoforce/libraries/websxcl/all"
                "aoforce/libraries/cl-bexp/all")
   :in-order-to ((test-op (test-op "aoforce/test")))
   :long-description "
