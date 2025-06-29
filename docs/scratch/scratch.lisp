@@ -3,7 +3,7 @@
 (in-package :aoforce/docs/scratch/scratch)
 
 ;; Find System version
-(asdf:component-version (asdf:find-system 'aoforce))
+(asdf:component-version (asdf:find-system :aoforce))
 
 ;; Figure out how to use mapcar!
 (mapcar (lambda (x) (+ x 1)) '(1 2 3 4 5))

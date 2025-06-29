@@ -1,12 +1,16 @@
 # AOFORCE - My Common Lisp Playground
 
 <p align="center">
+  <img src="assets/aoforce-logo.svg" width="700" />
+</p>
+
+<p align="center">
   <img src="assets/yin-yang-lisp-logo_512_svg.png" width="200" />
 </p>
 
 Note: This project is akin to a dotfiles repo, however, centered around
 Common Lisp - NOT intented to be useful to anyone besides myself, though one
-may find it useful as a learning aid... The incenntive and inspiration was
+may find it useful as a learning aid... The incentive and inspiration was
 always for learning purposes.
 
 This is my Commmon Lisp configuration resource tool project. This was started
@@ -19,7 +23,6 @@ Common Lisp environment.
 The plan is that ideas/tools started here may later manifest themselves into
 projects of their own. So this project is really just my Common Lisp
 playground...
-
 
 ## Setup, Building & Testing
 
@@ -110,7 +113,6 @@ A simple calculator exhibiting the use of functional programming in CL:
  - Develop a CL Command Line tool to create Fedora RPM's for CL Libraries/Systems
  - Create a website for this project (GitHub Pages)
 
-
 ## Changelog
 
 ### 0.0.4 (Next Up)
@@ -129,7 +131,6 @@ A simple calculator exhibiting the use of functional programming in CL:
   - Build out unit test system
   - Separate this changelog into it's own separate entity
 
-
 ### 0.0.2
   - Refactor/Clean-up project scaffold
   - Create System alias `:aofor` & set to package nickname
@@ -140,7 +141,6 @@ A simple calculator exhibiting the use of functional programming in CL:
   - Initial commit
   - Added basic project scaffold
 
-   
 ## References:
  - TBD
 
@@ -177,8 +177,19 @@ $ echo '(rebuild-ccl :full t)' | ./lx86cl64 -n
 
 ```
 
+## Building ECL
+Simply follow their instructions. ECL builds with the dependencies installed above.
+- ECL (Embedable CL): https://common-lisp.net/project/ecl/static/manual/Building-ECL.htm
 
-## Building Nyxt
+For a local install:
+
+```bash
+$ ./configure --prefix=/home/<user>/.local/   # change user to your username
+$ make                                        # -jX if you have X cores
+$ make install
+```
+
+## Building Nyxt (experimental)
  - Nyxt (Electron) dependencies
 
 ```bash
@@ -189,26 +200,7 @@ $ cd /path/to/nyxt
 $ make all NYXT_RENDERER=electron
 ```
 
-
-## Building ECL
-Simply follow their instructions. ECL builds with the dependencies installed above.
-
-- ECL (Embedable CL): https://common-lisp.net/project/ecl/static/manual/Building-ECL.htm
-
-
-## Building Clasp (experimental)
-
-- Build dependencies (Minimal)
-- Clasp upgrade to llvm20 -> clang20
-
-```bash
-$ sudo dnf install sbcl ninja-build clang19-devel llvm19-devel elfutils-devel \
-                   boost-devel fmt-devel gmp-devel libunwind-devel binutils-gold \
-                   redhat-rpm-config
-```
-
-
-## Building Lem (Fedora 42)
+## Building Lem (experimental)
  - qlot "automatic installer"
 
 ```bash
@@ -226,5 +218,58 @@ $ sudo dnf install sbcl ncurses-devel make automake gcc gcc-c++ \
 
 $ cd /path/to/lem
 # Build lem ncurses+sdl2
-$ make lem
+$ make sdl2-ncurses
+```
+
+## Building Clasp (experimental)
+
+- Build dependencies (Minimal)
+- Clasp to upgrade to llvm20 --> clang20 (current llvm19 --> clang19)
+
+```bash
+$ sudo dnf install sbcl ninja-build clang19-devel llvm19-devel elfutils-devel \
+                   boost-devel fmt-devel gmp-devel libunwind-devel binutils-gold \
+                   redhat-rpm-config
+
+$ mkdir -p ~/.local/share/clasp/
+$ cd ~/.local/share/clasp/
+$ git clone https://github.com/clasp-developers/clasp.git ~/.local/share/clasp/src/
+                   
+```
+
+## Building stumpwm/mahogany (experimental)
+
+Get source
+
+```bash
+# Get source
+$ git clone https://github.com/stumpwm/mahogany.git
+$ cd /path/to/mahogany/
+$ git submodule update --init
+# test specific working branch
+$ git switch fix/add-pkg-config-path-to-makefile
+```
+
+System Build Dependencies
+
+```bash
+$ sudo dnf install sbcl clang (or gcc) make meson \
+                   redhat-rpm-config
+$ sudo dnf builddep wlroots
+```
+
+CL Build Dependencies
+```bash
+# Note if you have ocicl setup this step is not necessary as it pulls
+# these packages automatically from system - just listing here for completeness
+$ ocicl install alexandria cl-ansi-text terminfo cl-argparse snakes ffi \
+                ffi-grovel closer-mop fiaso
+```
+
+Build & Run
+
+```bash
+# Build & Run
+$ make
+$ make run
 ```
