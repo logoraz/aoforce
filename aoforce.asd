@@ -10,7 +10,6 @@
   ;; :defsystem-depends-on (:my-asdf-system)
   :depends-on ("bordeaux-threads"
                "lparallel"
-               "green-threads"
                "closer-mop"
                ;; Dependencies are also detected by ASDF using the
                ;; :import-from clause (i.e. `:import-from` #:system-name)...

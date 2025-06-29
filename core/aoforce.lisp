@@ -1,4 +1,4 @@
-x(defpackage :aoforce/core/aoforce
+(defpackage :aoforce/core/aoforce
   (:use :cl
         :aoforce/core/utils/base)
   (:export #:simple-test

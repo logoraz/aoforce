@@ -2,7 +2,6 @@
 
 ;;; Enable Allegro CL-style Read-Eval-Print Loop for SBCL
 (ignore-errors (require 'asdf)
-               (require 'uiop)
                (require 'sb-aclrepl))
 
 (when (find-package 'sb-aclrepl)
@@ -32,8 +31,9 @@
 ;; Use setup's --force option to override.
 
 ;; Present the following code to your LISP system at startup, either
-;; by adding it to your implementation's startup file
-;; (~/.sbclrc, ~/.eclrc, ~/.clasprc  ~/.abclrc, ~/.clinit.cl, or ~/.roswell/init.lisp)
+;; by adding it to your implementation's startup file:
+;; (~/.sbclrc, ~/.ccl-init.lisp ~/.eclrc, ~/.clasprc  ~/.abclrc, ~/.clinit.cl,
+;;  ~/.roswell/init.lisp)
 ;; or overriding it completely on the command line
 ;; (eg. sbcl --userinit init.lisp)
 

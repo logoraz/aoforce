@@ -54,6 +54,8 @@
 (defvar *shell-program* "/bin/sh"
   "The shell program used by @code{run-shell-command}.")
 
+;;; source: stumpwm/wrappers.lisp
+;; implementation specific --> sbcl
 #+ (or)
 (defun run-prog (prog &rest opts &key args output (wait t) &allow-other-keys)
   "Common interface to shell. Does not return anything useful."

@@ -19,11 +19,11 @@ export XDG_DATA_HOME=$HOME/.local/share
 export XDG_BIN_HOME=$HOME/.local/bin
 
 ## Update PATH - Common Lisp Utilities/Applications
-COMMON_LISP_BIN=$XDG_DATA_HOME/common-lisp/bin
-ccl=$COMMON_LISP_BIN/ccl
+# COMMON_LISP_BIN=$XDG_DATA_HOME/common-lisp/bin
+# ccl=$COMMON_LISP_BIN/ccl
 
 ### Nyxt Source (custom install)
-nyxt=$COMMON_LISP_BIN/nyxt
+# nyxt=$COMMON_LISP_BIN/nyxt
 
 ## Update PATH
-export PATH="$ccl:$nyxt:$PATH"
+# export PATH="$ccl:$nyxt:$PATH"

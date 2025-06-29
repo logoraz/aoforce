@@ -121,7 +121,7 @@ A simple calculator exhibiting the use of functional programming in CL:
   - Website?
   
 ### 0.0.3 (WIP)
-  - Project name finalization: confer -> `:aoforce` `(:aofor)`
+  - Project name finalization: confer -> `:aoforce` `(:aoforce)`
   - Create AOFORCE Logo svg
   - Build base of core utilities/helpers
   - Create simple database to track configuration changes (clsql?)
@@ -144,13 +144,69 @@ A simple calculator exhibiting the use of functional programming in CL:
 ## References:
  - TBD
 
+
 # Fedora Scratch Notes
 
 ## Core Development Environment (Fedora 42)
 ```bash
-$ sudo dnf install sbcl gnome-themes-extra redhat-rpm-config cmake clisp
+$ sudo dnf install sbcl clisp gnome-themes-extra redhat-rpm-config cmake
 
 ```
+
+## Building Clozure CL (ccl)
+Simply follow their instructions. CCL is the most beautiful bootstrap I've seen, builds
+with everything it ships with (i.e. it's minimal lisp image kernel).
+
+- Ref: CCL (Clozure CL): https://github.com/Clozure/ccl/releases/tag/v1.13
+
+```bash
+# fetch source code into directory "ccl"
+$ git clone https://github.com/Clozure/ccl.git ccl
+
+# go into the "ccl" directory where the sources are
+$ cd ccl
+
+# download pre-compiled binaries
+$ curl -L -O https://github.com/Clozure/ccl/releases/download/v1.13/linuxx86.tar.gz
+
+# unpack binaries (lisp kernel, heap image, interface database) into "ccl" directory
+$ tar xf ./linuxx86.tar.gz
+
+# Rebuild CCL to make sure everything is up-to-date with respect to the current sources.
+$ echo '(rebuild-ccl :full t)' | ./lx86cl64 -n
+
+```
+
+
+## Building Nyxt
+ - Nyxt (Electron) dependencies
+
+```bash
+$ sudo dnf install sbcl openssl-devel libfixposix-devel libsqlite3x-devel \
+                   wl-clipboard enchant-devel npm redhat-rpm-config
+
+$ cd /path/to/nyxt
+$ make all NYXT_RENDERER=electron
+```
+
+
+## Building ECL
+Simply follow their instructions. ECL builds with the dependencies installed above.
+
+- ECL (Embedable CL): https://common-lisp.net/project/ecl/static/manual/Building-ECL.htm
+
+
+## Building Clasp (experimental)
+
+- Build dependencies (Minimal)
+- Clasp upgrade to llvm20 -> clang20
+
+```bash
+$ sudo dnf install sbcl ninja-build clang19-devel llvm19-devel elfutils-devel \
+                   boost-devel fmt-devel gmp-devel libunwind-devel binutils-gold \
+                   redhat-rpm-config
+```
+
 
 ## Building Lem (Fedora 42)
  - qlot "automatic installer"
@@ -172,38 +228,3 @@ $ cd /path/to/lem
 # Build lem ncurses+sdl2
 $ make lem
 ```
-
-## Building Nyxt (Fedora 42)
- - Nyxt (Electron) dependencies
-
-```bash
-$ sudo dnf install sbcl openssl-devel libfixposix-devel libsqlite3x-devel \
-                   wl-clipboard enchant-devel npm redhat-rpm-config
-
-$ cd /path/to/nyxt
-$ make all NYXT_RENDERER=electron
-```
-
-
-## Building Clasp (Fedora 42)
-
-- Build dependencies (Minimal)
-- Clasp upgrade to llvm20 -> clang20
-
-```bash
-$ sudo dnf install sbcl ninja-build clang19-devel llvm19-devel elfutils-devel \
-                   boost-devel fmt-devel gmp-devel libunwind-devel binutils-gold \
-                   redhat-rpm-config
-```
-
-## Building CCL & ECL
-Simply follow their instructions. CCL is the most beautiful bootstrap I've seen, builds
-with everything it ships with (i.e. it's minimal lisp image kernel). ECL builds with the
-dependencies installed above.
-
-
-- CCL (Clozure CL): https://github.com/Clozure/ccl/releases/tag/v1.13
-- ECL (Embedable CL): https://common-lisp.net/project/ecl/static/manual/Building-ECL.htm
-
-
-
