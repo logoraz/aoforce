@@ -52,3 +52,10 @@
 (defun cl-data-home-dir ()
   "Thunk creating XDG_DATA_HOME Common Lisp directory"
   (ensure-dir (uiop:xdg-data-home #P"common-lisp")))
+
+(defun lem-setup ()
+  "Thunk to setup Lem config."
+  ;; Symlink lem.desktop to ~/.local/share/applications/lem.desktop
+  (sb-posix:symlink (uiop:xdg-config-home #P"lem/lem.desktop")
+                    (uiop:xdg-data-home #P"applications/lem.desktop"))
+  t)

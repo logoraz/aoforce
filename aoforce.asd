@@ -1,7 +1,7 @@
 (defsystem "aoforce"
   :description "A Common Lisp Configuration Environment Resource"
   :author "Erik P Almaraz <erikalmaraz@fastmail.com>"
-  :license "MIT"
+  :license "Apache-2.0"
   :version (:read-file-form "version.sexp" :at (0 1))
   :class :package-inferred-system
   ;; `:defsystem-depends-on' is used to declare the dependency on any
