@@ -1,10 +1,11 @@
-(defpackage :aoforce/core/database
+(defpackage :database
   (:use :cl)
   (:import-from :green-threads)
   (:import-from :mito)
   (:export )
   (:documentation "An in-memory database -> basic Lisp data structures."))
-(in-package :aoforce/core/database)
+
+(in-package :database)
 
 
 (defparameter *default-table-size* 100)

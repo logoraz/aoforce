@@ -1,7 +1,7 @@
 (defpackage :aoforce/setup
   (:nicknames :setup)
   (:use :cl
-        :aoforce/core/utils/base)
+        :utils/base)
   (:export #:create-symlink
            #:dir-pathname
            #:cl-rcfile-slnks

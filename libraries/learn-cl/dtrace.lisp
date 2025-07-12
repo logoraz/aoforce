@@ -14,7 +14,7 @@
 ;;;   DTRACE  - same syntax as TRACE
 ;;;   DUNTRACE - same syntax as UNTRACE
 
-(defpackage :aoforce/libraries/learn-cl/dtrace
+(defpackage :learn-cl/dtrace
   (:nicknames :dtrace)
   (:use :cl)
   (:export #:dtrace
@@ -25,7 +25,8 @@
            #:*dtrace-print-pretty*
 	   #:*dtrace-print-array*)
   (:documentation "DTRACE - a portable tracing tool for Common Lisp"))
-(in-package :aoforce/libraries/learn-cl/dtrace)
+
+(in-package :learn-cl/dtrace)
 
 (eval-when (:load-toplevel :execute)
   (shadowing-import '(dtrace duntrace) (find-package :common-lisp-user)))

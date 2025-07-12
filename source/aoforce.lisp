@@ -1,10 +1,11 @@
-(defpackage :aoforce/core/aoforce
+(defpackage :aoforce
   (:use :cl
-        :aoforce/core/utils/base)
+        :utils/base)
   (:export #:simple-test
            #:test-utils)
   (:documentation "Main package of AOFORCE"))
-(in-package :aoforce/core/aoforce)
+
+(in-package :aoforce)
 
 
 (defun simple-test (&optional (n 11))
