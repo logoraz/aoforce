@@ -15,10 +15,9 @@ always for learning purposes.
 
 This is my Commmon Lisp configuration resource tool project. This was started
 as an idea to store my various common lisp libraries, each separately deployable
-from one system, hence setting it up using ASDF 3 `package-inferred-system`. I
-also want it to setup my Common Lisp linux environment, i.e. deploy rcfiles,
-dotfiles etc. that pertain to my workflow - a means of having a reproducible
-Common Lisp environment.
+from one system. I also want it to setup my Common Lisp linux environment, i.e.
+deploy rcfiles, dotfiles etc. that pertain to my workflow - a means of having a
+reproducible Common Lisp environment.
 
 The plan is that ideas/tools started here may later manifest themselves into
 projects of their own. So this project is really just my Common Lisp
@@ -27,9 +26,9 @@ playground...
 ## Setup, Building & Testing
 
 Currently, the setup of this project itself acts as a template on how to scaffold
-a modern Common Lisp system using the ASDF `package-inferred-system` along with a
-testing framework (FiveAM). The Common Lisp code written herein also acts as a
-'style guide' on my functionality/aesthetic preferences. I also use
+a modern Common Lisp system along with a testing framework (FiveAM).
+The Common Lisp code written herein also acts as a 'style guide' on my
+functionality/aesthetic preferences. I also use
 [ocicl](https://github.com/ocicl/ocicl) for a modern approach for Common Lisp
 Systems Management, its a great tool (highly preferred over quicklisp, qlot,
 roswell, CLPM, and vend which is discriminatory towards those using ASDF's
@@ -50,9 +49,6 @@ $ sbcl --load setup.lisp
 ```lisp
 
 * (asdf:load-system :aoforce)
-;; or
-;; (asdf:load-system :aofrc) ; system short alias
-;;...
 
 * (asdf:test-system :aoforce/test)
 
@@ -68,7 +64,7 @@ learning tool (a cons cell visual aid) in this project as follows:
 
 ```lisp
 
-(lcl:sdraw '(This (is a (test!))))
+(learn-cl/sdraw:sdraw '(This (is a (test!))))
 ;; =>
 ;; [*|*]--->[*|*]--->NIL
 ;;  |        |
@@ -94,16 +90,16 @@ A simple calculator exhibiting the use of functional programming in CL:
 ;;             :IN
 ;;             AOFORCE/LIBRARIES/LEARN-CL/FCALC:MAKE-CALCULATOR) {100457E9EB}>
 
-(fcalc:add! *my-calc* 2)
+(learn-cl/fcalc:add! *my-calc* 2)
 ;;=> 2
 
-(fcalc:multiply! *my-calc* 2)
+(learn-cl/fcalc:multiply! *my-calc* 2)
 ;;=> 4
 
-(fcalc:clear! *my-calc*)
+(learn-cl/fcalc:clear! *my-calc*)
 ;;=> 0
 
-(fcalc:get-result *my-calc*)
+(learn-cl/fcalc:get-result *my-calc*)
 ;;=> 0
 
 ```
@@ -116,30 +112,31 @@ A simple calculator exhibiting the use of functional programming in CL:
 ## Changelog
 
 ### 0.0.4 (Next Up)
-  - Create pre-liminary command-line application
-  - Refactor build/setup of CLI & CL Runtime
-  - Further build out unit testing
-  - Build out document generation
-  - Website?
+  - [X] Refactor ASDF system to explicit type
+  - [ ] Create pre-liminary command-line application
+  - [ ] Refactor build/setup of CLI & CL Runtime
+  - [ ] Further build out unit testing
+  - [ ] Build out document generation
+  - [ ] Website?
   
 ### 0.0.3 (WIP)
-  - Project name finalization: confer -> `:aoforce` `(:aoforce)`
-  - Create AOFORCE Logo svg
-  - Build base of core utilities/helpers
-  - Create simple database to track configuration changes (clsql?)
-  - Add document generation secondary system
-  - Build out unit test system
-  - Separate this changelog into it's own separate entity
+  - [X] Project name finalization: confer -> `:aoforce` `(:aoforce)`
+  - [X] Create AOFORCE Logo svg
+  - [X] Build base of core utilities/helpers
+  - [X] Create simple database to track configuration changes (clsql?)
+  - [X] Add document generation secondary system
+  - [X] Build out unit test system
+  - [X] Separate this changelog into it's own separate entity
 
 ### 0.0.2
-  - Refactor/Clean-up project scaffold
-  - Create System alias `:aofor` & set to package nickname
-  - Add unit-testing framework template (FiveAM)
-  - Update README & Revision Bump
+  - [X] Refactor/Clean-up project scaffold
+  - [X] Create System alias `:aofor` & set to package nickname
+  - [X] Add unit-testing framework template (FiveAM)
+  - [X] Update README & Revision Bump
 
 ### 0.0.1
-  - Initial commit
-  - Added basic project scaffold
+  - [X] Initial commit
+  - [X] Added basic project scaffold
 
 ## References:
  - TBD

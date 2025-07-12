@@ -3,41 +3,55 @@
   :author "Erik P Almaraz <erikalmaraz@fastmail.com>"
   :license "Apache-2.0"
   :version (:read-file-form "version.sexp" :at (0 1))
-  :class :package-inferred-system
-  ;; `:defsystem-depends-on' is used to declare the dependency on any
-  ;; ASDF dependencies defined in their own system (preferred to here).
-  ;; see https://asdf.common-lisp.dev/asdf.html
-  ;; :defsystem-depends-on (:my-asdf-system)
   :depends-on ("bordeaux-threads"
                "lparallel"
                "closer-mop"
-               ;; Dependencies are also detected by ASDF using the
-               ;; :import-from clause (i.e. `:import-from` #:system-name)...
-               ;; So not necessary to place all here, just the system-wide ones
-               ;; when using the package-inferred-system...
-               ;; https://asdf.common-lisp.dev/asdf.htmlx
-               ;; AOFORCE
-               "aoforce/setup"
-               "aoforce/core/all"
-               ;; Libraries
-               "aoforce/libraries/learn-cl/all"
-               "aoforce/libraries/websxcl/all"
-               "aoforce/libraries/cl-bexp/all")
+               "osicat"
+               "green-threads"
+               "mito"
+               ;; Local Systems (aka libraries)
+               "learn-cl"
+               "websxcl"
+               "cl-bexp")
+  ;; Map of System Hierarchy
+  :serial t
+  :components
+  ((:module "source"
+    :serial t
+    :components
+    ((:module "utils"
+      :serial t
+      :components
+      ((:file "base")))
+     (:file "aoforce")
+     (:file "database")))
+   (:file "setup" :depends-on ("source")))
+  ;; Building (executables) & Testing
+  ;; :build-operation "program-op"
+  ;; :build-pathname "aoforce-preexe"
+  ;; :entry-point "aoforce:main"
   :in-order-to ((test-op (test-op "aoforce/test")))
   :long-description "
 A collection of Common Lisp development environment configuration resources,
 tools, and a playground for building new projects.")
 
+#+or
+(defsystem "aoforce/libraries"
+  :depends-on ())
 
 (defsystem "aoforce/test"
-  :depends-on ("fiveam"
-               "aoforce/tests/all")
+  :depends-on ("fiveam")
+  :pathname "tests"
+  :serial t
+  :components
+  ((:file "suite"))
   :perform (test-op (op c)
                     (symbol-call :fiveam :run!
-                                 (find-symbol* :root-suite :aoforce/test))))
+                                 (find-symbol* :root-suite :tests/suite))))
 
 (defsystem "aoforce/docs"
-  :depends-on ())
+  :depends-on ()
+  :pathname "docs")
 
 ;;; Register Systems
 ;;; The function `register-system-packages' must be called to register packages
@@ -45,10 +59,10 @@ tools, and a playground for building new projects.")
 ;;; provides the package is not the same as the package name
 ;;; (converted to lower case).
 
-(asdf:register-system-packages "aoforce/tests/all" '(:aoforce/test))
-
 (register-system-packages "bordeaux-threads" '(:bt :bt2 :bordeaux-threads-2))
 
 (register-system-packages "closer-mop" '(:c2mop :c2cl :c2cl-user))
 
 (register-system-packages "fiveam" '(:5am))
+
+(asdf:register-system-packages "learn-cl" '(:sdraw :dtrace :fcalc))

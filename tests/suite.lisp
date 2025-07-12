@@ -1,10 +1,10 @@
-(defpackage :aoforce/tests/base
+(defpackage :tests/suite
   (:use :cl
         :aoforce
         :5am)
   (:export #:root-suite)
   (:documentation "Base testing suite -> root-suite"))
-(in-package :aoforce/tests/base)
+(in-package :tests/suite)
 
 ;; https://common-lisp-libraries.readthedocs.io/fiveam/
 ;; https://github.com/lispci/fiveam/blob/master/t/example.lisp

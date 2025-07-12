@@ -14,10 +14,16 @@
 ;; or overriding it completely on the command line
 ;; (eg. sbcl --userinit init.lisp)
 
+;; Note: To add other systems not registered in ocicl, simply use the
+;; :tree keyword (as opposed to the default :directory) as follows. Also,
+;; I wrap this initializing with `ignore-errors` so that the CL implementation
+;; fails quietly...
+
 #-ocicl
 (ignore-errors
   (when (probe-file (uiop:xdg-data-home #P"ocicl/ocicl-runtime.lisp"))
     (load (uiop:xdg-data-home #P"ocicl/ocicl-runtime.lisp")))
   (asdf:initialize-source-registry
    (list :source-registry
-         (list :directory (uiop:getcwd)) :inherit-configuration)))
+         (list :tree (uiop:getcwd)) 
+         :inherit-configuration)))

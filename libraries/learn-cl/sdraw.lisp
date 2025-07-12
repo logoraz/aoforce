@@ -20,7 +20,7 @@
 ;;;   *sdraw-leading-arrow*   Initially nil.  Set to t to get leading arrows.
 ;;;
 
-(defpackage :aoforce/libraries/learn-cl/sdraw
+(defpackage :learn-cl/sdraw
   (:nicknames :sdraw)
   (:use :cl)
   (:export #:sdraw
@@ -29,7 +29,8 @@
            #:*sdraw-print-circle*
            #:*sdraw-leading-arrow*)
   (:documentation "SDRAW  - draws cons cell structures."))
-(in-package :aoforce/libraries/learn-cl/sdraw)
+
+(in-package :learn-cl/sdraw)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
