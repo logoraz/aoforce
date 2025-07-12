@@ -38,9 +38,13 @@
 ;; (eg. sbcl --userinit init.lisp)
 
 #-ocicl
-(progn
+(ignore-errors
   (when (probe-file (uiop:xdg-data-home #P"ocicl/ocicl-runtime.lisp"))
     (load (uiop:xdg-data-home #P"ocicl/ocicl-runtime.lisp")))
   (asdf:initialize-source-registry
    (list :source-registry
-         (list :directory (uiop:getcwd)) :inherit-configuration)))
+         #+or
+         (list :directory (uiop:getcwd))
+         ;; Needed to store non-available ocicl systems in ocicl/
+         (list :tree (uiop:getcwd))
+         :inherit-configuration)))

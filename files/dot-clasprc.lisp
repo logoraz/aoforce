@@ -15,7 +15,7 @@
 ;; (eg. sbcl --userinit init.lisp)
 
 #-ocicl
-(progn
+(ignore-errors
   (when (probe-file (uiop:xdg-data-home #P"ocicl/ocicl-runtime.lisp"))
     (load (uiop:xdg-data-home #P"ocicl/ocicl-runtime.lisp")))
   (asdf:initialize-source-registry
