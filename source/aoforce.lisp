@@ -1,10 +1,10 @@
 (defpackage :aoforce
-  (:use :cl
-        :utils/base)
+  (:nicknames :aofr)
+  (:use :cl)
   (:export #:simple-test
-           #:test-utils)
+           #:test-utils
+           #:main)
   (:documentation "Main package of AOFORCE"))
-
 (in-package :aoforce)
 
 
@@ -14,5 +14,13 @@
         :collect (list (format nil "list ~A" i)
                        (/ i n))))
 
-(defun test-utils ()
-  (concat "string-1" " " "string-2"))
+(defun main ()
+  "Main entry point for the executable."
+  (format t "Hello from Common Lisp! Arguments: ~A~%" 'no-args)
+  #+or
+  (progn
+    #+clisp (ext:exit)
+    #+(and ecl clasp) (ext:quit)
+    #+ccl (ccl:quit)
+    #+sbcl (sb-ext:quit))
+  (uiop:quit))

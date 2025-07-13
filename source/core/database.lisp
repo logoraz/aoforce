@@ -1,11 +1,11 @@
-(defpackage :database
+(defpackage :core/database
+  (:nicknames :db)
   (:use :cl)
-  (:import-from :green-threads)
+  (:import-from :bt2)
   (:import-from :mito)
   (:export )
   (:documentation "An in-memory database -> basic Lisp data structures."))
-
-(in-package :database)
+(in-package :core/database)
 
 
 (defparameter *default-table-size* 100)

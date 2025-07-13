@@ -23,6 +23,7 @@ The plan is that ideas/tools started here may later manifest themselves into
 projects of their own. So this project is really just my Common Lisp
 playground...
 
+
 ## Setup, Building & Testing
 
 Currently, the setup of this project itself acts as a template on how to scaffold
@@ -38,33 +39,34 @@ The most recent addition is a testing framework (FiveAM) that has an example tes
 template borrowed from 
 [The Common Lisp Cookbook:Testing With FiveAM](https://lispcookbook.github.io/cl-cookbook/testing.html#testing-with-fiveam).
 
+
 ### Setup (WIP)
 
-```bash
-$ sbcl --load setup.lisp
-```
 
 ### Build & Test:
 
 ```lisp
-
 * (asdf:load-system :aoforce)
-
-* (asdf:test-system :aoforce/test)
-
+* (asdf:test-system :aoforce)
 ```
+
 
 ### Play & Learn
 
 As a fun exercise of incorporating a library, I adapted the `SDRAW` and `DTRACE` tools from
 the book 
 [Common Lisp: A Gentle Introduction to Symbolic Computation](https://www.cs.cmu.edu/~dst/LispBook/).
-This is staged in the library `learncl` (alias `lcl`). For example, you can run the `sdraw`
+This is staged in the system/library `learn-cl`. For example, you can run the `sdraw`
 learning tool (a cons cell visual aid) in this project as follows:
 
 ```lisp
+;; Load Library Systems
+(asdf:load-system :aoforce/libraries)
 
-(learn-cl/sdraw:sdraw '(This (is a (test!))))
+;; Enter into learn-cl/sdraw package
+(in-package :learn-cl/sdraw)
+
+(sdraw '(This (is a (test!))))
 ;; =>
 ;; [*|*]--->[*|*]--->NIL
 ;;  |        |
@@ -79,64 +81,56 @@ learning tool (a cons cell visual aid) in this project as follows:
 
 ```
 
-A simple calculator exhibiting the use of functional programming in CL:
+Another learning exercise was to create a functional calculator I wrote in Scheme,
+but then translated into Common Lisp - it is also contained in the system/library
+`learn-cl` under the package `:fcalc`. The CLOS based calculator can be trialed
+under the package `:scalc`!
+
+A simple calculator exhibiting the use of functional & CLOS programming 
+in CL.
 
 ```lisp
-(defvar *my-calc* ())
-;;=> *MY-CALC*
+;; Load Library Systems
+(asdf:load-system :aoforce/libraries)
 
-(setf *my-calc* (fcalc:make-calculator 0))
-;; #<FUNCTION (LAMBDA (AOFORCE/LIBRARIES/LEARN-CL/FCALC::OPERATION)
-;;             :IN
-;;             AOFORCE/LIBRARIES/LEARN-CL/FCALC:MAKE-CALCULATOR) {100457E9EB}>
+;; Enter in learn-cl/* package
+(in-package :learn-cl/fcalc)
+;; or (in-package :learn-cl/scalc)
 
-(learn-cl/fcalc:add! *my-calc* 2)
+(defvar *my-calc* (make-calculator 0))
+
+(add! *my-calc* 2)
 ;;=> 2
+;; OR
+;; (add *my-calc* 2)
 
-(learn-cl/fcalc:multiply! *my-calc* 2)
+(multiply! *my-calc* 2)
 ;;=> 4
+;; OR
+;; (multiply *my-calc* 2)
 
-(learn-cl/fcalc:clear! *my-calc*)
+(clear! *my-calc*)
 ;;=> 0
+;; OR
+;; (clear *my-calc*)
 
-(learn-cl/fcalc:get-result *my-calc*)
+(get-result *my-calc*)
 ;;=> 0
+;; OR
+;; (value *my-calc*)
 
 ```
 
-## TODOs (Wish List)
- - Create a CL setup script to scaffold my prefered develop environment
- - Develop a CL Command Line tool to create Fedora RPM's for CL Libraries/Systems
- - Create a website for this project (GitHub Pages)
 
-## Changelog
+## Roadmap
 
-### 0.0.4 (Next Up)
-  - [X] Refactor ASDF system to explicit type
-  - [ ] Create pre-liminary command-line application
-  - [ ] Refactor build/setup of CLI & CL Runtime
-  - [ ] Further build out unit testing
-  - [ ] Build out document generation
-  - [ ] Website?
-  
-### 0.0.3 (WIP)
-  - [X] Project name finalization: confer -> `:aoforce` `(:aoforce)`
-  - [X] Create AOFORCE Logo svg
-  - [X] Build base of core utilities/helpers
-  - [X] Create simple database to track configuration changes (clsql?)
-  - [X] Add document generation secondary system
-  - [X] Build out unit test system
-  - [X] Separate this changelog into it's own separate entity
+ - [ ] Build a documentation system 
+ - [ ] Build a configuration deployment system
+ - [ ] Build database for configuration deployment system
+ - [ ] Start adding unit testing
+ - [ ] Build a CLI for deployment system
+ - [ ] Build a GTK4 gui config system inspector?
 
-### 0.0.2
-  - [X] Refactor/Clean-up project scaffold
-  - [X] Create System alias `:aofor` & set to package nickname
-  - [X] Add unit-testing framework template (FiveAM)
-  - [X] Update README & Revision Bump
-
-### 0.0.1
-  - [X] Initial commit
-  - [X] Added basic project scaffold
 
 ## References:
  - TBD

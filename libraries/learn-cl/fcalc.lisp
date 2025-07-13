@@ -9,8 +9,8 @@
            #:clear!
            #:get-result)
   (:documentation "A functional calculator example in CL"))
-
 (in-package :learn-cl/fcalc)
+
 
 ;; See: https://gigamonkeys.com/book/functions
 

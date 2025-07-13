@@ -1,14 +1,14 @@
-(defpackage :aoforce/setup
-  (:nicknames :setup)
+(defpackage :setup
+  (:nicknames :init)
   (:use :cl
-        :utils/base)
-  (:export #:create-symlink
-           #:dir-pathname
-           #:cl-rcfile-slnks
+        :utils/files
+        :utils/shell)
+  (:export #:cl-rcfile-slnks
            #:bash-rcfile-slnks
            #:cl-data-home-dir)
   (:documentation "Setup script to scaffold CL configuration/environment."))
-(in-package :aoforce/setup)
+(in-package :setup)
+
 
 ;;; Current setup of symlinks (XDG_CONFIG_HOME)
 ;; Shell Environment
@@ -18,7 +18,7 @@
 ;; 3.  aoforce/files/dot-sbclrc.lisp --> ~/.sbclrc
 ;; 4.  aoforce/files/dot-ccl-init.lisp --> ~/.ccl-init.lisp
 ;; 5.  aoforce/files/dot-clapsrc.lisp --> ~/.clasprc
-;; Common Lisp Programs (XDG_DATA_HOME/common-lisp/bin)
+;; Common Lisnp Programs (XDG_DATA_HOME/common-lisp/bin)
 ;; 6.  (build) ccl/lx86cl64 --> HOME/.local/bin/ccl
 ;; 7.  (build) nyxt/nyxt --> HOME/.local/bin/nyxt
 ;; GNOME desktop files
@@ -56,8 +56,8 @@
 (defun lem-setup ()
   "Thunk to setup Lem config."
   ;; Symlink lem.desktop to ~/.local/share/applications/lem.desktop
-  (sb-posix:symlink (uiop:xdg-config-home #P"lem/lem.desktop")
-                    (uiop:xdg-data-home #P"applications/lem.desktop"))
+  (create-symlink (uiop:xdg-config-home #P"lem/lem.desktop")
+                  (uiop:xdg-data-home #P"applications/lem.desktop"))
   t)
 
 ;; Install or setup ocicl

@@ -3,66 +3,81 @@
   :author "Erik P Almaraz <erikalmaraz@fastmail.com>"
   :license "Apache-2.0"
   :version (:read-file-form "version.sexp" :at (0 1))
-  :depends-on ("bordeaux-threads"
-               "lparallel"
-               "closer-mop"
-               "osicat"
-               "green-threads"
-               "mito"
+  :depends-on ("bordeaux-threads" "closer-mop"
+               "osicat" "trivial-gray-streams"
+               "mito" "cl-ppcre"
+               "micros" "slynk"
+               #+sbcl "cl-cffi-gtk4"
                ;; Local Systems (aka libraries)
-               "learn-cl"
-               "websxcl"
                "cl-bexp")
+
   ;; Map of System Hierarchy
-  :serial t
   :components
   ((:module "source"
-    :serial t
     :components
-    ((:module "utils"
-      :serial t
+    ((:module "utils" ;; Establish first our toolbox
       :components
-      ((:file "base")))
-     (:file "aoforce")
-     (:file "database")))
-   (:file "setup" :depends-on ("source")))
+      ((:file "syntax")
+       (:file "files")
+       (:file "servers")
+       (:file "shell")
+       (:file "strings")))
+
+     ;; Build out the core of aoforce
+     (:module "core"
+      :depends-on ("utils")
+      :components
+      ((:file "database")))
+     
+     ;; Finally scaffold aoforce
+     (:file "setup"    :depends-on ("utils"))
+     (:file "aoforce"  :depends-on ("utils" "core"))))
+
+   ;; UI/X Frontends
+   (:module "frontends"
+    :components
+    (#+sbcl (:file "gtk4-tutorial"))))
+  
   ;; Building (executables) & Testing
-  ;; :build-operation "program-op"
-  ;; :build-pathname "aoforce-preexe"
-  ;; :entry-point "aoforce:main"
+  ;; Simply build with ccl/sbcl via (asdf:make :formulatum)
+  ;; (ccl:save-application #p"formulatum-ccl" 
+  ;;                       :toplevel #'formulatum:main 
+  ;;                       :prepend-kernel t)
+  :build-operation "program-op"
+  :build-pathname "aoforce-preexe"
+  :entry-point "aoforce:main"
   :in-order-to ((test-op (test-op "aoforce/test")))
   :long-description "
 A collection of Common Lisp development environment configuration resources,
 tools, and a playground for building new projects.")
-
-#+or
-(defsystem "aoforce/libraries"
-  :depends-on ())
-
-(defsystem "aoforce/test"
-  :depends-on ("fiveam")
-  :pathname "tests"
-  :serial t
-  :components
-  ((:file "suite"))
-  :perform (test-op (op c)
-                    (symbol-call :fiveam :run!
-                                 (find-symbol* :root-suite :tests/suite))))
-
-(defsystem "aoforce/docs"
-  :depends-on ()
-  :pathname "docs")
 
 ;;; Register Systems
 ;;; The function `register-system-packages' must be called to register packages
 ;;; used or provided by your system when the name of the system/file that 
 ;;; provides the package is not the same as the package name
 ;;; (converted to lower case).
-
 (register-system-packages "bordeaux-threads" '(:bt :bt2 :bordeaux-threads-2))
-
 (register-system-packages "closer-mop" '(:c2mop :c2cl :c2cl-user))
 
-(register-system-packages "fiveam" '(:5am))
 
-(asdf:register-system-packages "learn-cl" '(:sdraw :dtrace :fcalc))
+(defsystem "aoforce/libraries"
+  ;; Extra libraries to bring in if needed
+  :depends-on ("learn-cl"
+               "websxcl"))
+
+
+(defsystem "aoforce/test"
+  :depends-on ("rove" "mito")
+  :components
+  ((:module "tests"
+    :components
+    ((:file "suite"))))
+  :perform (test-op (o c)
+                    (unless (symbol-call :rove :run c)
+                      (error "Tests failed"))))
+
+
+(defsystem "aoforce/docs"
+  :depends-on ())
+
+

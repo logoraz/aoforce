@@ -8,6 +8,7 @@
   :components
   ((:file "sdraw")
    (:file "dtrace")
-   (:file "fcalc"))
+   (:file "fcalc")
+   (:file "scalc"))
   :long-description "
 TBD")
