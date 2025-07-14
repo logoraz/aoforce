@@ -10,7 +10,11 @@ fi
 ## General Env
 export LC_COLLATE=C
 export EDITOR=emacs
-export BROWSER=nyxt
+if [[ $XDG_SESSION_TYPE == 'x11' ]]; then
+    export EDITOR=lem
+    export BROWSER=nyxt
+    export GTK_THEME='Adwaita:dark'
+fi
 
 ## XDG Env
 export XDG_CONFIG_HOME=$HOME/.config

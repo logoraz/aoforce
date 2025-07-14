@@ -1,8 +1,11 @@
 ;;;; dot-sbclrc.lisp -> .sbclrc - SBCL Initialization File
 
 ;;; Enable Allegro CL-style Read-Eval-Print Loop for SBCL
-(ignore-errors (require 'asdf)
-               (require 'sb-aclrepl))
+(ignore-errors (require :asdf)
+               (require :uiop)
+               (require :sb-aclrepl)
+               (require :sb-rotate-byte)
+               (require :sb-cltl2))
 
 (when (find-package 'sb-aclrepl)
   (push :aclrepl cl:*features*))

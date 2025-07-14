@@ -1,13 +1,15 @@
 # ChangeLog
 
-## 0.0.4 (Next Up)
+## 0.0.5 (Future)
+ - [ ] Scaffold out database system
+ - [ ] Website?
+
+## 0.0.4 (current)
  - [X] Refactor ASDF system to explicit type
  - [X] Investigate adding GTK frontend
  - [X] Further build out unit testing
  - [X] Add CLOS 'scalc` based calculator to systemm learn-cl
- - [ ] Scaffold out database system
- - [ ] Build out document generation
- - [ ] Website?
+ - [ ] Scaffold document generation framework
   
 ## 0.0.3
  - [X] Project name finalization: confer -> `:aoforce` `(:aoforce)`

@@ -1,5 +1,5 @@
 (defpackage :utils/syntax
   (:use :cl :uiop)
   (:export )
-  (:documentation "Macros/Syntax Language Extension Utilities."))
+  (:documentation "Syntactic Language Extensions."))
 (in-package :utils/syntax)

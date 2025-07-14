@@ -24,6 +24,7 @@ if [ -d ~/.bashrc.d ]; then
 fi
 unset rc
 
+
 # User specific configurations (add --> .bashrc.d)
 
 ## Aliases

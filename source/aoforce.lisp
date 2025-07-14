@@ -1,6 +1,6 @@
 (defpackage :aoforce
   (:nicknames :aofr)
-  (:use :cl)
+  (:use :cl :asdf :uiop)
   (:export #:simple-test
            #:test-utils
            #:main)

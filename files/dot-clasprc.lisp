@@ -1,7 +1,7 @@
 ;;;; dot-clasprc.lisp -> .clasprc - Clasp Initialization File
 
-(ignore-errors (require 'asdf)
-               (require 'uiop))
+(ignore-errors (require :asdf)
+               (require :uiop))
 
 ;;; Enable OCICL
 ;; Preserving existing (uiop:xdg-data-home #P"ocicl/ocicl-registry.cfg")
