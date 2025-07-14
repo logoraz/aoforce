@@ -1,3 +1,12 @@
+3bmd, ghcr.io/ocicl/3bmd@sha256:8271fdd8c5916501e07004a9ccce66091db16dfd704e1c916ec9b0495277e1a1, 3bmd-20250614-f850c88/3bmd.asd
+3bmd-ext-code-blocks, ghcr.io/ocicl/3bmd@sha256:8271fdd8c5916501e07004a9ccce66091db16dfd704e1c916ec9b0495277e1a1, 3bmd-20250614-f850c88/3bmd-ext-code-blocks.asd
+3bmd-ext-definition-lists, ghcr.io/ocicl/3bmd@sha256:8271fdd8c5916501e07004a9ccce66091db16dfd704e1c916ec9b0495277e1a1, 3bmd-20250614-f850c88/3bmd-ext-definition-lists.asd
+3bmd-ext-math, ghcr.io/ocicl/3bmd@sha256:8271fdd8c5916501e07004a9ccce66091db16dfd704e1c916ec9b0495277e1a1, 3bmd-20250614-f850c88/3bmd-ext-math.asd
+3bmd-ext-tables, ghcr.io/ocicl/3bmd@sha256:8271fdd8c5916501e07004a9ccce66091db16dfd704e1c916ec9b0495277e1a1, 3bmd-20250614-f850c88/3bmd-ext-tables.asd
+3bmd-ext-wiki-links, ghcr.io/ocicl/3bmd@sha256:8271fdd8c5916501e07004a9ccce66091db16dfd704e1c916ec9b0495277e1a1, 3bmd-20250614-f850c88/3bmd-ext-wiki-links.asd
+3bmd-tests, ghcr.io/ocicl/3bmd@sha256:8271fdd8c5916501e07004a9ccce66091db16dfd704e1c916ec9b0495277e1a1, 3bmd-20250614-f850c88/3bmd-tests.asd
+3bmd-youtube, ghcr.io/ocicl/3bmd@sha256:8271fdd8c5916501e07004a9ccce66091db16dfd704e1c916ec9b0495277e1a1, 3bmd-20250614-f850c88/3bmd-youtube.asd
+3bmd-youtube-tests, ghcr.io/ocicl/3bmd@sha256:8271fdd8c5916501e07004a9ccce66091db16dfd704e1c916ec9b0495277e1a1, 3bmd-20250614-f850c88/3bmd-youtube-tests.asd
 alexandria, ghcr.io/ocicl/alexandria@sha256:e433c2e076ed3bcf8641b97b00192680db2201d305efac9293539dee88c7fbf7, alexandria-20240503-8514d8e/alexandria.asd
 autoload, ghcr.io/ocicl/mgl-pax-bootstrap@sha256:fbed0e1eba650957ac69835f468c5e0f8fdc67eb742e362acf6afe6f56e93bfe, mgl-pax-20250620-18f1d93/autoload/autoload.asd
 babel, ghcr.io/ocicl/babel@sha256:b505136744213e6b953913780a4b647da40e83818a10f41004846863b5037810, babel-20240606-23c1440/babel.asd
@@ -27,6 +36,7 @@ cl-postgres_plus_local-time, ghcr.io/ocicl/local-time@sha256:7f53539308b9fdfd32c
 cl-ppcre, ghcr.io/ocicl/cl-ppcre@sha256:bf073924cf4fd5957a4fd961a95d446ed0e53fa32a5002cbd2d52182874f45e5, cl-ppcre-20250606-a2ea581/cl-ppcre.asd
 cl-ppcre-unicode, ghcr.io/ocicl/cl-ppcre@sha256:bf073924cf4fd5957a4fd961a95d446ed0e53fa32a5002cbd2d52182874f45e5, cl-ppcre-20250606-a2ea581/cl-ppcre-unicode.asd
 closer-mop, ghcr.io/ocicl/closer-mop@sha256:e3ab432b86a1e95997f6b6f69bb42954da341506728344d657a8e4a2f42e7745, closer-mop-20250701-5f8adff/closer-mop.asd
+colorize, ghcr.io/ocicl/colorize@sha256:6a4c03efd20266dd630b9009620b29c0e22fffdb30781e258bf5ae308b8bb8a2, colorize-20241110-c41fcc5/colorize.asd
 dbd-mysql, ghcr.io/ocicl/dbi@sha256:72d852e2d6c90004bdfc5320779815088a268fdee93d1c099856cc5055ecb0de, cl-dbi-20240907-8dbd2cc/dbd-mysql.asd
 dbd-postgres, ghcr.io/ocicl/dbi@sha256:72d852e2d6c90004bdfc5320779815088a268fdee93d1c099856cc5055ecb0de, cl-dbi-20240907-8dbd2cc/dbd-postgres.asd
 dbd-sqlite3, ghcr.io/ocicl/dbi@sha256:72d852e2d6c90004bdfc5320779815088a268fdee93d1c099856cc5055ecb0de, cl-dbi-20240907-8dbd2cc/dbd-sqlite3.asd
@@ -37,9 +47,12 @@ dref, ghcr.io/ocicl/mgl-pax-bootstrap@sha256:fbed0e1eba650957ac69835f468c5e0f8fd
 dref-test, ghcr.io/ocicl/mgl-pax-bootstrap@sha256:fbed0e1eba650957ac69835f468c5e0f8fdc67eb742e362acf6afe6f56e93bfe, mgl-pax-20250620-18f1d93/dref/dref-test.asd
 dref-test-package-inferred, ghcr.io/ocicl/mgl-pax-bootstrap@sha256:fbed0e1eba650957ac69835f468c5e0f8fdc67eb742e362acf6afe6f56e93bfe, mgl-pax-20250620-18f1d93/dref/test/data/dref-test-package-inferred.asd
 esrap, ghcr.io/ocicl/esrap@sha256:d5dc7b6b9f5c4c7b97c9954ffdd7570e4cca3715bf6bbfe4e3f871ce4737fca0, esrap-20250602-d643807/esrap.asd
+fast-generic-functions, ghcr.io/ocicl/fast-generic-functions@sha256:2ea4de63378743229f992e7528f746d0717e8e8c3c8fb812f1f551ddbefa83de, fast-generic-functions-20250314-6e9d690/code/fast-generic-functions.asd
+fast-generic-functions-test-suite, ghcr.io/ocicl/fast-generic-functions@sha256:2ea4de63378743229f992e7528f746d0717e8e8c3c8fb812f1f551ddbefa83de, fast-generic-functions-20250314-6e9d690/test-suite/fast-generic-functions-test-suite.asd
 gio-example, ghcr.io/ocicl/cl-cffi-glib-init@sha256:46ed6e59ec6eb70f8b37c5d2263eb38a73086d324d2ad8b49c0416315ae80c7f, cl-cffi-glib-20250711-efe9f15/example/gio-example.asd
 global-vars, ghcr.io/ocicl/global-vars@sha256:d197e871c9c9abc4bf31b1186f5fd28f0ca848ebe2e9dddf2d82ecee01dbdc65, global-vars-20240503-c749f32/global-vars.asd
 global-vars-test, ghcr.io/ocicl/global-vars@sha256:d197e871c9c9abc4bf31b1186f5fd28f0ca848ebe2e9dddf2d82ecee01dbdc65, global-vars-20240503-c749f32/global-vars-test.asd
+html-encode, ghcr.io/ocicl/html-encode@sha256:3e3248ba94ccd5a49f5272b44e0341de29924c52346759f16b0beae4888ec440, html-encode-1.2/html-encode.asd
 introspect-environment, ghcr.io/ocicl/introspect-environment@sha256:4fa482690dee130996f1d0f89b470e0e84c92f22caea7649d3b83ce3e49c78ba, introspect-environment-20240503-69a50ac/introspect-environment.asd
 introspect-environment-test, ghcr.io/ocicl/introspect-environment@sha256:4fa482690dee130996f1d0f89b470e0e84c92f22caea7649d3b83ce3e49c78ba, introspect-environment-20240503-69a50ac/introspect-environment-test.asd
 ironclad, ghcr.io/ocicl/ironclad@sha256:3117e5a26a3e94924074c3548c235a2b733609ed61a2731880ac9e31df55428b, ironclad-20240503-6da010f/ironclad.asd
@@ -62,7 +75,9 @@ named-readtables, ghcr.io/ocicl/named-readtables@sha256:c6380ffa68acf18ba97ef7b8
 named-readtables-test, ghcr.io/ocicl/named-readtables@sha256:c6380ffa68acf18ba97ef7b88e84ea174fc5605c8a9b23d80ef2583b44f68017, named-readtables-20250524-8bd0045/named-readtables-test.asd
 osicat, ghcr.io/ocicl/osicat@sha256:7b40b8c7feeffbb683f2b885cd964767f0d63ece7f22ff31120e4598a402bd1c, osicat-20241215-37a3521/osicat.asd
 pango-example, ghcr.io/ocicl/cl-cffi-pango@sha256:89ce53a21c7035277db3d486b222f8adebd44bae6844702331da2fa11c97da27, cl-cffi-pango-20250711-bd56f70/example/pango-example.asd
+print-licenses, ghcr.io/ocicl/print-licenses@sha256:985c13101c88fba22672713e2a070b41f82c8c4ec68c4cbd696054313e63f6fa, print-licenses-20240503-3949663/print-licenses.asd
 rove, ghcr.io/ocicl/rove@sha256:00abe687aae34c84f8fc4666be48172abf22599b372444196e31c5cda07e031d, rove-20250218-9868028/rove.asd
+sealable-metaobjects, ghcr.io/ocicl/sealable-metaobjects@sha256:3386190c1ec804b36cd31e57beba3e24f59b710af7d4abde36d483f10c714ed9, sealable-metaobjects-20240503-e09ec97/code/sealable-metaobjects.asd
 slynk, ghcr.io/ocicl/slynk@sha256:8c35d6670ad09411ae9bd37b015137c75a8e8c83bf9f2e1f20a5ad257bdca077, sly-20250523-63131ef9/slynk/slynk.asd
 split-sequence, ghcr.io/ocicl/split-sequence@sha256:3a37662eedd99c42995587b9d443c4631f25c4c523091bcca31a27b880585b8e, split-sequence-2.0.1/split-sequence.asd
 sxql, ghcr.io/ocicl/sxql@sha256:f59b03e6923d61c21a395b283d9aa84d1c5e88ea0303a8904c5f56b743988a16, sxql-20250624-bf0714d/sxql.asd
@@ -85,6 +100,7 @@ trivial-features-tests, ghcr.io/ocicl/trivial-features@sha256:e278e24d39060fc7d3
 trivial-garbage, ghcr.io/ocicl/trivial-garbage@sha256:a85dcf4110ad60ae9f6c70970acceb2bf12402ce5326891643d35506059afb1d, trivial-garbage-20240503-3474f64/trivial-garbage.asd
 trivial-gray-streams, ghcr.io/ocicl/trivial-gray-streams@sha256:d0cc9fb73876100ee60647524f98b5b22566fa1c3a985d79548b0d2b228f8b51, trivial-gray-streams-20240503-a7ead68/trivial-gray-streams.asd
 trivial-gray-streams-test, ghcr.io/ocicl/trivial-gray-streams@sha256:d0cc9fb73876100ee60647524f98b5b22566fa1c3a985d79548b0d2b228f8b51, trivial-gray-streams-20240503-a7ead68/trivial-gray-streams-test.asd
+trivial-macroexpand-all, ghcr.io/ocicl/trivial-macroexpand-all@sha256:b23da4c2e508efe2396ec8f721cb22b8a4c076b2f0aea014a09f69dfd716d7f8, trivial-macroexpand-all-20250518-b6e4efa/trivial-macroexpand-all.asd
 trivial-types, ghcr.io/ocicl/trivial-types@sha256:6c7e66c7a2c7b190cf31a78597a1de81dc4d8190d0698416a1504b0d2cf3a2d9, trivial-types-20240503-ee869f2/trivial-types.asd
 trivial-utf-8, ghcr.io/ocicl/trivial-utf-8@sha256:014e7fa0edd7f351c8b38c3247e0cdda438235bb8a086bb0f2bac08f78ef400d, trivial-utf-8-20240503-ba9b4ff/trivial-utf-8.asd
 trivial-with-current-source-form, ghcr.io/ocicl/trivial-with-current-source-form@sha256:955baad39fb52d9d02af21ea36442c9675419c2486392279f669ada9788f3e3b, trivial-with-current-source-form-20240503-dc3fff9/trivial-with-current-source-form.asd

@@ -27,13 +27,12 @@ playground...
 ## Setup, Building & Testing
 
 Currently, the setup of this project itself acts as a template on how to scaffold
-a modern Common Lisp system along with a testing framework (FiveAM).
+a modern Common Lisp system (declarative style) along with a testing framework.
 The Common Lisp code written herein also acts as a 'style guide' on my
 functionality/aesthetic preferences. I also use
 [ocicl](https://github.com/ocicl/ocicl) for a modern approach for Common Lisp
-Systems Management, its a great tool (highly preferred over quicklisp, qlot,
-roswell, CLPM, and vend which is discriminatory towards those using ASDF's
-`package-inferred-system`). 
+Systems Management, its a great tool - the only one that has a CLI to tie into a
+unix/linux workflow.
 
 The most recent addition is a testing framework (FiveAM) that has an example test
 template borrowed from 
@@ -41,6 +40,8 @@ template borrowed from
 
 
 ### Setup (WIP)
+A work in progreess, plan is have a setup funtionality that auto builds and
+deploys my Common Lisp tools, sets up the environment, and deploys my rc/dot-files.
 
 
 ### Build & Test:
