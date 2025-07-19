@@ -1,4 +1,4 @@
-;;;; dot-ccl-init.lisp -> .ccl-init.lisp - Clozure CL Initialization File
+;;;; dot-eclrc.lisp -> .eclrc - ecl Initialization File
 
 (ignore-errors (require :asdf))
 

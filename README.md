@@ -14,15 +14,18 @@ may find it useful as a learning aid... The incentive and inspiration was
 always for learning purposes.
 
 This is my Commmon Lisp configuration resource tool project. This was started
-as an idea to store my various common lisp libraries, each separately deployable
-from one system. I also want it to setup my Common Lisp linux environment, i.e.
-deploy rcfiles, dotfiles etc. that pertain to my workflow - a means of having a
-reproducible Common Lisp environment.
+as an idea to store my various common lisp libraries. 
+I also want it to setup my Common Lisp & linux environment, i.e.
+deploy rcfiles, dotfiles etc. and even pull & build Common Lisp tools 
+that pertain to my workflow - a means of having a reproducible Common Lisp 
+environment.
 
 The plan is that ideas/tools started here may later manifest themselves into
 projects of their own. So this project is really just my Common Lisp
 playground...
 
+This project is intended to be ANSI Common Lisp compliant (i.e. implementation agnostic)
+though it is mainly developed on sbcl, ccl, and ecl (wip).
 
 ## Setup, Building & Testing
 
@@ -44,11 +47,24 @@ A work in progreess, plan is have a setup funtionality that auto builds and
 deploys my Common Lisp tools, sets up the environment, and deploys my rc/dot-files.
 
 
-### Build & Test:
+### Build, Test, Create Executable, and Generate Documentation:
 
 ```lisp
-* (asdf:load-system :aoforce)
-* (asdf:test-system :aoforce)
+;; Build System
+(asdf:load-system :aoforce)
+
+;; Test System
+(asdf:test-system :aoforce/test)
+
+;; Create Executable
+(asdf:make :aoforce/executable)
+
+;; Generate Documentation
+(asdf:load-system :aoforce/docs)
+
+;; Build Libraries (Extensions)
+(asdf:load-system :aoforce/libraries)
+
 ```
 
 
