@@ -1,6 +1,7 @@
 ;;;; dot-ccl-init.lisp -> .ccl-init.lisp - Clozure CL Initialization File
 
-(ignore-errors (require :asdf))
+(ignore-errors (require :asdf)
+               (require :uiop))
 
 ;;; Enable OCICL
 ;; Preserving existing (uiop:xdg-data-home #P"ocicl/ocicl-registry.cfg")
