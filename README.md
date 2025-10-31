@@ -145,7 +145,7 @@ in CL.
 Currently working on establishing a gtk4/adw frontend using `cl-gtk4`.
 You can play/test it as follows. See: https://github.com/bohonghuang/cl-gtk4
 
-Note: ocicl will install most of the dependencies, however, currently `cl-gtk4'
+Note: ocicl will install most of the dependencies, however, currently `cl-gtk4`
 is not pulling/available and so `cl-gtk4` will need to be mainly placed in
 the created `/ocicl/` directory:
 
