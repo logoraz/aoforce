@@ -177,5 +177,3 @@ Then you can run the adw tutorial package as follows:
  - TBD
 
 
-# Fedora Setup Scratch Notes
-
