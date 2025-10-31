@@ -12,7 +12,9 @@
                "mito"
                "micros"
                "slynk"
-               #+sbcl "cl-cffi-gtk4"
+               #+sbcl "cl-gtk4"
+               #+sbcl "cl-gobject-introspection-wrapper" ; List for visibility
+               #+sbcl "cl-gtk4.adw"
                ;; Local Systems (aka libraries)
                "cl-bexp")
   :components ;; Map of System
@@ -36,7 +38,7 @@
    ;; UI/X Frontends
    (:module "frontends"
     :components
-    (#+sbcl (:file "gtk4-tutorial"))))
+    (#+sbcl (:file "adw-tutorial"))))
   :long-description "A collection of Common Lisp development environment 
 configuration resources, tools, and a playground for building new projects.")
 

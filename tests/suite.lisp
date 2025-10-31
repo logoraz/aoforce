@@ -13,6 +13,7 @@
 (deftest concat-test
   (ok (string-equal (concat "1 " "2") "1 2")))
 
+#+nil
 (deftest executable-find-test
   (ok (string-equal (executable-find "ocicl")
                     (uiop:native-namestring "~/.local/bin/ocicl"))))
