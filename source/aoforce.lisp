@@ -1,6 +1,8 @@
 (defpackage :aoforce
   (:nicknames :aofr)
-  (:use :cl :asdf :uiop)
+  (:use :cl :asdf :uiop
+        :gtk4
+        :aofr.adw)
   (:export #:simple-test
            #:test-utils
            #:main)
@@ -8,12 +10,25 @@
 (in-package :aoforce)
 
 
+;;; =============================================================================
+;;; Tests
+;;; =============================================================================
 (defun simple-test (&optional (n 11))
   "Simple function for testing."
   (loop :for i :from 0 :below n
         :collect (list (format nil "list ~A" i)
                        (/ i n))))
 
+;;; =============================================================================
+;;; Entry Point
+;;; =============================================================================
+(defun main ()
+  "Main entry point for the executable."
+  (unless (adw:initialized-p)
+    (adw:init))
+  (simple-repl))
+
+#+(or)
 (defun main ()
   "Main entry point for the executable."
   (format t "Hello from Common Lisp! Arguments: ~A~%" 'no-args)

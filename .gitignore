@@ -1,16 +1,17 @@
-# Main
+# root
 /ocicl/*
 
-# core
+## source
 /core/ocicl/*
 
-# libraries
+## libraries
 /libraries/ocicl/*
 /libraries/learncl/ocicl/*
-/libraries/notes/ocicl/*
+/libraries/confr/ocicl/*
+/libraries/cl-rpm/ocicl/*
 
-# rcfiles
-/rcfiles/ocicl/*
+## rcfiles
+/files/ocicl/*
 
-# xdg-config
-/xdg-config/ocicl/*
+## tests
+/tests/ocicl/*

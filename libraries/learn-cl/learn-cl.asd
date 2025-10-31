@@ -11,4 +11,5 @@
    (:file "fcalc")
    (:file "scalc"))
   :long-description "
-TBD")
+A library exibiting how to setup a library staging various learnings.
+")

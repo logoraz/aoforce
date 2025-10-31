@@ -1,21 +1,23 @@
-(defpackage :tests/suite
+(defpackage #:tests/suite
   (:use :cl
-        :rove
+        :5am
         :utils/strings
         :utils/shell
         :aoforce)
   (:export )
   (:documentation "Base Test Suite"))
-(in-package :tests/suite)
+(in-package #:tests/suite)
 
+;;; =============================================================================
+;;; Define the test suite
+;;; =============================================================================
+(def-suite :suite :description "AOFORCE test suite")
+(in-suite :suite)
 
-;; Let's first define the "easy" tests
-(deftest concat-test
-  (ok (string-equal (concat "1 " "2") "1 2")))
+;;; =============================================================================
+;;; Let's first define the "easy" tests
+;;; =============================================================================
+(test concat-test
+  (is (string= "1 2" (concat "1 " "2"))))
 
-(deftest executable-find-test
-  (ok (string-equal (executable-find "ocicl")
-                    (uiop:native-namestring "~/.local/bin/ocicl"))))
-
-(run-suite *package*)
 

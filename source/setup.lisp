@@ -9,8 +9,9 @@
   (:documentation "Setup script to scaffold CL configuration/environment."))
 (in-package :setup)
 
-
+;;; =============================================================================
 ;;; Current setup of symlinks (XDG_CONFIG_HOME)
+;;; =============================================================================
 ;; Shell Environment
 ;; 1.  aoforce/files/dot-bashrc.sh --> ~/.bashrc
 ;; 2.  aoforce/files/dot-bash_profile.sh --> ~/.bash_profile
@@ -29,7 +30,9 @@
 ;;; TODO: Refactor these...
 ;;;       & add functionality to store these changes to a database...
 
-;; Setup RC Files symlnks
+;;; =============================================================================
+;;; Setup RC Files symlnks
+;;; =============================================================================
 (defun cl-rcfile-slnks (pathspec &key (clasp nil))
   "Function to setup Common Lisp symlinks to repo PATHSPEC."
   (create-symlink (uiop:xdg-config-home "aoforce/files/dot-sbclrc.lisp")
@@ -60,7 +63,9 @@
                   (uiop:xdg-data-home #P"applications/lem.desktop"))
   t)
 
-;; Install or setup ocicl
+;;; =============================================================================
+;;; Install or setup ocicl
+;;; =============================================================================
 #+or
 (progn
   sbcl --eval "(defconstant +dynamic-space-size+ 2048)" --load setup.lisp)

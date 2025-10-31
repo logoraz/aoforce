@@ -9,16 +9,18 @@
                "osicat"
                "trivial-gray-streams"
                "cl-ppcre"
-               "mito"
                "micros"
                "slynk"
-               #+sbcl "cl-cffi-gtk4"
+               #+sbcl "cl-gtk4"
+               #+sbcl "cl-gobject-introspection-wrapper" ; List for visibility
+               #+sbcl "cl-gtk4.adw"
                ;; Local Systems (aka libraries)
-               "cl-bexp")
+               "confr")
   :components ;; Map of System
   ((:module "source"
     :components
-    ((:module "utils" ;; Establish first our toolbox
+    (;; Establish utils/toolbox
+     (:module "utils"
       :components
       ((:file "syntax")
        (:file "files")
@@ -30,33 +32,40 @@
       :depends-on ("utils")
       :components
       ((:file "database")))
+     ;; UI/X Frontends
+     (:module "frontends"
+      :components
+      (#+sbcl (:file "aofr-adw")))
      ;; Finally scaffold aoforce
      (:file "setup"    :depends-on ("utils"))
-     (:file "aoforce"  :depends-on ("utils" "core"))))
-   ;; UI/X Frontends
-   (:module "frontends"
-    :components
-    (#+sbcl (:file "gtk4-tutorial"))))
+     (:file "aoforce"  :depends-on ("utils" "core" "frontends")))))
+  :in-order-to ((test-op (test-op "aoforce/tests")))
   :long-description "A collection of Common Lisp development environment 
 configuration resources, tools, and a playground for building new projects.")
 
+;;; =============================================================================
 ;;; Register Systems
-;;; The function `register-system-packages' must be called to register packages
-;;; used or provided by your system when the name of the system/file that 
-;;; provides the package is not the same as the package name
-;;; (converted to lower case).
+;;; =============================================================================
+;; The function `register-system-packages' must be called to register packages
+;; used or provided by your system when the name of the system/file that 
+;; provides the package is not the same as the package name
+;; (converted to lower case).
 (register-system-packages "bordeaux-threads" '(:bt :bt2 :bordeaux-threads-2))
 (register-system-packages "closer-mop" '(:c2mop :c2cl :c2cl-user))
+(register-system-packages "fiveam" '(:5am))
 
-
-(defsystem "aoforce/executable"
-  :description "Build executable"
-  :depends-on ("aoforce")
-  :build-operation "program-op"
-  :build-pathname "aoforce-preexe"
-  :entry-point "aoforce:main"
-  :long-description "Simply build with ccl/sbcl via (asdf:make :aoforce/executable)")
-
+;;; =============================================================================
+;;; Secondary Systems
+;;; =============================================================================
+(defsystem "aoforce/tests"
+  :description "Unit tests"
+  :depends-on ("aoforce" "fiveam")
+  :components
+  ((:module "tests"
+    :components
+    ((:file "suite"))))
+  :perform (test-op (o c)
+                    (symbol-call :fiveam :run! :suite)))
 
 (defsystem "aoforce/docs"
   :description "Documentation framework"
@@ -64,30 +73,17 @@ configuration resources, tools, and a playground for building new projects.")
   :components
   ((:module "docs"
     :components
-    ((:file "aoforce-docs"))))
-  :long-description "aoforce documentation creation utils and additional
-documentation.
-Use (print-licensnes:print-licenses :print-licenses) to check dependency
-licenses.")
-
+    ((:file "aoforce-docs")))))
 
 (defsystem "aoforce/libraries"
   :description "Extra libraries to bring in if needed"
-  :depends-on ("learn-cl"
-               "websxcl"))
+  :depends-on ("confr"
+               "cl-rpm"
+               "learn-cl"))
 
-
-(defsystem "aoforce/test"
-  :description "Unit tests"
-  :depends-on ("aoforce" "rove" "mito")
-  :components
-  ((:module "tests"
-    :components
-    ((:file "suite"))))
-  :perform (test-op (o c)
-                    (unless (symbol-call :rove :run c)
-                      (error "Tests failed"))))
-
-
-
-
+(defsystem "aoforce/executable"
+  :description "Build executable"
+  :depends-on ("aoforce")
+  :build-operation "program-op"
+  :build-pathname "aoforce-preexe"
+  :entry-point "aoforce:main")
