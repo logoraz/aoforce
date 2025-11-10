@@ -12,6 +12,7 @@
 (define-application (:name simple-repl
                      :id "aoforce.libadwaita-example.simple-repl")
   (define-main-window (window (adw:make-application-window :app *application*))
+    (setf (adw:style-manager-color-scheme (adw:style-manager-default)) adw:+color-scheme-force-dark+)
     (let ((expression nil))
       (widget-add-css-class window "devel")
       (setf (widget-size-request window) '(400 600))
@@ -30,8 +31,9 @@
           (let ((page (adw:make-status-page)))
             (setf (widget-hexpand-p page) t
                   (widget-vexpand-p page) t
-                  (adw:status-page-icon-name page) "utilities-terminal-symbolic"
-                  (adw:status-page-title page) "Simple Lisp REPL"
+                  ;; (adw:status-page-icon-name page) "utilities-terminal-symbolic"
+                  (adw:status-page-paintable page) (gdk:make-texture :path "assets/lisp-logo.png")
+                  (adw:status-page-title page) "AOFORCE"
                   (adw:status-page-description page) " ")
             (flet ((eval-expression (widget)
                      (declare (ignore widget))
@@ -42,21 +44,30 @@
                                 (error (err) err)))))))
               (let ((box (make-box :orientation +orientation-vertical+
                                    :spacing 0)))
+                ;;
                 (let ((group (adw:make-preferences-group)))
                   (setf (widget-margin-all group) 10)
                   (let ((row (adw:make-action-row)))
-                    (setf (adw:preferences-row-title row) (format nil "~A>" (or (car (package-nicknames *package*))
-                                                                                (package-name *package*))))
+                    (setf (adw:preferences-row-title row) 
+                          (format nil "~A>" (or (car (package-nicknames *package*))
+                                                (package-name *package*))))
                     (let ((entry (make-entry)))
                       (setf (widget-valign entry) +align-center+
                             (widget-hexpand-p entry) t)
-                      (connect entry "changed" (lambda (entry)
-                                                 (setf expression (ignore-errors (read-from-string (entry-buffer-text (entry-buffer entry)))))
-                                                 (funcall (if expression #'widget-remove-css-class #'widget-add-css-class) entry "error")))
+                      (connect entry "changed" 
+                               (lambda (entry)
+                                 (setf expression
+                                       (ignore-errors 
+                                         (read-from-string 
+                                          (entry-buffer-text (entry-buffer entry)))))
+                                 (funcall 
+                                  (if expression #'widget-remove-css-class
+                                      #'widget-add-css-class) entry "error")))
                       (connect entry "activate" #'eval-expression)
                       (adw:action-row-add-suffix row entry))
                     (adw:preferences-group-add group row))
                   (box-append box group))
+                ;;
                 (let ((carousel-box box)
                       (box (make-box :orientation +orientation-horizontal+
                                      :spacing 0)))

@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <img src="assets/yin-yang-lisp-logo_512_svg.png" width="200" />
+  <img src="assets/lisp-logo.png" width="200" />
 </p>
 
 Note: This project is akin to a dotfiles repo, however, centered around

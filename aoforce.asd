@@ -12,8 +12,8 @@
                "micros"
                "slynk"
                #+sbcl "cl-gtk4"
-               #+sbcl "cl-gobject-introspection-wrapper" ; List for visibility
                #+sbcl "cl-gtk4.adw"
+               #+sbcl "cl-gdk4"
                ;; Local Systems (aka libraries)
                "confr")
   :components ;; Map of System
