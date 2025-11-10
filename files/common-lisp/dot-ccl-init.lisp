@@ -1,8 +1,11 @@
-;;;; dot-eclrc.lisp -> .eclrc - ecl Initialization File
+;;;; dot-ccl-init.lisp -> .ccl-init.lisp - Clozure CL Initialization File
 
-(ignore-errors (require :asdf))
+(ignore-errors (require :asdf)
+               (require :uiop))
 
-;;; Enable OCICL
+;;; =============================================================================
+;;; Enable ocicl
+;;; =============================================================================
 ;; Preserving existing (uiop:xdg-data-home #P"ocicl/ocicl-registry.cfg")
 ;; Use setup's --force option to override.
 
@@ -27,3 +30,7 @@
          ;; Needed to store non-available ocicl systems in ocicl/
          (list :tree (uiop:getcwd))
          :inherit-configuration)))
+
+;;; =============================================================================
+;;; Other
+;;; =============================================================================

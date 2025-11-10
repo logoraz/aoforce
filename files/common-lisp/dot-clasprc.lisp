@@ -3,7 +3,10 @@
 (ignore-errors (require :asdf)
                (require :uiop))
 
-;;; Enable OCICL
+
+;;; =============================================================================
+;;; Enable ocicl
+;;; =============================================================================
 ;; Preserving existing (uiop:xdg-data-home #P"ocicl/ocicl-registry.cfg")
 ;; Use setup's --force option to override.
 
@@ -27,3 +30,8 @@
    (list :source-registry
          (list :tree (uiop:getcwd)) 
          :inherit-configuration)))
+
+;;; =============================================================================
+;;; Other
+;;; =============================================================================
+

@@ -12,11 +12,14 @@
 (in-package :utils/servers)
 
 
-;; TCP servers
-
-;; Only works in Lem with sbcl (ccl hangs)
-;; TODO: Identify & Report bug with Lem regarding this...
+;;;==============================================================================
+;;; TCP Servers
+;;;==============================================================================
 (defvar *micros-port* 4005
+  "Default Micros server port for Formulatum.")
+
+;;; Provided to Connect to Emacs
+(defvar *slynk-port* 4007
   "Default Micros server port for Formulatum.")
 
 (defun start-micros (&optional (micros-port *micros-port*))
@@ -28,10 +31,6 @@
   "Stop current Micros server."
   (micros:stop-server micros-port)
   (format nil "Closing Micros server at port ~A" micros-port))
-
-;;; Provided to Connect to Emacs
-(defvar *slynk-port* 4007
-  "Default Micros server port for Formulatum.")
 
 (defun start-slynk (&optional (slynk-port *slynk-port*))
   "Start a Micros server."

@@ -1,16 +1,21 @@
 (defpackage :utils/streams
-  (:use :cl 
-        :trivial-gray-streams)
+  (:use :cl)
+  (:import-from :trivial-gray-streams)
   (:export )
   (:documentation "Tools/Utilities for streams."))
 (in-package :utils/streams)
 
 
-;;; Ref:
+;;;==============================================================================
+;;; References
+;;;==============================================================================
 ;; 1. https://github.com/trivial-gray-streams/trivial-gray-streams
 ;; 2. https://github.com/fukamachi/rove
 
+
+;;;==============================================================================
 ;;; Colors
+;;;==============================================================================
 (defvar *enable-colors*
   (or (not
        (or (equal (uiop:getenv "EMACS") "t")
@@ -43,6 +48,10 @@
                     #\Esc)))
       text))
 
+
+;;;==============================================================================
+;;; Streams
+;;;==============================================================================
 (defclass indent-stream (trivial-gray-stream-mixin
                          fundamental-character-output-stream)
   ((stream :initarg :stream

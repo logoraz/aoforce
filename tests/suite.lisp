@@ -1,6 +1,5 @@
 (defpackage #:tests/suite
-  (:use :cl
-        :5am
+  (:use :cl :5am
         :utils/strings
         :utils/shell
         :aoforce)

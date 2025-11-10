@@ -1,5 +1,4 @@
 (defpackage :frontends/aofr-adw
-  (:nicknames :aofr.adw)
   (:use :cl :gtk4)
   (:export #:simple-repl)
   (:documentation "Frontend for GTK4/ADW using cl-gtk4."))
@@ -12,7 +11,8 @@
 (define-application (:name simple-repl
                      :id "aoforce.libadwaita-example.simple-repl")
   (define-main-window (window (adw:make-application-window :app *application*))
-    (setf (adw:style-manager-color-scheme (adw:style-manager-default)) adw:+color-scheme-force-dark+)
+    (setf (adw:style-manager-color-scheme 
+           (adw:style-manager-default)) adw:+color-scheme-force-dark+)
     (let ((expression nil))
       (widget-add-css-class window "devel")
       (setf (widget-size-request window) '(400 600))

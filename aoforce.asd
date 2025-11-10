@@ -3,20 +3,21 @@
   :author "Erik P Almaraz <erikalmaraz@fastmail.com>"
   :license "Apache-2.0"
   :version (:read-file-form "version.sexp" :at (0 1))
-  :depends-on ("bordeaux-threads"
-               "closer-mop"
-               "fast-generic-functions"
-               "osicat"
-               "trivial-gray-streams"
-               "cl-ppcre"
-               "micros"
-               "slynk"
-               #+sbcl "cl-gtk4"
-               #+sbcl "cl-gtk4.adw"
-               #+sbcl "cl-gdk4"
-               ;; Local Systems (aka libraries)
-               "confr")
-  :components ;; Map of System
+  :depends-on ;; External Dependencies 
+  ("bordeaux-threads"
+   "closer-mop"
+   "fast-generic-functions"
+   "osicat"
+   "cl-ppcre"
+   "trivial-gray-streams"
+   "micros"
+   "slynk"
+   #+sbcl "cl-gtk4"
+   #+sbcl "cl-gtk4.adw"
+   #+sbcl "cl-gdk4"
+   ;; Local Systems (aka libraries)
+   "confr")
+  :components ;; Map of System (Internals)
   ((:module "source"
     :components
     (;; Establish utils/toolbox

@@ -27,7 +27,7 @@ iterate, ghcr.io/ocicl/iterate@sha256:6950c55e3782d58cabbbb5753111a70d8cafab8348
 micros, ghcr.io/ocicl/micros@sha256:9368ab522b00694440b97a8b41eed4b058f4006c4caa16843506eacd4f22a9f5, micros-20250812-e1d3857/micros.asd
 osicat, ghcr.io/ocicl/osicat@sha256:48af110420f02e99c37370e48bee10d7c7aada7e563483e1f47e3bc1173545f9, osicat-20251007-68732bd/osicat.asd
 sealable-metaobjects, ghcr.io/ocicl/sealable-metaobjects@sha256:3386190c1ec804b36cd31e57beba3e24f59b710af7d4abde36d483f10c714ed9, sealable-metaobjects-20240503-e09ec97/code/sealable-metaobjects.asd
-slynk, ghcr.io/ocicl/slynk@sha256:783ff7529a5dc5518a6a9bd13fe06af5a62b6840dc3f790999c8625c2ee252f0, sly-20251109-6e6520b8/slynk/slynk.asd
+slynk, ghcr.io/ocicl/slynk@sha256:0f7bb8a0e22e76a593f23a6554d91eb83d21b9fadbb107cc68447e2f47bb3b85, sly-20251110-6e6520b8/slynk/slynk.asd
 trivial-features, ghcr.io/ocicl/trivial-features@sha256:e278e24d39060fc7d3715531b16ddd9ab7f93f22ade53e436c0b86dbae3aa065, trivial-features-1.0/trivial-features.asd
 trivial-features-tests, ghcr.io/ocicl/trivial-features@sha256:e278e24d39060fc7d3715531b16ddd9ab7f93f22ade53e436c0b86dbae3aa065, trivial-features-1.0/trivial-features-tests.asd
 trivial-garbage, ghcr.io/ocicl/trivial-garbage@sha256:a85dcf4110ad60ae9f6c70970acceb2bf12402ce5326891643d35506059afb1d, trivial-garbage-20240503-3474f64/trivial-garbage.asd

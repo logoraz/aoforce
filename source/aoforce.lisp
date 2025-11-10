@@ -1,8 +1,7 @@
 (defpackage :aoforce
   (:nicknames :aofr)
-  (:use :cl :asdf :uiop
-        :gtk4
-        :aofr.adw)
+  (:use :cl :asdf :uiop :gtk4
+        :frontends/aofr-adw)
   (:export #:simple-test
            #:test-utils
            #:main)

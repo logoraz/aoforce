@@ -1,6 +1,6 @@
 ;;;; dot-sbclrc.lisp -> .sbclrc - SBCL Initialization File
 
-;;; Enable Allegro CL-style Read-Eval-Print Loop for SBCL
+;;; Enable Advanced SBCL Features
 (ignore-errors (require :asdf)
                (require :uiop)
                (require :sb-aclrepl)
@@ -10,9 +10,12 @@
 (when (find-package 'sb-aclrepl)
   (push :aclrepl cl:*features*))
 
+;;; =============================================================================
+;;; Enhanced SBCL REPL (Allegro CL Style)
+;;; =============================================================================
+;; From sb-aclrepl example: see ch 17.1 sbcl manual...
 #+aclrepl
 (progn
-  "From sb-aclrepl example: see ch 17.1 sbcl manual..."
   (setq sb-aclrepl:*max-history* 1000)
   (setf (sb-aclrepl:alias "asdc")
         #'(lambda (sys) (asdf:operate 'asdf:compile-op sys)))
@@ -25,11 +28,11 @@
   (sb-aclrepl:alias ("require" 0 "Require module") (sys) (require sys))
   (setq cl:*features* (delete :aclrepl cl:*features*))
   ;; Alias to quit sbcl repl
-  (sb-aclrepl:alias ("quit" 0 "Quit REPL") () (quit))
-  ;;
-  )
+  (sb-aclrepl:alias ("quit" 0 "Quit REPL") () (quit)))
 
-;;; Enable OCICL
+;;; =============================================================================
+;;; Enable ocicl
+;;; =============================================================================
 ;; Preserving existing (uiop:xdg-data-home #P"ocicl/ocicl-registry.cfg")
 ;; Use setup's --force option to override.
 
@@ -54,3 +57,8 @@
          ;; Needed to store non-available ocicl systems in ocicl/
          (list :tree (uiop:getcwd))
          :inherit-configuration)))
+
+;;; =============================================================================
+;;; Other
+;;; =============================================================================
+

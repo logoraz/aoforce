@@ -5,6 +5,10 @@
   (:documentation "Shell utilities."))
 (in-package :utils/shell)
 
+
+;;;==============================================================================
+;;; General
+;;;==============================================================================
 (defun executable-find (program)
   "Simple function to return path to PROGRAM"
   (remove #\newline 
@@ -15,6 +19,10 @@
 (defvar *shell-program* "/bin/sh"
   "The shell program used by @code{run-shell-command}.")
 
+
+;;;==============================================================================
+;;; Reference
+;;;==============================================================================
 ;;; source: stumpwm/wrappers.lisp
 ;; implementation specific --> sbcl
 ;; convert to ANSI Common Lisp (ccl & sbcl)
