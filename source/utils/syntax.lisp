@@ -1,9 +1,17 @@
 (defpackage :utils/syntax
   (:use :cl :uiop)
-  (:export )
+  (:export #:concat
+           #:nlet)
   (:documentation "Syntactic Language Extensions."))
 (in-package :utils/syntax)
 
+
+;;;==============================================================================
+;;; String Manipulation
+;;;==============================================================================
+(defun concat (&rest strings)
+  "Shorthand for CONCATENATE specialized for strings."
+  (apply #'concatenate 'string strings))
 
 ;;;==============================================================================
 ;;; Examples

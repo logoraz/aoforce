@@ -10,8 +10,6 @@
    "osicat"
    "cl-ppcre"
    "trivial-gray-streams"
-   "micros"
-   "slynk"
    #+sbcl "cl-gtk4"
    #+sbcl "cl-gtk4.adw"
    #+sbcl "cl-gdk4"
@@ -23,23 +21,20 @@
     (;; Establish utils/toolbox
      (:module "utils"
       :components
-      ((:file "syntax")
-       (:file "files")
-       (:file "strings")
-       (:file "shell")                               
-       (:file "servers")))
+      ((:file "syntax")))
      ;; Build out the core of aoforce
      (:module "core"
       :depends-on ("utils")
       :components
-      ((:file "database")))
+      ((:file "database")
+       (:file "config-manager")))
      ;; UI/X Frontends
      (:module "frontends"
       :components
       (#+sbcl (:file "aofr-adw")))
      ;; Finally scaffold aoforce
-     (:file "setup"    :depends-on ("utils"))
-     (:file "aoforce"  :depends-on ("utils" "core" "frontends")))))
+     (:file "setup"   :depends-on ("utils" "core"))
+     (:file "aoforce" :depends-on ("utils" "core" "frontends")))))
   :in-order-to ((test-op (test-op "aoforce/tests")))
   :long-description "A collection of Common Lisp development environment 
 configuration resources, tools, and a playground for building new projects.")
