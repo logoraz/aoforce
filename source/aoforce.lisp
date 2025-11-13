@@ -1,13 +1,14 @@
 (defpackage :aoforce
   (:nicknames :aofr)
-  (:use :cl :asdf :uiop :gtk4
+  (:use :cl
+        :gtk4
         :frontends/aofr-adw)
   (:export #:simple-test
            #:test-utils
            #:main)
   (:documentation "Main package of AOFORCE"))
-(in-package :aoforce)
 
+(in-package :aoforce)
 
 ;;; =============================================================================
 ;;; Tests

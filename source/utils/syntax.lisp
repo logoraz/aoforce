@@ -3,8 +3,8 @@
   (:export #:concat
            #:nlet)
   (:documentation "Syntactic Language Extensions."))
-(in-package :utils/syntax)
 
+(in-package :utils/syntax)
 
 ;;;==============================================================================
 ;;; String Manipulation

@@ -1,4 +1,4 @@
-# AOFORCE - Common Lisp Playground
+# AOFORCE - A Common Lisp Playground
 
 <p align="center">
   <img src="assets/aoforce-logo.svg" width="700" />
@@ -11,13 +11,15 @@
 Note: This project is akin to a dotfiles repo, however, centered around
 Common Lisp - NOT intented to be useful to anyone besides myself, though one
 may find it useful as a learning aid... The incentive and inspiration was
-always for learning purposes.
+always for learning purposes and managing my Common Lisp/Linux environment.
 
 The plan is that ideas/tools started here may later manifest themselves into
 projects of their own. So this project is really just my Common Lisp
-playground...
+playground... Any ideas, besides the core inspiration of this repo, are staged
+in the `libraries` directory..
 
-## Setup, Building & Testing
+
+## Build, Testing, & Configuration
 
 Currently, the setup of this project itself acts as a template on how to scaffold
 a modern Common Lisp system (declarative style) along with a testing framework.
@@ -27,34 +29,52 @@ functionality/aesthetic preferences. I also use
 Systems Management, its a great tool - the only one that has a CLI to tie into a
 unix/linux workflow.
 
+### Build & Test (WIP: Executable & Document Generation):
 
-### Setup (WIP)
-A work in progreess, plan is have a setup funtionality that auto builds and
-deploys my Common Lisp tools, sets up the environment, and deploys my rc/dot-files.
+This build depends on ocicl, first install ocicl (https://github.com/ocicl/ocicl)
+and use `files/common-lisp/dot-sbclrc.lisp --> ~/.sbclrc` for your SBCL init file.
 
-
-### Build, Test, Create Executable, and Generate Documentation:
 
 ```lisp
 ;; Build System
-;; will need `cl-gtk4` library manually injected in /ocicl/
-;; see below section Play & Learn:ADW/GTK4 Example
 (asdf:load-system :aoforce)
+;; Build may fail since it needs cl-gtk4
+;; $ git clone https://github.com/bohonghuang/cl-gtk4.git into /ocicl
+;; and re-run (asdf:load-system :aoforce) to successfully build
 
 ;; Test System
 (asdf:test-system :aoforce/test)
 
-;; Create Executable
+;; Create Executable (WIP)
 (asdf:make :aoforce/executable)
 
-;; Generate Documentation
+;; Generate Documentation (WIP)
 (asdf:load-system :aoforce/docs)
 
-;; Build Libraries (Extensions)
+;; Build Libraries/Extensions (WIP)
 (asdf:load-system :aoforce/libraries)
 
 ```
 
+### Configuration Manager
+
+Just recently added on a new addition, which is a configuration manager which
+allows for deploying your dotfiles from a specified location/repo. This system
+is established in CLOS and I plan to extend it greatly - perhaps may exist
+as its own library one day, but for now it is a core feature of this project 
+and will likely remain here.
+
+First edit/modify `aoforce/source/setup.lisp` (`:setup`) and then deploy your
+configuration as follows:
+
+```lisp
+  ;; cd to ~/Work/aoforce/ (or location of this repo)
+  (asdf:load-system :aoforce)
+  ;; First visualize your deployment plan
+  (setup::list-configs)
+  ;; Deploy!
+  (setup:deploy)
+```
 
 ### Play & Learn
 
@@ -86,15 +106,15 @@ learning tool (a cons cell visual aid) in this project as follows:
 
 ```
 
-
 #### ADW/GTK4 Example
 
-Currently working on establishing a gtk4/adw frontend using `cl-gtk4`.
-You can play/test it as follows. See: https://github.com/bohonghuang/cl-gtk4
+Currently working on establishing a gtk4/adw frontend using `cl-gtk4`,
+see https://github.com/bohonghuang/cl-gtk4.
 
 Note: ocicl will install most of the dependencies, however, currently `cl-gtk4`
-is not pulling/available and so `cl-gtk4` will need to be mainly placed in
-the created `/ocicl/` directory:
+is not building upstream  and so `cl-gtk4` will need to be manually placed in
+the created `/ocicl/` directory that is created after first run of 
+`(asdf:load-system :aoforce)`:
 
 ```shell
   $ cd ./ocicl/
@@ -104,11 +124,11 @@ the created `/ocicl/` directory:
 Then you can run the adw tutorial package as follows:
 
 ```lisp
+;; Re-run to finish building successfully
 (asdf:load-system :aoforce)
-(in-package :frontends/adw-tutorial)
+(in-package :frontends/aofr-adw)
 (main)
 ```
-
 
 ## Roadmap
 

@@ -1,9 +1,10 @@
 (defpackage :frontends/aofr-adw
-  (:use :cl :gtk4)
+  (:use :cl 
+        :gtk4)
   (:export #:simple-repl)
   (:documentation "Frontend for GTK4/ADW using cl-gtk4."))
-(in-package :frontends/aofr-adw)
 
+(in-package :frontends/aofr-adw)
 
 ;;; =============================================================================
 ;;; Example code using cl-gtk4
