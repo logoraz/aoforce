@@ -2,9 +2,9 @@
   (:nicknames :aofr)
   (:use :cl
         :gtk4
+        :setup
         :frontends/aofr-adw)
   (:export #:simple-test
-           #:test-utils
            #:main)
   (:documentation "Main package of AOFORCE"))
 

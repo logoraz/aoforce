@@ -3,40 +3,34 @@
   :author "Erik P Almaraz <erikalmaraz@fastmail.com>"
   :license "Apache-2.0"
   :version (:read-file-form "version.sexp" :at (0 1))
-  :depends-on ;; External Dependencies 
-  ("bordeaux-threads"
-   "closer-mop"
-   "fast-generic-functions"
-   "osicat"
-   "cl-ppcre"
-   "trivial-gray-streams"
+  :depends-on ; External Dependencies
+  ("bordeaux-threads" "lparallel"
+   "closer-mop" "fast-generic-functions"
+   "cl-ppcre" "osicat" "trivial-gray-streams"
    #+sbcl "cl-gtk4"
    #+sbcl "cl-gtk4.adw"
    #+sbcl "cl-gdk4"
    ;; Local Systems (aka libraries)
    "confr")
-  :components ;; Map of System (Internals)
+  :components ; Map of System (Internals)
   ((:module "source"
     :components
-    (;; Establish utils/toolbox
-     (:module "utils"
+    ((:module "utils" ; Establish utils/toolbox
       :components
       ((:file "syntax")))
-     ;; Build out the core of aoforce
-     (:module "core"
+     (:module "core" ; Build out the core of aoforce
       :depends-on ("utils")
       :components
       ((:file "database")
        (:file "config-manager")))
-     ;; UI/X Frontends
-     (:module "frontends"
+     (:module "frontends" ; UI/X Frontends
       :components
       (#+sbcl (:file "aofr-adw")))
      ;; Finally scaffold aoforce
      (:file "setup"   :depends-on ("utils" "core"))
      (:file "aoforce" :depends-on ("utils" "core" "frontends")))))
   :in-order-to ((test-op (test-op "aoforce/tests")))
-  :long-description "A collection of Common Lisp development environment 
+  :long-description "A collection of Common Lisp development environment
 configuration resources, tools, and a playground for building new projects.")
 
 ;;; =============================================================================

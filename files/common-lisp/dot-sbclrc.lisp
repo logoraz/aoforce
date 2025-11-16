@@ -30,6 +30,9 @@
   ;; Alias to quit sbcl repl
   (sb-aclrepl:alias ("quit" 0 "Quit REPL") () (quit)))
 
+;; Enable Colorized REPL
+;; (setf *print-pretty* t)
+
 ;;; =============================================================================
 ;;; Enable ocicl
 ;;; =============================================================================
