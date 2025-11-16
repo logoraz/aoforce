@@ -1,7 +1,8 @@
 (defpackage :setup
   (:use :cl
         :core/config-manager)
-  (:export #:deploy)
+  (:export #:outline
+           #:deploy)
   (:documentation "Setup script to scaffold CL configuration/environment."))
 
 (in-package :setup)
@@ -57,16 +58,28 @@
 ;;; =============================================================================
 ;;; Deploy config-objects
 ;;; =============================================================================
+(defun outline ()
+  "List your Configuration Environment outline."
+  ;; Enable Colorized REPL
+  (unless *print-pretty*
+    (setf *print-pretty* t))
+  (let ((stream (make-instance 'colored-stream :target *standard-output*)))
+    (list-configs *config-mgr* stream)))
+
 (defun deploy ()
-  "Setup & Deploy Your Configuration Environment."
-  (list-configs *config-mgr*)
-  (deploy-configs *config-mgr*))
+  "Deploy Your Configuration Environment."
+  ;; Enable Colorized REPL
+  (unless *print-pretty*
+    (setf *print-pretty* t))
+  (let ((stream (make-instance 'colored-stream :target *standard-output*)))
+    (deploy-configs *config-mgr* stream)))
+
 
 ;;; =============================================================================
 ;;; Install/Configure Common Lisp Utilities (i.e. ocicl, ccl, etc)
 ;;; =============================================================================
-;;; TODO: Enable `config-manager` to install/setup Common Lisp utilities like
-;;; ocicl...
-]#+(or)
+;; TODO: Enable `config-manager` to install/setup Common Lisp utilities like
+;; ocicl...
+#+(or)
 (progn
   sbcl --eval "(defconstant +dynamic-space-size+ 2048)" --load setup.lisp)

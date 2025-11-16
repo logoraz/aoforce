@@ -4,12 +4,10 @@
   :license "Apache-2.0"
   :version (:read-file-form "version.sexp" :at (0 1))
   :depends-on ;; External Dependencies 
-  ("bordeaux-threads"
-   "closer-mop"
-   "fast-generic-functions"
-   "osicat"
-   "cl-ppcre"
-   "trivial-gray-streams"
+  ("bordeaux-threads" "lparallel"
+   "closer-mop" "fast-generic-functions"
+   "cl-ppcre" "osicat" "trivial-gray-streams"
+   "magicl" ;"lisp-stat" "gsll"
    #+sbcl "cl-gtk4"
    #+sbcl "cl-gtk4.adw"
    #+sbcl "cl-gdk4"
