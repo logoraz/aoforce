@@ -1,11 +1,11 @@
-(defpackage :setup
-  (:use :cl
-        :core/config-manager)
+(defpackage #:setup
+  (:use #:cl
+        #:core/config-manager)
   (:export #:outline
            #:deploy)
   (:documentation "Setup script to scaffold CL configuration/environment."))
 
-(in-package :setup)
+(in-package #:setup)
 
 ;;; =============================================================================
 ;;; Current Configuration Setup

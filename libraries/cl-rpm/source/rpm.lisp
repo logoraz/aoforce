@@ -1,6 +1,7 @@
-(defpackage :rpm
-  (:nicknames :rpm)
-  (:use :cl)
+(defpackage #:rpm
+  ;; (:nicknames #:rpm)
+  (:use #:cl)
   (:export )
   (:documentation "rpm main"))
-(in-package :rpm)
+
+(in-package #:rpm)

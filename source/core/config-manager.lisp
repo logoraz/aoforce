@@ -1,21 +1,21 @@
-(defpackage :core/config-manager
-  (:use :cl 
-        :utils/syntax
-        :trivial-gray-streams)
-  (:import-from :uiop
+(defpackage #:core/config-manager
+  (:use #:cl 
+        #:utils/syntax
+        #:trivial-gray-streams)
+  (:import-from #:uiop
                 #:run-program
                 #:copy-file
                 #:ensure-pathname
                 #:ensure-directory-pathname)
-  (:import-from :uiop/filesystem
+  (:import-from #:uiop/filesystem
                 #:ensure-directories-exist
                 #:directory-exists-p)
-  (:import-from :uiop/pathname
+  (:import-from #:uiop/pathname
                 #:directory-namestring)
-  (:import-from :osicat
+  (:import-from #:osicat
                 #:make-link
                 #:file-kind)
-  (:import-from :cl-ppcre
+  (:import-from #:cl-ppcre
                 #:regex-replace-all)
   (:export #:config-object
            #:config-manager
@@ -33,14 +33,14 @@
            #:create-symlink)
   (:documentation "CLOS-based Configuration Manager"))
 
-(in-package :core/config-manager)
+(in-package #:core/config-manager)
 
 ;;; =============================================================================
 ;;; Classes
 ;;; =============================================================================
 (defclass config-object ()
   ((name    :initarg :name :reader config-name :type string
-            :documentation "Name of the config (e.g., 'emacs')")
+            :documentation "Name of the config")
    (source  :initarg :source :reader config-source  :type pathname
             :documentation "Source path")
    (place   :initarg :place :reader config-place :type pathname

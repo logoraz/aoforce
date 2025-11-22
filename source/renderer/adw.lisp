@@ -1,10 +1,11 @@
-(defpackage :frontends/aofr-adw
-  (:use :cl 
-        :gtk4)
-  (:export #:simple-repl)
+(defpackage #:renderer/adw
+  (:use #:cl 
+        #:gtk4)
+  (:export #:simple-repl
+           #:main)
   (:documentation "Frontend for GTK4/ADW using cl-gtk4."))
 
-(in-package :frontends/aofr-adw)
+(in-package #:renderer/adw)
 
 ;;; =============================================================================
 ;;; Example code using cl-gtk4
@@ -98,7 +99,6 @@
 ;;; =============================================================================
 ;;; Main
 ;;; =============================================================================
-#+nil
 (defun main ()
   (unless (adw:initialized-p)
     (adw:init))

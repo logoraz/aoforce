@@ -1,6 +1,6 @@
-(defpackage :learn-cl/fcalc
-  (:nicknames :fcalc)
-  (:use :cl)
+(defpackage #:learn-cl/fcalc
+  (:nicknames #:fcalc)
+  (:use #:cl)
   (:export #:make-calculator
            #:add!
            #:subtract!
@@ -9,7 +9,8 @@
            #:clear!
            #:get-result)
   (:documentation "A functional calculator example in CL"))
-(in-package :learn-cl/fcalc)
+
+(in-package #:learn-cl/fcalc)
 
 
 ;; See: https://gigamonkeys.com/book/functions

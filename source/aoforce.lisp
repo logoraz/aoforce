@@ -1,14 +1,15 @@
-(defpackage :aoforce
-  (:nicknames :aofr)
-  (:use :cl
-        :gtk4
-        :setup
-        :frontends/aofr-adw)
+(defpackage #:aoforce
+  (:nicknames #:aofr)
+  (:use #:cl
+        #:setup
+        #:renderer/adw)
+  (:local-nicknames (#:it #:iterate))
   (:export #:simple-test
-           #:main)
+           #:simple-test2
+           #:ui)
   (:documentation "Main package of AOFORCE"))
 
-(in-package :aoforce)
+(in-package #:aoforce)
 
 ;;; =============================================================================
 ;;; Tests
@@ -19,14 +20,18 @@
         :collect (list (format nil "list ~A" i)
                        (/ i n))))
 
+(defun simple-test2 (&optional (n 11))
+  "Simple function for testing."
+  (it:iter (it:for i from 0 below n)
+           (it:collect (list (format nil "list ~A" i)
+                             (/ i n)))))
+
 ;;; =============================================================================
 ;;; Entry Point
 ;;; =============================================================================
-(defun main ()
+(defun ui ()
   "Main entry point for the executable."
-  (unless (adw:initialized-p)
-    (adw:init))
-  (simple-repl))
+  (main))
 
 #+(or)
 (defun main ()

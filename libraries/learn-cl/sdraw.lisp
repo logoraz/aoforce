@@ -20,16 +20,17 @@
 ;;;   *sdraw-leading-arrow*   Initially nil.  Set to t to get leading arrows.
 ;;;
 
-(defpackage :learn-cl/sdraw
-  (:nicknames :sdraw)
-  (:use :cl)
+(defpackage #:learn-cl/sdraw
+  (:nicknames #:sdraw)
+  (:use #:cl)
   (:export #:sdraw
            #:sdraw-loop
            #:scrawl
            #:*sdraw-print-circle*
            #:*sdraw-leading-arrow*)
   (:documentation "SDRAW  - draws cons cell structures."))
-(in-package :learn-cl/sdraw)
+
+(in-package #:learn-cl/sdraw)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

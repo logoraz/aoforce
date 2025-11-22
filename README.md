@@ -126,8 +126,7 @@ Then you can run the adw tutorial package as follows:
 ```lisp
 ;; Re-run to finish building successfully
 (asdf:load-system :aoforce)
-(in-package :frontends/aofr-adw)
-(main)
+(aoforce:ui)
 ```
 
 ## Roadmap

@@ -1,6 +1,7 @@
-(defpackage :confr
-  (:nicknames :confr)
-  (:use :cl)
+(defpackage #:confr
+  (:nicknames #:confr)
+  (:use #:cl)
   (:export )
   (:documentation "confr main"))
-(in-package :confr)
+
+(in-package #:confr)

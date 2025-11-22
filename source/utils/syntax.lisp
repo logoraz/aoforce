@@ -1,10 +1,11 @@
-(defpackage :utils/syntax
-  (:use :cl :uiop)
+(defpackage #:utils/syntax
+  (:use #:cl #:uiop)
+  (:local-nicknames (#:it #:iterate))
   (:export #:concat
            #:nlet)
   (:documentation "Syntactic Language Extensions."))
 
-(in-package :utils/syntax)
+(in-package #:utils/syntax)
 
 ;;;==============================================================================
 ;;; String Manipulation

@@ -3,12 +3,12 @@
   :author "Erik P Almaraz <erikalmaraz@fastmail.com>"
   :license "Apache-2.0"
   :version (:read-file-form "version.sexp" :at (0 1))
-  :depends-on ("bordeaux-threads"
-               "closer-mop"
-               "fast-generic-functions"
+  :depends-on ("iterate"
+               "bordeaux-threads"
+               "lparallel"
+               "cl-ppcre"
                "osicat"
-               "trivial-gray-streams"
-               "cl-ppcre")
+               "trivial-gray-streams")
   :components ;; Map of System
   ((:module "source"
     :components

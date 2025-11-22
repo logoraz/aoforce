@@ -1,6 +1,6 @@
-(defpackage :learn-cl/scalc
-  (:nicknames :scalc)
-  (:use :cl)
+(defpackage #:learn-cl/scalc
+  (:nicknames #:scalc)
+  (:use #:cl)
   (:export #:make-calculator
            #:add
            #:subtract
@@ -8,7 +8,8 @@
            #:divide
            #:clear)
   (:documentation "A CLOS calculator example"))
-(in-package :learn-cl/scalc)
+
+(in-package #:learn-cl/scalc)
 
 
 (defclass calculator ()

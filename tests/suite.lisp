@@ -1,7 +1,8 @@
 (defpackage #:tests/suite
-  (:use :cl :5am
-        :utils/syntax
-        :aoforce)
+  (:use #:cl
+        #:5am
+        #:utils/syntax
+        #:aoforce)
   (:export )
   (:documentation "Base Test Suite"))
 

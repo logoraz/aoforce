@@ -1,9 +1,9 @@
 (defpackage #:tests/suite
-  (:use :cl
-        :5am
-        :utils/strings
-        :utils/shell
-        :rpm)
+  (:use #:cl
+        #:5am
+        #:utils/strings
+        #:utils/shell
+        #:rpm)
   (:export )
   (:documentation "Base Test Suite"))
 

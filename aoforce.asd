@@ -4,9 +4,12 @@
   :license "Apache-2.0"
   :version (:read-file-form "version.sexp" :at (0 1))
   :depends-on ; External Dependencies
-  ("bordeaux-threads" "lparallel"
-   "closer-mop" "fast-generic-functions"
-   "cl-ppcre" "osicat" "trivial-gray-streams"
+  ("iterate"
+   "bordeaux-threads"
+   "lparallel"
+   "cl-ppcre"
+   "osicat"
+   "trivial-gray-streams"
    #+sbcl "cl-gtk4"
    #+sbcl "cl-gtk4.adw"
    #+sbcl "cl-gdk4"
@@ -23,12 +26,12 @@
       :components
       ((:file "database")
        (:file "config-manager")))
-     (:module "frontends" ; UI/X Frontends
+     (:module "renderer" ; UI/X Frontends
       :components
-      (#+sbcl (:file "aofr-adw")))
+      (#+sbcl (:file "adw")))
      ;; Finally scaffold aoforce
      (:file "setup"   :depends-on ("utils" "core"))
-     (:file "aoforce" :depends-on ("utils" "core" "frontends")))))
+     (:file "aoforce" :depends-on ("utils" "core" "renderer")))))
   :in-order-to ((test-op (test-op "aoforce/tests")))
   :long-description "A collection of Common Lisp development environment
 configuration resources, tools, and a playground for building new projects.")
@@ -37,11 +40,11 @@ configuration resources, tools, and a playground for building new projects.")
 ;;; Register Systems
 ;;; =============================================================================
 ;; The function `register-system-packages' must be called to register packages
-;; used or provided by your system when the name of the system/file that 
+;; used or provided by your system when the name of the system/file that
 ;; provides the package is not the same as the package name
 ;; (converted to lower case).
+(register-system-packages "iterate" '(:iter))
 (register-system-packages "bordeaux-threads" '(:bt :bt2 :bordeaux-threads-2))
-(register-system-packages "closer-mop" '(:c2mop :c2cl :c2cl-user))
 (register-system-packages "fiveam" '(:5am))
 
 ;;; =============================================================================
@@ -49,7 +52,8 @@ configuration resources, tools, and a playground for building new projects.")
 ;;; =============================================================================
 (defsystem "aoforce/tests"
   :description "Unit tests"
-  :depends-on ("aoforce" "fiveam")
+  :depends-on ("aoforce"
+               "fiveam")
   :components
   ((:module "tests"
     :components
@@ -59,7 +63,10 @@ configuration resources, tools, and a playground for building new projects.")
 
 (defsystem "aoforce/docs"
   :description "Documentation framework"
-  :depends-on ("aoforce" "3bmd" "print-licenses")
+  :depends-on ("aoforce"
+               "3bmd"
+               "colorize"
+               "print-licenses")
   :components
   ((:module "docs"
     :components
