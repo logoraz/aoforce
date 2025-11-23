@@ -1,9 +1,9 @@
 (defpackage #:setup
   (:use #:cl
         #:core/config-manager)
+  (:documentation "Setup script to scaffold CL configuration/environment.")
   (:export #:outline
-           #:deploy)
-  (:documentation "Setup script to scaffold CL configuration/environment."))
+           #:deploy))
 
 (in-package #:setup)
 

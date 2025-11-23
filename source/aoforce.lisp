@@ -2,12 +2,13 @@
   (:nicknames #:aofr)
   (:use #:cl
         #:setup
-        #:renderer/adw)
+        #:renderer/app)
   (:local-nicknames (#:it #:iterate))
-  (:export #:simple-test
-           #:simple-test2
-           #:ui)
-  (:documentation "Main package of AOFORCE"))
+  (:documentation "Main package of AOFORCE")
+  (:export
+   #:simple-test
+   #:simple-test2
+   #:ui))
 
 (in-package #:aoforce)
 
@@ -31,7 +32,7 @@
 ;;; =============================================================================
 (defun ui ()
   "Main entry point for the executable."
-  (main))
+  (start-app))
 
 #+(or)
 (defun main ()

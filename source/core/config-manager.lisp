@@ -17,21 +17,22 @@
                 #:file-kind)
   (:import-from #:cl-ppcre
                 #:regex-replace-all)
-  (:export #:config-object
-           #:config-manager
-           #:colored-stream
-           #:print-object
-           ;; Manager methods
-           #:add-config
-           #:list-configs
-           #:deploy-configs
-           #:clear-configs
-           #:configs
-           ;; Utilities
-           #:expand-pathname
-           #:symlinkp
-           #:create-symlink)
-  (:documentation "CLOS-based Configuration Manager"))
+  (:documentation "CLOS-based Configuration Manager")
+  (:export 
+   #:config-object
+   #:config-manager
+   #:colored-stream
+   #:print-object
+   ;; Manager methods
+   #:add-config
+   #:list-configs
+   #:deploy-configs
+   #:clear-configs
+   #:configs
+   ;; Utilities
+   #:expand-pathname
+   #:symlinkp
+   #:create-symlink))
 
 (in-package #:core/config-manager)
 

@@ -10,9 +10,9 @@
    "cl-ppcre"
    "osicat"
    "trivial-gray-streams"
-   #+sbcl "cl-gtk4"
-   #+sbcl "cl-gtk4.adw"
-   #+sbcl "cl-gdk4"
+   "cl-gtk4"
+   "cl-gtk4.adw"
+   "cl-gdk4"
    ;; Local Systems (aka libraries)
    "confr")
   :components ; Map of System (Internals)
@@ -27,8 +27,14 @@
       ((:file "database")
        (:file "config-manager")))
      (:module "renderer" ; UI/X Frontends
+      :serial t
       :components
-      (#+sbcl (:file "adw")))
+      ((:file "widgets")
+       (:file "layouts")
+       (:file "controller")
+       (:file "builder")
+       (:file "app")
+       #+nil (:file "adw")))
      ;; Finally scaffold aoforce
      (:file "setup"   :depends-on ("utils" "core"))
      (:file "aoforce" :depends-on ("utils" "core" "renderer")))))
