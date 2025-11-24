@@ -10,6 +10,7 @@
    "cl-ppcre"
    "osicat"
    "trivial-gray-streams"
+   "cl-dbi"
    "cl-gtk4"
    "cl-gtk4.adw"
    "cl-gdk4"
@@ -24,10 +25,9 @@
      (:module "core" ; Build out the core of aoforce
       :depends-on ("utils")
       :components
-      ((:file "database")
-       (:file "config-manager")))
+      ((:file "config-manager")
+       (:file "persistence")))
      (:module "renderer" ; UI/X Frontends
-      :serial t
       :components
       ((:file "widgets")
        (:file "layouts")

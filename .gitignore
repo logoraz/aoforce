@@ -1,5 +1,6 @@
 # root
 /ocicl/*
+*.db
 
 ## source
 /core/ocicl/*

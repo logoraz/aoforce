@@ -10,6 +10,7 @@ cffi-libffi, ghcr.io/ocicl/cffi-grovel@sha256:0854274d437e36f8bd30549103de36d23a
 cffi-tests, ghcr.io/ocicl/cffi-grovel@sha256:0854274d437e36f8bd30549103de36d23ac22f481f2746e61785e883f52b25fa, cffi-20250822-dad3520/cffi-tests.asd
 cffi-toolchain, ghcr.io/ocicl/cffi-grovel@sha256:0854274d437e36f8bd30549103de36d23ac22f481f2746e61785e883f52b25fa, cffi-20250822-dad3520/cffi-toolchain.asd
 cffi-uffi-compat, ghcr.io/ocicl/cffi-grovel@sha256:0854274d437e36f8bd30549103de36d23ac22f481f2746e61785e883f52b25fa, cffi-20250822-dad3520/cffi-uffi-compat.asd
+cl-dbi, ghcr.io/ocicl/cl-dbi@sha256:831b6c4b26fcd003cd1ed4a2e42a5620128bd577ff077d4c6400a076e41bbff8, cl-dbi-20250928-be4df4f/cl-dbi.asd
 cl-gio, ghcr.io/ocicl/cl-glib@sha256:cd4c7ba702338ab9964e2cd4cbd7c7207d4ffe776873d3b39205ca5c63efd493, cl-glib-20240503-31d8d33/cl-gio.asd
 cl-glib, ghcr.io/ocicl/cl-glib@sha256:cd4c7ba702338ab9964e2cd4cbd7c7207d4ffe776873d3b39205ca5c63efd493, cl-glib-20240503-31d8d33/cl-glib.asd
 cl-gobject, ghcr.io/ocicl/cl-glib@sha256:cd4c7ba702338ab9964e2cd4cbd7c7207d4ffe776873d3b39205ca5c63efd493, cl-glib-20240503-31d8d33/cl-gobject.asd
@@ -18,6 +19,13 @@ cl-gobject-introspection-test, ghcr.io/ocicl/cl-gobject-introspection@sha256:474
 cl-gobject-introspection-wrapper, ghcr.io/ocicl/cl-gobject-introspection-wrapper@sha256:8973c43c767965813d8d707488da8fb241eac9362551f9388c881a0ef4754f47, cl-gobject-introspection-wrapper-20251005-59d7386/cl-gobject-introspection-wrapper.asd
 cl-ppcre, ghcr.io/ocicl/cl-ppcre@sha256:bf073924cf4fd5957a4fd961a95d446ed0e53fa32a5002cbd2d52182874f45e5, cl-ppcre-20250606-a2ea581/cl-ppcre.asd
 cl-ppcre-unicode, ghcr.io/ocicl/cl-ppcre@sha256:bf073924cf4fd5957a4fd961a95d446ed0e53fa32a5002cbd2d52182874f45e5, cl-ppcre-20250606-a2ea581/cl-ppcre-unicode.asd
+closer-mop, ghcr.io/ocicl/closer-mop@sha256:e99c0448dd5a5eb1e5134ffebb0cfc7f84a4c14e45c77d7566a273f04e3e0017, closer-mop-20251028-443e42e/closer-mop.asd
+dbd-mysql, ghcr.io/ocicl/cl-dbi@sha256:831b6c4b26fcd003cd1ed4a2e42a5620128bd577ff077d4c6400a076e41bbff8, cl-dbi-20250928-be4df4f/dbd-mysql.asd
+dbd-null, ghcr.io/ocicl/cl-dbi@sha256:831b6c4b26fcd003cd1ed4a2e42a5620128bd577ff077d4c6400a076e41bbff8, cl-dbi-20250928-be4df4f/dbd-null.asd
+dbd-postgres, ghcr.io/ocicl/cl-dbi@sha256:831b6c4b26fcd003cd1ed4a2e42a5620128bd577ff077d4c6400a076e41bbff8, cl-dbi-20250928-be4df4f/dbd-postgres.asd
+dbd-sqlite3, ghcr.io/ocicl/cl-dbi@sha256:831b6c4b26fcd003cd1ed4a2e42a5620128bd577ff077d4c6400a076e41bbff8, cl-dbi-20250928-be4df4f/dbd-sqlite3.asd
+dbi, ghcr.io/ocicl/cl-dbi@sha256:831b6c4b26fcd003cd1ed4a2e42a5620128bd577ff077d4c6400a076e41bbff8, cl-dbi-20250928-be4df4f/dbi.asd
+dbi-test, ghcr.io/ocicl/cl-dbi@sha256:831b6c4b26fcd003cd1ed4a2e42a5620128bd577ff077d4c6400a076e41bbff8, cl-dbi-20250928-be4df4f/dbi-test.asd
 global-vars, ghcr.io/ocicl/global-vars@sha256:d197e871c9c9abc4bf31b1186f5fd28f0ca848ebe2e9dddf2d82ecee01dbdc65, global-vars-20240503-c749f32/global-vars.asd
 global-vars-test, ghcr.io/ocicl/global-vars@sha256:d197e871c9c9abc4bf31b1186f5fd28f0ca848ebe2e9dddf2d82ecee01dbdc65, global-vars-20240503-c749f32/global-vars-test.asd
 iterate, ghcr.io/ocicl/iterate@sha256:6950c55e3782d58cabbbb5753111a70d8cafab8348b7fd6f2143d9abeaab46fb, iterate-20250703-d27d7ff/iterate.asd
@@ -25,6 +33,9 @@ lparallel, ghcr.io/ocicl/lparallel@sha256:4b9e626031904279f7f2b53b3ca52f380642cb
 lparallel-bench, ghcr.io/ocicl/lparallel@sha256:4b9e626031904279f7f2b53b3ca52f380642cb5402390e478fe1f535f0829379, lparallel-20240503-9c11f40/lparallel-bench.asd
 lparallel-test, ghcr.io/ocicl/lparallel@sha256:4b9e626031904279f7f2b53b3ca52f380642cb5402390e478fe1f535f0829379, lparallel-20240503-9c11f40/lparallel-test.asd
 osicat, ghcr.io/ocicl/osicat@sha256:48af110420f02e99c37370e48bee10d7c7aada7e563483e1f47e3bc1173545f9, osicat-20251007-68732bd/osicat.asd
+split-sequence, ghcr.io/ocicl/split-sequence@sha256:3a37662eedd99c42995587b9d443c4631f25c4c523091bcca31a27b880585b8e, split-sequence-2.0.1/split-sequence.asd
+sqlite, ghcr.io/ocicl/sqlite@sha256:a7f80757e6ee13af06e2eeaeff1e079dba439d85ea5c7f68e262bccc40dcbd5c, cl-sqlite-0.2.1/sqlite.asd
+sqlite-tests, ghcr.io/ocicl/sqlite@sha256:a7f80757e6ee13af06e2eeaeff1e079dba439d85ea5c7f68e262bccc40dcbd5c, cl-sqlite-0.2.1/sqlite-tests.asd
 trivial-features, ghcr.io/ocicl/trivial-features@sha256:e278e24d39060fc7d3715531b16ddd9ab7f93f22ade53e436c0b86dbae3aa065, trivial-features-1.0/trivial-features.asd
 trivial-features-tests, ghcr.io/ocicl/trivial-features@sha256:e278e24d39060fc7d3715531b16ddd9ab7f93f22ade53e436c0b86dbae3aa065, trivial-features-1.0/trivial-features-tests.asd
 trivial-garbage, ghcr.io/ocicl/trivial-garbage@sha256:a85dcf4110ad60ae9f6c70970acceb2bf12402ce5326891643d35506059afb1d, trivial-garbage-20240503-3474f64/trivial-garbage.asd
