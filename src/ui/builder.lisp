@@ -10,31 +10,28 @@
 ;;;;   - All created widgets are registered in the controller
 ;;;;   - Support for nested/recursive building
 
-(defpackage #:renderer/builder
+(defpackage #:ui/builder
   (:use #:cl #:gtk4
-        #:renderer/widgets
-        #:renderer/layouts
-        #:renderer/controller)
-  (:documentation "UI builder that constructs UI from layout definitions.")
-  (:export
-   #:build-section
-   #:build-page
-   #:build-application-window))
+        #:ui/widgets
+        #:ui/layouts
+        #:ui/controller)
+  (:export #:build-section
+           #:build-page
+           #:build-application-window)
+  (:documentation "UI builder that constructs UI from layout definitions."))
 
-(in-package #:renderer/builder)
+(in-package #:ui/builder)
 
-;;; ============================================================================
+;;; =============================================================================
 ;;; Section Building - Generic Function
-;;; ============================================================================
-
+;;; =============================================================================
 (defgeneric build-section (type section controller parent)
   (:documentation "Build a section of TYPE into PARENT, using CONTROLLER for state.
 Returns the created widget(s)."))
 
-;;; ============================================================================
+;;; =============================================================================
 ;;; Section Builders - Status Section
-;;; ============================================================================
-
+;;; =============================================================================
 (defmethod build-section ((type (eql :status)) section controller parent)
   "Build a status/branding section."
   (let* ((title (section-property section :title))
@@ -53,10 +50,9 @@ Returns the created widget(s)."))
       (box-append parent page))
     page))
 
-;;; ============================================================================
+;;; =============================================================================
 ;;; Section Builders - Input Section
-;;; ============================================================================
-
+;;; =============================================================================
 (defmethod build-section ((type (eql :input)) section controller parent)
   "Build an input field section with validation."
   (let* ((title (section-property section :title))
@@ -96,10 +92,9 @@ Returns the created widget(s)."))
       (box-append parent group))
     group))
 
-;;; ============================================================================
+;;; =============================================================================
 ;;; Section Builders - Button Section
-;;; ============================================================================
-
+;;; =============================================================================
 (defmethod build-section ((type (eql :buttons)) section controller parent)
   "Build a button bar section."
   (let* ((buttons-spec (section-property section :buttons))
@@ -130,10 +125,9 @@ Returns the created widget(s)."))
       (box-append parent box))
     box))
 
-;;; ============================================================================
+;;; =============================================================================
 ;;; Section Builders - Preferences Section
-;;; ============================================================================
-
+;;; =============================================================================
 (defmethod build-section ((type (eql :preferences)) section controller parent)
   "Build a preferences group with multiple rows."
   (let* ((title (section-property section :title))
@@ -196,20 +190,18 @@ Returns the created widget(s)."))
       (box-append parent group))
     group))
 
-;;; ============================================================================
+;;; =============================================================================
 ;;; Section Builders - Custom Section
-;;; ============================================================================
-
+;;; =============================================================================
 (defmethod build-section ((type (eql :custom)) section controller parent)
   "Build a custom section using the provided builder function."
   (let ((builder-fn (section-property section :builder-fn)))
     (when builder-fn
       (funcall builder-fn controller parent))))
 
-;;; ============================================================================
+;;; =============================================================================
 ;;; Page Building
-;;; ============================================================================
-
+;;; =============================================================================
 (defun build-page (page-def controller &key (container nil) (carousel nil))
   "Build a complete page from PAGE-DEF.
 Keywords:
@@ -251,10 +243,9 @@ Returns the built page widget."
            (box-append container content-box))
          content-box)))))
 
-;;; ============================================================================
+;;; =============================================================================
 ;;; Application Window Building
-;;; ============================================================================
-
+;;; =============================================================================
 (defun build-application-window (controller window page-def
                                   &key (header t) 
                                        (header-title nil)

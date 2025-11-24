@@ -32,45 +32,43 @@
                 #:file-kind)
   (:import-from #:cl-ppcre
                 #:regex-replace-all)
-  (:documentation "CLOS-based Configuration Manager")
-  (:export 
-   ;; Classes
-   #:config-object
-   #:config-manager
-   #:colored-stream
-   ;; Config accessors
-   #:config-name
-   #:config-source
-   #:config-place
-   #:config-spec
-   #:config-type
-   ;; Manager methods
-   #:add-config
-   #:remove-config
-   #:find-config
-   #:list-configs
-   #:deploy-configs
-   #:clear-configs
-   #:configs
-   #:config-count
-   ;; Utilities
-   #:expand-pathname
-   #:symlinkp
-   #:symlink-target
-   #:symlink-update-needed-p
-   #:create-symlink
-   #:copy-directory
-   ;; Conditions
-   #:config-error
-   #:source-not-found
-   #:deployment-error))
+  ;; Classes
+  (:export #:config-object
+           #:config-manager
+           #:colored-stream)
+  ;; Config Accessors
+  (:export #:config-name
+           #:config-source
+           #:config-place
+           #:config-spec
+           #:config-type)
+  ;; Manager Methods
+  (:export #:add-config
+           #:remove-config
+           #:find-config
+           #:list-configs
+           #:deploy-configs
+           #:clear-configs
+           #:configs
+           #:config-count)
+  ;; Utilities
+  (:export #:expand-pathname
+           #:symlinkp
+           #:symlink-target
+           #:symlink-update-needed-p
+           #:create-symlink
+           #:copy-directory)
+  ;; Conditions
+  (:export #:config-error
+           #:source-not-found
+           #:deployment-error)
+  (:documentation "CLOS-based Configuration Manager"))
 
 (in-package #:core/config-manager)
 
 ;;; =============================================================================
 ;;; Conditions
 ;;; =============================================================================
-
 (define-condition config-error (error)
   ((config :initarg :config :reader config-error-config))
   (:documentation "Base condition for config-manager errors."))
@@ -92,7 +90,6 @@
 ;;; =============================================================================
 ;;; Classes
 ;;; =============================================================================
-
 (defclass config-object ()
   ((name    :initarg :name :reader config-name :type string
             :documentation "Name of the config")
@@ -123,7 +120,6 @@
 ;;; =============================================================================
 ;;; Interface (Generic Functions)
 ;;; =============================================================================
-
 (defgeneric add-config (manager name source place &key spec type validate)
   (:documentation "Add a config entry to the manager."))
 
@@ -148,7 +144,6 @@
 ;;; =============================================================================
 ;;; Methods (Core Behavior)
 ;;; =============================================================================
-
 (defmethod add-config ((manager config-manager) name source place
                        &key (spec :symlink) (type :file) (validate t))
   "Add a config entry with path expansion.
@@ -298,7 +293,7 @@ Returns a list of performed actions:
     
     (let ((actions (nreverse results)))
       (when verbose
-        (format verbose "~%~A~ADeployment complete: ~A~D~A/~A~D~A action~:P~A~%"
+        (format verbose "~%~A~ADeployment complete: ~A~D~A action~:P, ~A~D~A error~:P~A~%"
                 (color :bold) (color :green)
                 (color :cyan) (- (length actions) errors)
                 (color :green)
@@ -331,7 +326,6 @@ Returns a list of performed actions:
 ;;; =============================================================================
 ;;; Stream Methods
 ;;; =============================================================================
-
 (defmethod trivial-gray-streams:stream-write-string
     ((stream colored-stream) string &optional start end)
   "Write STRING to target, stripping ANSI codes if colors disabled."  
@@ -346,7 +340,6 @@ Returns a list of performed actions:
 ;;; =============================================================================
 ;;; Helper Functions/Utilities
 ;;; =============================================================================
-
 (defun expand-pathname (pathspec)
   "Expand ~ and ~/ to user's home directory."
   (let* ((str (etypecase pathspec
@@ -462,7 +455,6 @@ Creates DEST if it doesn't exist. Copies all files and subdirectories."
 ;;; =============================================================================
 ;;; ANSI Color Support
 ;;; =============================================================================
-
 (defparameter *esc* (string (code-char 27))
   "ANSI escape character as a string.")
 
@@ -498,7 +490,6 @@ Creates DEST if it doesn't exist. Copies all files and subdirectories."
 ;;; =============================================================================
 ;;; Directory Utilities
 ;;; =============================================================================
-
 (defun ensure-directory (pathspec &key (mode #o700))
   "Ensure directory exists with specified MODE."
   (ensure-directories-exist (ensure-directory-pathname pathspec) :mode mode))

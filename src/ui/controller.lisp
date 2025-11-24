@@ -8,45 +8,43 @@
 ;;;; The controller is passed to all builders and handlers, providing
 ;;;; a central coordination point without global state.
 
-(defpackage #:renderer/controller
+(defpackage #:ui/controller
   (:use #:cl #:gtk4)
-  (:documentation "Application state management and business logic.")
-  (:export
-   ;; Action registry
-   #:*action-registry*
-   #:register-action
-   #:get-action
-   #:invoke-action
-   #:clear-actions
-   #:define-action
-   ;; Controller class
-   #:app-controller
-   ;; Accessors
-   #:window
-   #:widgets
-   #:state
-   #:config
-   ;; Widget registry
-   #:register-widget
-   #:get-widget
-   #:list-widgets
-   ;; State management
-   #:get-state
-   #:set-state
-   #:update-state
-   #:clear-state
-   ;; Configuration
-   #:get-config
-   ;; Utilities
-   #:with-widget
-   #:with-controller-widgets))
+  ;; Action Registry
+  (:export #:*action-registry*
+           #:register-action
+           #:get-action
+           #:invoke-action
+           #:clear-actions
+           #:define-action)
+  ;; Controller Class
+  (:export #:app-controller)
+  ;; Accessors
+  (:export #:window
+           #:widgets
+           #:state
+           #:config)
+  ;; Widget Registry
+  (:export #:register-widget
+           #:get-widget
+           #:list-widgets)
+  ;; State Managementp
+  (:export #:get-state
+           #:set-state
+           #:update-state
+           #:clear-state)
+  ;; Configuration  
+  (:export #:get-config)
+  ;; Utilities
+  (:export #:with-widget
+           #:with-controller-widgets)
+  (:documentation "Application state management and business logic."))
 
-(in-package #:renderer/controller)
+(in-package #:ui/controller)
 
-;;; ============================================================================
+;;; =============================================================================
 ;;; Action Registry
-;;; ============================================================================
-
+;;; =============================================================================
 (defvar *action-registry* (make-hash-table :test 'eq)
   "Global registry of action handlers.
 Actions are named functions that can be invoked by UI components.")
@@ -83,10 +81,9 @@ Example:
     (lambda (,controller ,@args)
       ,@body)))
 
-;;; ============================================================================
+;;; =============================================================================
 ;;; Application Controller Class
-;;; ============================================================================
-
+;;; =============================================================================
 (defclass app-controller ()
   ((window
     :initarg :window
@@ -114,10 +111,9 @@ Example:
             (hash-table-count (widgets controller))
             (hash-table-count (state controller)))))
 
-;;; ============================================================================
+;;; =============================================================================
 ;;; Widget Registry Methods
-;;; ============================================================================
-
+;;; =============================================================================
 (defgeneric register-widget (controller name widget)
   (:documentation "Register WIDGET under NAME in CONTROLLER."))
 
@@ -135,13 +131,12 @@ Example:
 
 (defun list-widgets (controller)
   "List all registered widget names."
-  (loop for key being the hash-keys of (widgets controller)
-        collect key))
+  (loop :for key :being :the hash-keys :of (widgets controller)
+        :collect key))
 
-;;; ============================================================================
+;;; =============================================================================
 ;;; State Management Methods
-;;; ============================================================================
-
+;;; =============================================================================
 (defgeneric get-state (controller key &optional default)
   (:documentation "Get state value for KEY."))
 
@@ -169,10 +164,9 @@ FN receives the current value and returns the new value."
   "Clear all state in CONTROLLER."
   (clrhash (state controller)))
 
-;;; ============================================================================
+;;; =============================================================================
 ;;; Configuration Access
-;;; ============================================================================
-
+;;; =============================================================================
 (defgeneric get-config (controller key &optional default)
   (:documentation "Get configuration value."))
 
@@ -180,10 +174,9 @@ FN receives the current value and returns the new value."
   "Get configuration value for KEY."
   (getf (config controller) key default))
 
-;;; ============================================================================
+;;; =============================================================================
 ;;; Utility Methods
-;;; ============================================================================
-
+;;; =============================================================================
 (defgeneric with-widget (controller name fn)
   (:documentation "Execute FN with the widget named NAME if it exists."))
 
@@ -194,10 +187,9 @@ FN receives the widget as its argument. Does nothing if widget not found."
     (when widget
       (funcall fn widget))))
 
-;;; ============================================================================
+;;; =============================================================================
 ;;; Convenience Macros
-;;; ============================================================================
-
+;;; =============================================================================
 (defmacro with-controller-widgets (controller bindings &body body)
   "Bind multiple widgets from CONTROLLER for use in BODY.
 Example:
@@ -207,6 +199,6 @@ Example:
     (setf (label-text label) (entry-text entry)))"
   (let ((ctrl-var (gensym "CONTROLLER")))
     `(let ((,ctrl-var ,controller))
-       (let ,(loop for (var name) in bindings
-                   collect `(,var (get-widget ,ctrl-var ,name)))
+       (let ,(loop :for (var name) :in bindings
+                   :collect `(,var (get-widget ,ctrl-var ,name)))
          ,@body))))

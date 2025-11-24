@@ -7,7 +7,7 @@ A declarative, modular UI framework built on top of `cl-gtk4.adw` (libadwaita bi
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                          app.lisp                               │
-│  - Application entry point (renderer/app)                       │
+│  - Application entry point (ui/app)                             │
 │  - Action definitions (business logic)                          │
 │  - Page layout definitions                                      │
 └─────────────────────────────────────────────────────────────────┘
@@ -15,7 +15,7 @@ A declarative, modular UI framework built on top of `cl-gtk4.adw` (libadwaita bi
                               ▼
 ┌─────────────────────────────────────────────────────────────────┐
 │                        builder.lisp                             │
-│  - Builds widgets from layout definitions (renderer/builder)    │
+│  - Builds widgets from layout definitions (ui/builder)          │
 │  - Section type dispatching                                     │
 │  - Window construction                                          │
 └─────────────────────────────────────────────────────────────────┘
@@ -24,7 +24,7 @@ A declarative, modular UI framework built on top of `cl-gtk4.adw` (libadwaita bi
               ▼               ▼               ▼
 ┌──────────────────┐ ┌──────────────────┐ ┌──────────────────┐
 │   widgets.lisp   │ │   layouts.lisp   │ │ controller.lisp  │
-│ renderer/widgets │ │ renderer/layouts │ │renderer/controller│
+│    ui/widgets    │ │    ui/layouts    │ │  ui/controller   │
 │                  │ │                  │ │                  │
 │ - Widget factory │ │ - Section types  │ │ - State mgmt     │
 │ - Reusable       │ │ - Page registry  │ │ - Widget registry│
@@ -35,11 +35,10 @@ A declarative, modular UI framework built on top of `cl-gtk4.adw` (libadwaita bi
 
 ## Integration with AOFORCE
 
-These files belong in `source/renderer/` and are loaded via the main `aoforce.asd`:
+These files belong in `src/ui/` and are loaded via the main `aoforce.asd`:
 
 ```lisp
-(:module "renderer"
- :serial t
+(:module "ui"
  :components
  ((:file "widgets")
   (:file "layouts")
@@ -54,11 +53,11 @@ Each file defines its own package using `defpackage`:
 
 | File | Package | Purpose |
 |------|---------|---------|
-| `widgets.lisp` | `renderer/widgets` | Widget factory functions |
-| `layouts.lisp` | `renderer/layouts` | Declarative layout definitions |
-| `controller.lisp` | `renderer/controller` | State & action management |
-| `builder.lisp` | `renderer/builder` | Builds UI from layouts |
-| `app.lisp` | `renderer/app` | Main application entry |
+| `widgets.lisp` | `ui/widgets` | Widget factory functions |
+| `layouts.lisp` | `ui/layouts` | Declarative layout definitions |
+| `controller.lisp` | `ui/controller` | State & action management |
+| `builder.lisp` | `ui/builder` | Builds UI from layouts |
+| `app.lisp` | `ui/app` | Main application entry |
 
 ## Module Descriptions
 
@@ -66,7 +65,7 @@ Each file defines its own package using `defpackage`:
 Provides factory functions for creating configured widgets:
 
 ```lisp
-(in-package #:renderer/widgets)
+(in-package #:ui/widgets)
 
 ;; Buttons
 (make-pill-button "Click Me" :suggested t)
@@ -88,7 +87,7 @@ Provides factory functions for creating configured widgets:
 Define UI structure as data, not code:
 
 ```lisp
-(in-package #:renderer/layouts)
+(in-package #:ui/layouts)
 
 (define-page :my-page (:title "My Page" :icon "go-home-symbolic")
   ;; Status section with branding
@@ -119,7 +118,7 @@ Define UI structure as data, not code:
 Centralized state and widget registry:
 
 ```lisp
-(in-package #:renderer/controller)
+(in-package #:ui/controller)
 
 ;; State management
 (set-state controller :user-name "John")
@@ -141,7 +140,7 @@ Centralized state and widget registry:
 Transforms layout definitions into actual widgets:
 
 ```lisp
-(in-package #:renderer/builder)
+(in-package #:ui/builder)
 
 ;; Build a page
 (build-page (get-page-definition :my-page) controller :container box)
@@ -208,13 +207,13 @@ Transforms layout definitions into actual widgets:
 
 ```
 aoforce/
-├── source/
-│   └── renderer/
-│       ├── widgets.lisp      # renderer/widgets package
-│       ├── layouts.lisp      # renderer/layouts package
-│       ├── controller.lisp   # renderer/controller package
-│       ├── builder.lisp      # renderer/builder package
-│       └── app.lisp          # renderer/app package
+├── src/
+│   └── ui/
+│       ├── widgets.lisp      # ui/widgets package
+│       ├── layouts.lisp      # ui/layouts package
+│       ├── controller.lisp   # ui/controller package
+│       ├── builder.lisp      # ui/builder package
+│       └── app.lisp          # ui/app package
 └── aoforce.asd
 ```
 
@@ -227,5 +226,5 @@ aoforce/
 ;; Run the UI
 (aoforce:ui)
 ;; or
-(renderer/app:main)
+(ui/app:main)
 ```

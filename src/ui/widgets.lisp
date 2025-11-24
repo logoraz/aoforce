@@ -10,38 +10,36 @@
 ;;;;   - No side effects beyond widget creation
 ;;;;   - Composable - widgets can be nested freely
 
-(defpackage #:renderer/widgets
+(defpackage #:ui/widgets
   (:use #:cl #:gtk4)
-  (:documentation "Reusable widget constructors for libadwaita UI components.")
-  (:export
-   ;; Box constructors
-   #:make-vbox
-   #:make-hbox
-   ;; Button constructors
-   #:make-pill-button
-   #:make-icon-button
-   ;; Layout helpers
-   #:make-toolbar-view
-   #:make-scrolled-content
-   ;; Preferences widgets
-   #:make-pref-group
-   #:make-action-row-entry
-   #:make-action-row-switch
-   #:make-action-row-combo
-   ;; Status/Display
-   #:make-branded-status-page
-   ;; Header
-   #:make-app-header-bar
-   ;; Utility
-   #:set-margins
-   #:set-expand))
+  ;; Box Constructors
+  (:export #:make-vbox
+           #:make-hbox)
+  ;; Button constructors
+  (:export #:make-pill-button
+           #:make-icon-button)
+  ;; Layout helpers
+  (:export #:make-toolbar-view
+           #:make-scrolled-content)
+  ;; Preferences widgets
+  (:export #:make-pref-group
+           #:make-action-row-entry
+           #:make-action-row-switch
+           #:make-action-row-combo)
+  ;; Status/Display
+  (:export #:make-branded-status-page)
+  ;; Header
+  (:export #:make-app-header-bar)
+  ;; Utility
+  (:export #:set-margins
+           #:set-expand)
+  (:documentation "Reusable widget constructors for libadwaita UI components."))
 
-(in-package #:renderer/widgets)
+(in-package #:ui/widgets)
 
-;;; ============================================================================
+;;; =============================================================================
 ;;; Utility Functions
-;;; ============================================================================
-
+;;; =============================================================================
 (defun set-margins (widget &key (all nil) (top nil) (bottom nil) 
                                 (start nil) (end nil))
   "Set margins on WIDGET. ALL sets all margins uniformly, 
@@ -64,10 +62,9 @@ individual margins override ALL when specified."
     (setf (widget-vexpand-p widget) t))
   widget)
 
-;;; ============================================================================
+;;; =============================================================================
 ;;; Box Constructors
-;;; ============================================================================
-
+;;; =============================================================================
 (defun make-vbox (&key (spacing 0))
   "Create a vertical box with optional SPACING between children."
   (make-box :orientation +orientation-vertical+ :spacing spacing))
@@ -76,10 +73,9 @@ individual margins override ALL when specified."
   "Create a horizontal box with optional SPACING between children."
   (make-box :orientation +orientation-horizontal+ :spacing spacing))
 
-;;; ============================================================================
+;;; =============================================================================
 ;;; Button Constructors
-;;; ============================================================================
-
+;;; =============================================================================
 (defun make-pill-button (label &key (suggested nil) (destructive nil) 
                                     (margin 10) (expand-h t))
   "Create a pill-styled button with LABEL.
@@ -120,10 +116,9 @@ Keywords:
       (setf (widget-css-classes btn) classes))
     btn))
 
-;;; ============================================================================
+;;; =============================================================================
 ;;; Layout Containers
-;;; ============================================================================
-
+;;; =============================================================================
 (defun make-toolbar-view (&key (top-bar nil) (bottom-bar nil) (content nil))
   "Create an AdwToolbarView with optional TOP-BAR, BOTTOM-BAR, and CONTENT.
 This is the recommended container for libadwaita applications."
@@ -154,10 +149,9 @@ Keywords:
             (list (policy->gtk policy-h) (policy->gtk policy-v))))
     scrolled))
 
-;;; ============================================================================
+;;; =============================================================================
 ;;; Header Components
-;;; ============================================================================
-
+;;; =============================================================================
 (defun make-app-header-bar (&key (title nil) (subtitle nil)
                                  (show-title t)
                                  (start-widgets nil)
@@ -182,10 +176,9 @@ Keywords:
       (adw:header-bar-pack-end header w))
     header))
 
-;;; ============================================================================
+;;; =============================================================================
 ;;; Status/Display Components
-;;; ============================================================================
-
+;;; =============================================================================
 (defun make-branded-status-page (&key (title "AOFORCE")
                                       (description " ")
                                       (icon-name nil)
@@ -212,10 +205,9 @@ Keywords:
     (set-expand page :both t)
     page))
 
-;;; ============================================================================
+;;; =============================================================================
 ;;; Preferences Components
-;;; ============================================================================
-
+;;; =============================================================================
 (defun make-pref-group (&key (title nil) (description nil) (margin 10))
   "Create an AdwPreferencesGroup.
 Keywords:

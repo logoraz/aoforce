@@ -3,12 +3,12 @@
 ;;;; NOTE: Each module defines its own package at the top of its file.
 ;;;; This file is kept for documentation purposes only.
 ;;;;
-;;;; Package hierarchy (matches source/renderer/ module structure):
-;;;;   renderer/widgets    - Reusable widget constructors (widgets.lisp)
-;;;;   renderer/layouts    - Declarative page/section definitions (layouts.lisp)
-;;;;   renderer/controller - Application state management (controller.lisp)
-;;;;   renderer/builder    - UI construction from layouts (builder.lisp)
-;;;;   renderer/app        - Main application entry point (app.lisp)
+;;;; Package hierarchy (matches src/ui/ module structure):
+;;;;   ui/widgets    - Reusable widget constructors (widgets.lisp)
+;;;;   ui/layouts    - Declarative page/section definitions (layouts.lisp)
+;;;;   ui/controller - Application state management (controller.lisp)
+;;;;   ui/builder    - UI construction from layouts (builder.lisp)
+;;;;   ui/app        - Main application entry point (app.lisp)
 ;;;;
 ;;;; Dependencies (via :use):
 ;;;;   widgets    -> cl, gtk4

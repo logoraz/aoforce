@@ -2,16 +2,19 @@
   (:use #:cl
         #:core/config-manager
         #:core/persistence)
-  (:documentation "Setup script to scaffold CL configuration/environment.")
+  ;; Basic Setup
   (:export #:outline
-           #:deploy
-           #:init-db
-           #:deploy-and-record
-           #:history
-           #:rollback
-           #:save-snapshot
-           #:load-snapshot
-           #:snapshots))
+           #:deploy)
+  ;; Advanced Setup
+  (:export
+   #:init-db
+   #:deploy-and-record
+   #:history
+   #:rollback
+   #:save-snapshot
+   #:load-snapshot
+   #:snapshots)
+  (:documentation "Setup script to scaffold CL configuration/environment."))
 
 (in-package #:setup)
 

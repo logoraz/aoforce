@@ -10,49 +10,47 @@
 ;;;;   - Separation between definition and instantiation
 ;;;;   - Registry pattern for organizing pages
 
-(defpackage #:renderer/layouts
+(defpackage #:ui/layouts
   (:use #:cl)
-  (:documentation "Declarative layout definitions and page registry.")
-  (:export
-   ;; Section class and accessors
-   #:section
-   #:section-id
-   #:section-type
-   #:section-title
-   #:section-properties
-   #:section-property
-   #:make-section
-   ;; Section type constructors
-   #:status-section
-   #:input-section
-   #:button-section
-   #:preferences-section
-   #:custom-section
-   ;; Page definition
-   #:page-definition
-   #:page-id
-   #:page-title
-   #:page-icon
-   #:page-sections
-   #:page-properties
-   #:page-property
-   #:make-page-definition
-   ;; Registry
-   #:*page-registry*
-   #:register-page
-   #:get-page-definition
-   #:list-pages
-   #:clear-page-registry
-   ;; Macros
-   #:define-page
-   #:define-section))
+  ;; Section class and accessors
+  (:export #:section
+           #:section-id
+           #:section-type
+           #:section-title
+           #:section-properties
+           #:section-property
+           #:make-section)
+  ;; Section type constructors
+  (:export #:status-section
+           #:input-section
+           #:button-section
+           #:preferences-section
+           #:custom-section)
+  ;; Page definition
+  (:export #:page-definition
+           #:page-id
+           #:page-title
+           #:page-icon
+           #:page-sections
+           #:page-properties
+           #:page-property
+           #:make-page-definition)
+  ;; Registry
+  (:export #:*page-registry*
+           #:register-page
+           #:get-page-definition
+           #:list-pages
+           #:clear-page-registry)
+  ;; Macros
+  (:export #:define-page
+           #:define-section)
+  (:documentation "Declarative layout definitions and page registry."))
 
-(in-package #:renderer/layouts)
+(in-package #:ui/layouts)
 
-;;; ============================================================================
+;;; =============================================================================
 ;;; Section Type Definitions
-;;; ============================================================================
-
+;;; =============================================================================
 (defclass section ()
   ((id :initarg :id
        :accessor section-id
@@ -74,10 +72,9 @@
   (print-unreadable-object (section stream :type t)
     (format stream "~A (~A)" (section-id section) (section-type section))))
 
-;;; ----------------------------------------------------------------------------
+;;; -----------------------------------------------------------------------------
 ;;; Section Constructors
-;;; ----------------------------------------------------------------------------
-
+;;; -----------------------------------------------------------------------------
 (defun make-section (id type &rest properties)
   "Create a section definition with ID, TYPE, and property plist."
   (make-instance 'section
@@ -93,10 +90,9 @@
   "Set a property value on SECTION."
   (setf (getf (section-properties section) key) value))
 
-;;; ============================================================================
+;;; =============================================================================
 ;;; Predefined Section Types
-;;; ============================================================================
-
+;;; =============================================================================
 (defun status-section (id &key title description icon-name paintable-path)
   "Define a status/branding section.
 Keywords:
@@ -155,10 +151,9 @@ add widgets to PARENT."
   (make-section id :custom
                 :builder-fn builder-fn))
 
-;;; ============================================================================
+;;; =============================================================================
 ;;; Page Definition
-;;; ============================================================================
-
+;;; =============================================================================
 (defclass page-definition ()
   ((id :initarg :id
        :accessor page-id
@@ -200,10 +195,9 @@ add widgets to PARENT."
   "Get a property from PAGE."
   (getf (page-properties page) key default))
 
-;;; ============================================================================
+;;; =============================================================================
 ;;; Page Registry
-;;; ============================================================================
-
+;;; =============================================================================
 (defvar *page-registry* (make-hash-table :test 'eq)
   "Registry mapping page IDs to page definitions.")
 
@@ -226,10 +220,9 @@ add widgets to PARENT."
   "Clear all registered pages."
   (clrhash *page-registry*))
 
-;;; ============================================================================
+;;; =============================================================================
 ;;; Macro for Defining Pages
-;;; ============================================================================
-
+;;; =============================================================================
 (defmacro define-page (id (&key title icon) &body sections)
   "Define and register a page.
 Example:

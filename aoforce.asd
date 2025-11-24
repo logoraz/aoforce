@@ -17,7 +17,7 @@
    ;; Local Systems (aka libraries)
    "confr")
   :components ; Map of System (Internals)
-  ((:module "source"
+  ((:module "src"
     :components
     ((:module "utils" ; Establish utils/toolbox
       :components
@@ -27,17 +27,16 @@
       :components
       ((:file "config-manager")
        (:file "persistence")))
-     (:module "renderer" ; UI/X Frontends
+     (:module "ui"
       :components
       ((:file "widgets")
        (:file "layouts")
        (:file "controller")
        (:file "builder")
-       (:file "app")
-       #+nil (:file "adw")))
+       (:file "app")))
      ;; Finally scaffold aoforce
      (:file "setup"   :depends-on ("utils" "core"))
-     (:file "aoforce" :depends-on ("utils" "core" "renderer")))))
+     (:file "aoforce" :depends-on ("utils" "core" "ui")))))
   :in-order-to ((test-op (test-op "aoforce/tests")))
   :long-description "A collection of Common Lisp development environment
 configuration resources, tools, and a playground for building new projects.")
@@ -78,7 +77,7 @@ configuration resources, tools, and a playground for building new projects.")
     :components
     ((:file "aoforce-docs")))))
 
-(defsystem "aoforce/libraries"
+(defsystem "aoforce/lib"
   :description "Extra libraries to bring in if needed"
   :depends-on ("confr"
                "cl-rpm"

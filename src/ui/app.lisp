@@ -12,24 +12,22 @@
 ;;;;   3. Add new sections to existing pages
 ;;;;   4. Create custom section builders
 
-(defpackage #:renderer/app
+(defpackage #:ui/app
   (:use #:cl #:gtk4
-        #:renderer/widgets
-        #:renderer/layouts
-        #:renderer/controller
-        #:renderer/builder)
-  (:documentation "Main renderer application package.")
-  (:export
-   #:main
-   #:start-app
-   #:aoforce-app))
+        #:ui/widgets
+        #:ui/layouts
+        #:ui/controller
+        #:ui/builder)
+  (:export #:main
+           #:start-app
+           #:aoforce-app)
+  (:documentation "Main renderer application package."))
 
-(in-package #:renderer/app)
+(in-package #:ui/app)
 
-;;; ============================================================================
+;;; =============================================================================
 ;;; Actions - Business Logic
-;;; ============================================================================
-
+;;; =============================================================================
 (define-action :parse-expression (controller entry text)
   "Parse the input text as a Lisp expression."
   (let ((expr (ignore-errors (read-from-string text))))
@@ -64,10 +62,9 @@
     (lambda (window)
       (window-destroy window))))
 
-;;; ============================================================================
+;;; =============================================================================
 ;;; Page Layouts
-;;; ============================================================================
-
+;;; =============================================================================
 ;;; The main REPL page layout
 (define-page :repl-page (:title "REPL" :icon "utilities-terminal-symbolic")
   ;; Branding/Status section at top
@@ -140,10 +137,9 @@
   (let ((text (entry-buffer-text (entry-buffer entry))))
     (format t "Prompt set to: ~A~%" text)))
 
-;;; ============================================================================
+;;; =============================================================================
 ;;; Application Definition
-;;; ============================================================================
-
+;;; =============================================================================
 ;;; Forward declaration for the macro-generated function
 (declaim (ftype function aoforce-app))
 
@@ -168,10 +164,9 @@
       (unless (widget-visible-p window)
         (window-present window)))))
 
-;;; ============================================================================
+;;; =============================================================================
 ;;; Public API
-;;; ============================================================================
-
+;;; =============================================================================
 (defun main ()
   "Main entry point for the application."
   (unless (adw:initialized-p)

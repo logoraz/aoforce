@@ -27,25 +27,24 @@
                 #:fetch-all
                 #:do-sql
                 #:with-connection)
-  (:documentation "SQLite persistence for config-manager deployment history.")
-  (:export
-   ;; Database management
-   #:*db-path*
-   #:with-database
-   #:initialize-database
-   ;; Deployment records
-   #:record-deployment
-   #:get-deployment-history
-   #:get-deployment-by-id
-   #:get-latest-deployment
-   ;; Config snapshots
-   #:save-config-snapshot
-   #:load-config-snapshot
-   #:list-snapshots
-   ;; Rollback
-   #:rollback-deployment
-   ;; Integration
-   #:deploy-with-history))
+  ;; Database management
+  (:export #:*db-path*
+           #:with-database
+           #:initialize-database)
+  ;; Deployment records
+  (:export #:record-deployment
+           #:get-deployment-history
+           #:get-deployment-by-id
+           #:get-latest-deployment)
+  ;; Config snapshots
+  (:export #:save-config-snapshot
+           #:load-config-snapshot
+           #:list-snapshots)
+  ;; Rollback
+  (:export #:rollback-deployment)
+  ;; Integration
+  (:export #:deploy-with-history)
+  (:documentation "SQLite persistence for config-manager deployment history."))
 
 (in-package #:core/persistence)
 
@@ -115,7 +114,6 @@
 ;;; =============================================================================
 ;;; Database Connection Management
 ;;; =============================================================================
-
 (defun ensure-db-directory ()
   "Ensure the database directory exists."
   (ensure-all-directories-exist (list *db-path*)))
@@ -139,7 +137,6 @@ Automatically handles connection opening and closing."
 ;;; =============================================================================
 ;;; Deployment Recording
 ;;; =============================================================================
-
 (defun record-deployment (manager &key notes)
   "Record a new deployment from MANAGER, returning the deployment ID.
 Call this BEFORE deploy-configs to create the deployment record,
@@ -179,7 +176,6 @@ then update action statuses as deployment proceeds."
 ;;; =============================================================================
 ;;; History Queries
 ;;; =============================================================================
-
 (defun get-deployment-history (&key (limit 20) (offset 0))
   "Get recent deployment history."
   (fetch-all
@@ -221,7 +217,6 @@ then update action statuses as deployment proceeds."
 ;;; =============================================================================
 ;;; Configuration Snapshots
 ;;; =============================================================================
-
 (defun save-config-snapshot (manager name &key description)
   "Save current manager configuration as a named snapshot."
   (let ((snapshot-id
@@ -272,7 +267,6 @@ then update action statuses as deployment proceeds."
 ;;; =============================================================================
 ;;; Rollback Support
 ;;; =============================================================================
-
 (defun rollback-deployment (deployment-id &key dry-run)
   "Attempt to rollback a deployment by reversing its actions.
 For symlinks: remove the symlink
@@ -306,7 +300,6 @@ If DRY-RUN is true, only report what would be done."
 ;;; =============================================================================
 ;;; Integration with config-manager
 ;;; =============================================================================
-
 (defun deploy-with-history (manager &key notes verbose)
   "Deploy configurations and record in database.
 Returns (values deployment-id results)."

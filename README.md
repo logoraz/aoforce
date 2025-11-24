@@ -131,12 +131,15 @@ Then you can run the adw tutorial package as follows:
 
 ## Roadmap
 
+ - [X] Build configuration manager system
+ - [X] Incorparate config-manager persistence via sqlite
+ - [X] Begin Scaffolding ADW/GTK4 UI System
+ - [ ] Build out unit testing 
  - [ ] Build a documentation system 
- - [ ] Build a database based on sqlite
- - [ ] Start adding unit testing
- - [ ] Build a CLI for deployment system
+ - [ ] Extend Configuration Manager to build/deploy external systems
+ - [ ] Build a CLI executable for deployment system
  - [ ] Build a ADW/GTK4 GUI config system inspector?
- - [ ] Build a configuration deployment library/system (`:confr`)
+ - [ ] Build a CL Project Scaffolding library/system (`:confr`)
  - [ ] Build a system to contruct rpm packagtes (`:cl-rpm`)
 
 

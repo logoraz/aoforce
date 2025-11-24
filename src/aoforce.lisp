@@ -2,13 +2,14 @@
   (:nicknames #:aofr)
   (:use #:cl
         #:setup
-        #:renderer/app)
+        #:ui/app)
   (:local-nicknames (#:it #:iterate))
-  (:documentation "Main package of AOFORCE")
-  (:export
-   #:simple-test
-   #:simple-test2
-   #:ui))
+  ;; Tests/Play
+  (:export #:simple-test
+           #:simple-test2)
+  ;; UI
+  (:export #:ui)
+  (:documentation "Main package of AOFORCE"))
 
 (in-package #:aoforce)
 

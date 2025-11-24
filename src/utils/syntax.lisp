@@ -1,10 +1,10 @@
 (defpackage #:utils/syntax
   (:use #:cl #:uiop)
   (:local-nicknames (#:it #:iterate))
-  (:documentation "Syntactic Language Extensions.")
   (:export
    #:concat
-   #:nlet))
+   #:nlet)
+  (:documentation "Syntactic Language Extensions."))
 
 (in-package #:utils/syntax)
 
