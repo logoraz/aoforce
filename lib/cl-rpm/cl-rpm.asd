@@ -25,9 +25,9 @@
   :in-order-to ((test-op (test-op "cl-rpm/tests")))
   :long-description "")
 
-;; ==============================================================================
-;; Register Systems
-;; ==============================================================================
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Register Systems
+;;;
 ;; The function `register-system-packages' must be called to register packages
 ;; used or provided by your system when the name of the system/file that 
 ;; provides the package is not the same as the package name
@@ -37,9 +37,9 @@
 (register-system-packages "closer-mop" '(:c2mop :c2cl :c2cl-user))
 (register-system-packages "fiveam" '(:5am))
 
-;; ==============================================================================
-;; Secondary Systems
-;; ==============================================================================
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Secondary Systems
+;;;
 (defsystem "cl-rpm/tests"
   :description "Unit tests"
   :depends-on ("cl-rpm" "fiveam")

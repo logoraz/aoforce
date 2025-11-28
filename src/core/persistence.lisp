@@ -10,23 +10,14 @@
 (defpackage #:core/persistence
   (:use #:cl
         #:core/config-manager)
-  (:import-from #:uiop
-                #:native-namestring)
   (:import-from #:uiop/filesystem
                 #:ensure-all-directories-exist)
   (:import-from #:uiop/configuration
                 #:xdg-data-home)
   (:import-from #:uiop/os
                 #:getenv)
-  (:import-from #:dbi
-                #:connect
-                #:disconnect
-                #:execute
-                #:prepare
-                #:fetch
-                #:fetch-all
-                #:do-sql
-                #:with-connection)
+  (:local-nicknames (#:u #:uiop)
+                    (#:db #:dbi))
   ;; Database management
   (:export #:*db-path*
            #:with-database
@@ -48,9 +39,9 @@
 
 (in-package #:core/persistence)
 
-;;; =============================================================================
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Database Configuration
-;;; =============================================================================
+;;;
 
 (defparameter *db-path*
   (merge-pathnames "aoforce/deployments.db" (xdg-data-home))
@@ -59,9 +50,9 @@
 (defparameter *db-connection* nil
   "Current database connection (dynamically bound).")
 
-;;; =============================================================================
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Schema Definition
-;;; =============================================================================
+;;;
 
 (defparameter *schema*
   '("CREATE TABLE IF NOT EXISTS deployments (
@@ -111,9 +102,9 @@
        ON deployment_actions(deployment_id)")
   "SQL statements to initialize the database schema.")
 
-;;; =============================================================================
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Database Connection Management
-;;; =============================================================================
+;;;
 (defun ensure-db-directory ()
   "Ensure the database directory exists."
   (ensure-all-directories-exist (list *db-path*)))
@@ -124,32 +115,32 @@ Automatically handles connection opening and closing."
   `(let ((*db-path* ,path))
      (ensure-db-directory)
      ;; Using cl-dbi style - adjust if using different library
-     (with-connection (*db-connection* :sqlite3 :database-name (native-namestring *db-path*))
+     (db:with-connection (*db-connection* :sqlite3 :database-name (u:native-namestring *db-path*))
        ,@body)))
 
 (defun initialize-database (&optional (path *db-path*))
   "Initialize the database with the required schema."
   (with-database (path)
     (dolist (statement *schema*)
-      (do-sql *db-connection* statement))
+      (db:do-sql *db-connection* statement))
     (format t "Database initialized at: ~A~%" path)))
 
-;;; =============================================================================
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Deployment Recording
-;;; =============================================================================
+;;;
 (defun record-deployment (manager &key notes)
   "Record a new deployment from MANAGER, returning the deployment ID.
 Call this BEFORE deploy-configs to create the deployment record,
 then update action statuses as deployment proceeds."
   (let ((deployment-id
-          (do-sql *db-connection*
+          (db:do-sql *db-connection*
             "INSERT INTO deployments (hostname, username, notes) VALUES (?, ?, ?)"
             (list (machine-instance)
                   (getenv "USER")
                   notes))))
     ;; Record each config as a pending action
     (dolist (config (configs manager))
-      (do-sql *db-connection*
+      (db:do-sql *db-connection*
         "INSERT INTO deployment_actions 
            (deployment_id, config_name, source_path, dest_path, spec, type)
          VALUES (?, ?, ?, ?, ?, ?)"
@@ -163,24 +154,24 @@ then update action statuses as deployment proceeds."
 
 (defun update-action-status (action-id status &optional error-message)
   "Update the status of a deployment action."
-  (do-sql *db-connection*
+  (db:do-sql *db-connection*
     "UPDATE deployment_actions SET status = ?, error_message = ? WHERE id = ?"
     (list status error-message action-id)))
 
 (defun complete-deployment (deployment-id status)
   "Mark a deployment as complete with final STATUS."
-  (do-sql *db-connection*
+  (db:do-sql *db-connection*
     "UPDATE deployments SET status = ? WHERE id = ?"
     (list status deployment-id)))
 
-;;; =============================================================================
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; History Queries
-;;; =============================================================================
+;;;
 (defun get-deployment-history (&key (limit 20) (offset 0))
   "Get recent deployment history."
-  (fetch-all
-   (execute
-    (prepare *db-connection*
+  (db:fetch-all
+   (db:execute
+    (db:prepare *db-connection*
       "SELECT id, timestamp, hostname, username, status, notes
        FROM deployments
        ORDER BY timestamp DESC
@@ -190,15 +181,15 @@ then update action statuses as deployment proceeds."
 (defun get-deployment-by-id (deployment-id)
   "Get a deployment record with all its actions."
   (let ((deployment
-          (fetch
-           (execute
-            (prepare *db-connection*
+          (db:fetch
+           (db:execute
+            (db:prepare *db-connection*
               "SELECT * FROM deployments WHERE id = ?")
             (list deployment-id))))
         (actions
-          (fetch-all
-           (execute
-            (prepare *db-connection*
+          (db:fetch-all
+           (db:execute
+            (db:prepare *db-connection*
               "SELECT * FROM deployment_actions WHERE deployment_id = ?")
             (list deployment-id)))))
     (when deployment
@@ -207,24 +198,24 @@ then update action statuses as deployment proceeds."
 
 (defun get-latest-deployment ()
   "Get the most recent deployment."
-  (let ((row (fetch
-              (execute
-               (prepare *db-connection*
+  (let ((row (db:fetch
+              (db:execute
+               (db:prepare *db-connection*
                  "SELECT id FROM deployments ORDER BY timestamp DESC LIMIT 1")))))
     (when row
       (get-deployment-by-id (getf row :|id|)))))
 
-;;; =============================================================================
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Configuration Snapshots
-;;; =============================================================================
+;;;
 (defun save-config-snapshot (manager name &key description)
   "Save current manager configuration as a named snapshot."
   (let ((snapshot-id
-          (do-sql *db-connection*
+          (db:do-sql *db-connection*
             "INSERT INTO config_snapshots (name, description) VALUES (?, ?)"
             (list name description))))
     (dolist (config (configs manager))
-      (do-sql *db-connection*
+      (db:do-sql *db-connection*
         "INSERT INTO snapshot_configs 
            (snapshot_id, config_name, source_path, dest_path, spec, type)
          VALUES (?, ?, ?, ?, ?, ?)"
@@ -239,9 +230,9 @@ then update action statuses as deployment proceeds."
 (defun load-config-snapshot (manager snapshot-id)
   "Load a snapshot into MANAGER, replacing current configs."
   (clear-configs manager)
-  (let ((rows (fetch-all
-               (execute
-                (prepare *db-connection*
+  (let ((rows (db:fetch-all
+               (db:execute
+                (db:prepare *db-connection*
                   "SELECT * FROM snapshot_configs WHERE snapshot_id = ?")
                 (list snapshot-id)))))
     (dolist (row rows)
@@ -255,18 +246,18 @@ then update action statuses as deployment proceeds."
 
 (defun list-snapshots (&key (limit 50))
   "List available configuration snapshots."
-  (fetch-all
-   (execute
-    (prepare *db-connection*
+  (db:fetch-all
+   (db:execute
+    (db:prepare *db-connection*
       "SELECT id, name, created_at, description
        FROM config_snapshots
        ORDER BY created_at DESC
        LIMIT ?")
     (list limit))))
 
-;;; =============================================================================
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Rollback Support
-;;; =============================================================================
+;;;
 (defun rollback-deployment (deployment-id &key dry-run)
   "Attempt to rollback a deployment by reversing its actions.
 For symlinks: remove the symlink
@@ -291,15 +282,15 @@ If DRY-RUN is true, only report what would be done."
                   (incf rolled-back))))))
       
       (unless dry-run
-        (do-sql *db-connection*
+        (db:do-sql *db-connection*
           "UPDATE deployments SET status = 'rolled_back' WHERE id = ?"
           (list deployment-id)))
       
       (values rolled-back (length actions)))))
 
-;;; =============================================================================
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Integration with config-manager
-;;; =============================================================================
+;;;
 (defun deploy-with-history (manager &key notes verbose)
   "Deploy configurations and record in database.
 Returns (values deployment-id results)."

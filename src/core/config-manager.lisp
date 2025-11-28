@@ -12,26 +12,15 @@
   (:use #:cl 
         #:utils/syntax
         #:trivial-gray-streams)
-  (:import-from #:uiop
-                #:copy-file
-                #:ensure-pathname
-                #:ensure-directory-pathname
-                #:file-exists-p
-                #:directory-files
-                #:subdirectories)
-  (:import-from #:uiop/filesystem
-                #:ensure-directories-exist
-                #:directory-exists-p
-                #:delete-file-if-exists
-                #:rename-file-overwriting-target)
-  (:import-from #:uiop/pathname
-                #:directory-namestring)
   (:import-from #:osicat
                 #:make-link
                 #:read-link
                 #:file-kind)
   (:import-from #:cl-ppcre
                 #:regex-replace-all)
+  (:local-nicknames (#:u #:uiop)
+                    (#:ufs #:uiop/filesystem)
+                    (#:upn #:uiop/pathname))
   ;; Classes
   (:export #:config-object
            #:config-manager
@@ -66,9 +55,9 @@
 
 (in-package #:core/config-manager)
 
-;;; =============================================================================
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Conditions
-;;; =============================================================================
+;;;
 (define-condition config-error (error)
   ((config :initarg :config :reader config-error-config))
   (:documentation "Base condition for config-manager errors."))
@@ -87,9 +76,9 @@
                      (config-name (config-error-config c))
                      (deployment-error-reason c)))))
 
-;;; =============================================================================
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Classes
-;;; =============================================================================
+;;;
 (defclass config-object ()
   ((name    :initarg :name :reader config-name :type string
             :documentation "Name of the config")
@@ -117,9 +106,9 @@
    (use-colors :initarg :use-colors :initform t :accessor use-colors-p))
   (:documentation "A Gray stream that adds ANSI colors to output."))
 
-;;; =============================================================================
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Interface (Generic Functions)
-;;; =============================================================================
+;;;
 (defgeneric add-config (manager name source place &key spec type validate)
   (:documentation "Add a config entry to the manager."))
 
@@ -141,9 +130,9 @@
 (defgeneric config-count (manager)
   (:documentation "Return the number of configs."))
 
-;;; =============================================================================
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Methods (Core Behavior)
-;;; =============================================================================
+;;;
 (defmethod add-config ((manager config-manager) name source place
                        &key (spec :symlink) (type :file) (validate t))
   "Add a config entry with path expansion.
@@ -153,8 +142,8 @@ Replaces existing config with same name."
         (expanded-place (expand-pathname place)))
     ;; Validation
     (when validate
-      (unless (or (file-exists-p expanded-source)
-                  (directory-exists-p expanded-source))
+      (unless (or (u:file-exists-p expanded-source)
+                  (ufs:directory-exists-p expanded-source))
         (warn 'source-not-found :path expanded-source)))
     ;; Remove existing with same name (avoid duplicates)
     (let ((existing (find-config manager name)))
@@ -323,9 +312,9 @@ Returns a list of performed actions:
             (color :cyan) (config-place config)
             (color :grey))))
 
-;;; =============================================================================
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Stream Methods
-;;; =============================================================================
+;;;
 (defmethod trivial-gray-streams:stream-write-string
     ((stream colored-stream) string &optional start end)
   "Write STRING to target, stripping ANSI codes if colors disabled."  
@@ -337,9 +326,9 @@ Returns a list of performed actions:
   "Fallback: write single character directly."  
   (write-char char (target stream)))
 
-;;; =============================================================================
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Helper Functions/Utilities
-;;; =============================================================================
+;;;
 (defun expand-pathname (pathspec)
   "Expand ~ and ~/ to user's home directory."
   (let* ((str (etypecase pathspec
@@ -347,7 +336,7 @@ Returns a list of performed actions:
                 (pathname (namestring pathspec))
                 (symbol (symbol-name pathspec))))
          (home (namestring (user-homedir-pathname))))
-    (ensure-pathname
+    (u:ensure-pathname
      (cond
        ;; Bare ~ means home directory
        ((string= str "~") 
@@ -378,10 +367,10 @@ Returns T if:
   - LINK is a symlink but points to a different target
 
 If DIR is true, treats TARGET as a directory path."
-  (let ((expected-target (if dir (ensure-directory-pathname target) target)))
+  (let ((expected-target (if dir (u:ensure-directory-pathname target) target)))
     (cond
       ;; Link doesn't exist - need to create
-      ((not (or (file-exists-p link) (symlinkp link)))
+      ((not (or (u:file-exists-p link) (symlinkp link)))
        t)
       ;; Link exists but is not a symlink - need to replace
       ((not (symlinkp link))
@@ -402,9 +391,9 @@ Keywords:
 
 Returns LINK pathname on success.
 Signals an error if LINK exists and OVERWRITE is NIL."
-  (let ((target (if dir (ensure-directory-pathname src) src)))
+  (let ((target (if dir (u:ensure-directory-pathname src) src)))
     ;; Handle existing file/symlink at link location
-    (when (or (file-exists-p link) (symlinkp link))
+    (when (or (u:file-exists-p link) (symlinkp link))
       (unless overwrite
         (error "Link destination already exists: ~A" link))
       ;; Backup regular files if requested (symlinks just get replaced)
@@ -413,11 +402,11 @@ Signals an error if LINK exists and OVERWRITE is NIL."
                             :defaults link
                             :type (format nil "~A.bak" 
                                           (or (pathname-type link) "")))))
-          (rename-file-overwriting-target link backup-path)))
+          (ufs:rename-file-overwriting-target link backup-path)))
       ;; Remove existing symlink or file
       (when (symlinkp link)
         (delete-file link))
-      (when (file-exists-p link)
+      (when (u:file-exists-p link)
         (delete-file link)))
     ;; Create the symlink
     (make-link link :target target)
@@ -430,20 +419,20 @@ Keywords:
   OVERWRITE - If true (default), overwrite existing files
 
 Creates DEST if it doesn't exist. Copies all files and subdirectories."
-  (let ((source-dir (ensure-directory-pathname source))
-        (dest-dir (ensure-directory-pathname dest)))
+  (let ((source-dir (u:ensure-directory-pathname source))
+        (dest-dir (u:ensure-directory-pathname dest)))
     ;; Ensure destination exists
     (ensure-directories-exist dest-dir)
     
     ;; Copy all files in the source directory
-    (dolist (file (directory-files source-dir))
+    (dolist (file (u:directory-files source-dir))
       (let* ((filename (file-namestring file))
              (dest-file (merge-pathnames filename dest-dir)))
-        (when (or overwrite (not (file-exists-p dest-file)))
-          (copy-file file dest-file))))
+        (when (or overwrite (not (u:file-exists-p dest-file)))
+          (u:copy-file file dest-file))))
     
     ;; Recursively copy subdirectories
-    (dolist (subdir (subdirectories source-dir))
+    (dolist (subdir (u:subdirectories source-dir))
       (let* ((dirname (first (last (pathname-directory subdir))))
              (dest-subdir (merge-pathnames 
                            (make-pathname :directory (list :relative dirname))
@@ -452,9 +441,9 @@ Creates DEST if it doesn't exist. Copies all files and subdirectories."
     
     dest-dir))
 
-;;; =============================================================================
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; ANSI Color Support
-;;; =============================================================================
+;;;
 (defparameter *esc* (string (code-char 27))
   "ANSI escape character as a string.")
 
@@ -487,9 +476,9 @@ Creates DEST if it doesn't exist. Copies all files and subdirectories."
   "Remove ANSI escape codes from string S."
   (regex-replace-all "\\[[0-9;]*m" s ""))
 
-;;; =============================================================================
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Directory Utilities
-;;; =============================================================================
+;;;
 (defun ensure-directory (pathspec &key (mode #o700))
   "Ensure directory exists with specified MODE."
-  (ensure-directories-exist (ensure-directory-pathname pathspec) :mode mode))
+  (ensure-directories-exist (u:ensure-directory-pathname pathspec) :mode mode))

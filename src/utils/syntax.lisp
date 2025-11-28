@@ -1,23 +1,22 @@
 (defpackage #:utils/syntax
-  (:use #:cl #:uiop)
+  (:use #:cl)
   (:local-nicknames (#:it #:iterate))
-  (:export
-   #:concat
-   #:nlet)
+  (:export #:concat
+           #:nlet)
   (:documentation "Syntactic Language Extensions."))
 
 (in-package #:utils/syntax)
 
-;;;==============================================================================
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; String Manipulation
-;;;==============================================================================
+;;;
 (defun concat (&rest strings)
   "Shorthand for CONCATENATE specialized for strings."
   (apply #'concatenate 'string strings))
 
-;;;==============================================================================
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Examples
-;;;==============================================================================
+;;;
 (defmacro nlet (name bindings &body body)
   `(labels ((,name ,(mapcar #'car bindings) ,@body))
      (,name ,@(mapcar #'cadr bindings))))

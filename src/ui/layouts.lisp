@@ -48,9 +48,9 @@
 
 (in-package #:ui/layouts)
 
-;;; =============================================================================
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Section Type Definitions
-;;; =============================================================================
+;;;
 (defclass section ()
   ((id :initarg :id
        :accessor section-id
@@ -72,9 +72,9 @@
   (print-unreadable-object (section stream :type t)
     (format stream "~A (~A)" (section-id section) (section-type section))))
 
-;;; -----------------------------------------------------------------------------
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Section Constructors
-;;; -----------------------------------------------------------------------------
+;;;
 (defun make-section (id type &rest properties)
   "Create a section definition with ID, TYPE, and property plist."
   (make-instance 'section
@@ -90,9 +90,9 @@
   "Set a property value on SECTION."
   (setf (getf (section-properties section) key) value))
 
-;;; =============================================================================
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Predefined Section Types
-;;; =============================================================================
+;;;
 (defun status-section (id &key title description icon-name paintable-path)
   "Define a status/branding section.
 Keywords:
@@ -151,9 +151,9 @@ add widgets to PARENT."
   (make-section id :custom
                 :builder-fn builder-fn))
 
-;;; =============================================================================
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Page Definition
-;;; =============================================================================
+;;;
 (defclass page-definition ()
   ((id :initarg :id
        :accessor page-id
@@ -195,9 +195,9 @@ add widgets to PARENT."
   "Get a property from PAGE."
   (getf (page-properties page) key default))
 
-;;; =============================================================================
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Page Registry
-;;; =============================================================================
+;;;
 (defvar *page-registry* (make-hash-table :test 'eq)
   "Registry mapping page IDs to page definitions.")
 
@@ -220,9 +220,9 @@ add widgets to PARENT."
   "Clear all registered pages."
   (clrhash *page-registry*))
 
-;;; =============================================================================
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Macro for Defining Pages
-;;; =============================================================================
+;;;
 (defmacro define-page (id (&key title icon) &body sections)
   "Define and register a page.
 Example:
