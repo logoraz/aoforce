@@ -1,12 +1,18 @@
 (defpackage #:aoforce
   (:nicknames #:aofr)
-  (:use #:cl
-        #:setup
-        #:ui/app)
+  (:use #:cl)
+  (:import-from #:setup
+                #:outline
+                #:deploy)
+  (:import-from #:ui/app
+                #:start-app)
   (:local-nicknames (#:it #:iterate))
   ;; Tests/Play
   (:export #:simple-test
            #:simple-test2)
+  ;; Setup
+  (:export #:outline
+           #:deploy)
   ;; UI
   (:export #:ui)
   (:documentation "Main package of AOFORCE"))

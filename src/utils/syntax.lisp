@@ -1,9 +1,8 @@
 (defpackage #:utils/syntax
-  (:use #:cl #:uiop)
+  (:use #:cl)
   (:local-nicknames (#:it #:iterate))
-  (:export
-   #:concat
-   #:nlet)
+  (:export #:concat
+           #:nlet)
   (:documentation "Syntactic Language Extensions."))
 
 (in-package #:utils/syntax)

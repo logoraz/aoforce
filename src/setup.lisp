@@ -6,14 +6,13 @@
   (:export #:outline
            #:deploy)
   ;; Advanced Setup
-  (:export
-   #:init-db
-   #:deploy-and-record
-   #:history
-   #:rollback
-   #:save-snapshot
-   #:load-snapshot
-   #:snapshots)
+  (:export #:init-db
+           #:deploy-and-record
+           #:history
+           #:rollback
+           #:save-snapshot
+           #:load-snapshot
+           #:snapshots)
   (:documentation "Setup script to scaffold CL configuration/environment."))
 
 (in-package #:setup)

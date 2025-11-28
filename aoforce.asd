@@ -16,13 +16,13 @@
    "cl-gdk4"
    ;; Local Systems (aka libraries)
    "confr")
-  :components ; Map of System (Internals)
+  :components
   ((:module "src"
     :components
-    ((:module "utils" ; Establish utils/toolbox
+    ((:module "utils"
       :components
       ((:file "syntax")))
-     (:module "core" ; Build out the core of aoforce
+     (:module "core"
       :depends-on ("utils")
       :components
       ((:file "config-manager")
