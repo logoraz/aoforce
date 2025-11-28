@@ -22,6 +22,18 @@ specified therein according to asdf's best practices guide (link above).
 Additional systems are defined in the libraries directory and are their own
 stand-alone systems, that can be used in conjunction to this system.
 
+Package (`defpackge`/`uiop:define-package`) guide-lines
+ - 1-5 symbols from a package → `:import-from`
+ - 6+ symbols from a package → `:local-nicknames`
+ - Utility libraries (uiop, alexandria, str) → `:local-nicknames`
+ - Domain libraries (lem-core, your own packages) → `:import-from`
+
+Package key order
+ - `:use` comes first - it's the foundation (what symbols are available by default)
+ - `:import-from` next - explicit external dependencies
+ - `:local-nicknames` after - convenience layer for prefixing
+ - `:export` near the end - what you're providing to others
+ - `:documentation` last - descriptive metadata
 
 ## Alexandria and other utility libraries
 

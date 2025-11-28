@@ -42,9 +42,9 @@
 
 (in-package #:ui/controller)
 
-;;; =============================================================================
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Action Registry
-;;; =============================================================================
+;;;
 (defvar *action-registry* (make-hash-table :test 'eq)
   "Global registry of action handlers.
 Actions are named functions that can be invoked by UI components.")
@@ -81,9 +81,9 @@ Example:
     (lambda (,controller ,@args)
       ,@body)))
 
-;;; =============================================================================
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Application Controller Class
-;;; =============================================================================
+;;;
 (defclass app-controller ()
   ((window
     :initarg :window
@@ -111,9 +111,9 @@ Example:
             (hash-table-count (widgets controller))
             (hash-table-count (state controller)))))
 
-;;; =============================================================================
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Widget Registry Methods
-;;; =============================================================================
+;;;
 (defgeneric register-widget (controller name widget)
   (:documentation "Register WIDGET under NAME in CONTROLLER."))
 
@@ -134,9 +134,9 @@ Example:
   (loop :for key :being :the hash-keys :of (widgets controller)
         :collect key))
 
-;;; =============================================================================
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; State Management Methods
-;;; =============================================================================
+;;;
 (defgeneric get-state (controller key &optional default)
   (:documentation "Get state value for KEY."))
 
@@ -164,9 +164,9 @@ FN receives the current value and returns the new value."
   "Clear all state in CONTROLLER."
   (clrhash (state controller)))
 
-;;; =============================================================================
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Configuration Access
-;;; =============================================================================
+;;;
 (defgeneric get-config (controller key &optional default)
   (:documentation "Get configuration value."))
 
@@ -174,9 +174,9 @@ FN receives the current value and returns the new value."
   "Get configuration value for KEY."
   (getf (config controller) key default))
 
-;;; =============================================================================
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Utility Methods
-;;; =============================================================================
+;;;
 (defgeneric with-widget (controller name fn)
   (:documentation "Execute FN with the widget named NAME if it exists."))
 
@@ -187,9 +187,9 @@ FN receives the widget as its argument. Does nothing if widget not found."
     (when widget
       (funcall fn widget))))
 
-;;; =============================================================================
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Convenience Macros
-;;; =============================================================================
+;;;
 (defmacro with-controller-widgets (controller bindings &body body)
   "Bind multiple widgets from CONTROLLER for use in BODY.
 Example:

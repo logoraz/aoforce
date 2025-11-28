@@ -6,14 +6,13 @@
   (:export #:outline
            #:deploy)
   ;; Advanced Setup
-  (:export
-   #:init-db
-   #:deploy-and-record
-   #:history
-   #:rollback
-   #:save-snapshot
-   #:load-snapshot
-   #:snapshots)
+  (:export #:init-db
+           #:deploy-and-record
+           #:history
+           #:rollback
+           #:save-snapshot
+           #:load-snapshot
+           #:snapshots)
   (:documentation "Setup script to scaffold CL configuration/environment."))
 
 (in-package #:setup)
@@ -63,6 +62,14 @@
             "CCL Executable"
             "~/Work/builds/ccl/lx86cl64"
             "~/.local/bin/ccl"
+            :spec :symlink
+            :type :file)
+
+;; 6.  ~/Work/aoforce/files/common-lisp/dot-clasprc.lisp --> ~/.clasprc
+(add-config *config-mgr*
+            "CCL Config"
+            "~/Work/aoforce/files/common-lisp/dot-clasprc.lisp"
+            "~/.clasprc"
             :spec :symlink
             :type :file)
 

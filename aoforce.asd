@@ -16,13 +16,13 @@
    "cl-gdk4"
    ;; Local Systems (aka libraries)
    "confr")
-  :components ; Map of System (Internals)
-  ((:module "src"
+  :components
+  ((:module "source"
     :components
-    ((:module "utils" ; Establish utils/toolbox
+    ((:module "utils"
       :components
       ((:file "syntax")))
-     (:module "core" ; Build out the core of aoforce
+     (:module "core"
       :depends-on ("utils")
       :components
       ((:file "config-manager")
@@ -41,9 +41,9 @@
   :long-description "A collection of Common Lisp development environment
 configuration resources, tools, and a playground for building new projects.")
 
-;;; =============================================================================
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Register Systems
-;;; =============================================================================
+;;;
 ;; The function `register-system-packages' must be called to register packages
 ;; used or provided by your system when the name of the system/file that
 ;; provides the package is not the same as the package name
@@ -52,9 +52,9 @@ configuration resources, tools, and a playground for building new projects.")
 (register-system-packages "bordeaux-threads" '(:bt :bt2 :bordeaux-threads-2))
 (register-system-packages "fiveam" '(:5am))
 
-;;; =============================================================================
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Secondary Systems
-;;; =============================================================================
+;;;
 (defsystem "aoforce/tests"
   :description "Unit tests"
   :depends-on ("aoforce"
@@ -77,13 +77,13 @@ configuration resources, tools, and a playground for building new projects.")
     :components
     ((:file "aoforce-docs")))))
 
-(defsystem "aoforce/lib"
+(defsystem "aoforce/libraries"
   :description "Extra libraries to bring in if needed"
   :depends-on ("confr"
                "cl-rpm"
                "learn-cl"))
 
-(defsystem "aoforce/executable"
+(defsystem "aoforce/exec"
   :description "Build executable"
   :depends-on ("aoforce")
   :build-operation "program-op"

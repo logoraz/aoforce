@@ -25,9 +25,9 @@
   :in-order-to ((test-op (test-op "confr/tests")))
   :long-description "")
 
-;; ==============================================================================
-;; Register Systems
-;; ==============================================================================
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Register Systems
+;;;
 ;; The function `register-system-packages' must be called to register packages
 ;; used or provided by your system when the name of the system/file that 
 ;; provides the package is not the same as the package name
@@ -36,9 +36,9 @@
 (register-system-packages "bordeaux-threads" '(:bt :bt2 :bordeaux-threads-2))
 (register-system-packages "fiveam" '(:5am))
 
-;; ==============================================================================
-;; Secondary Systems
-;; ==============================================================================
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Secondary Systems
+;;;
 (defsystem "confr/tests"
   :description "Unit tests"
   :depends-on ("confr" "fiveam")
