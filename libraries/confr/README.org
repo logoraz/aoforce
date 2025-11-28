@@ -1,0 +1,23 @@
+#+title: confr: Common Lisp Project/Library Scaffolding Tool (:confr)
+#+author: logoraz
+#+date: 2025-12-26
+#+options: toc:nil
+#+startup: overview
+#+startup: inlineimages
+:meta:
+:end:
+
+# #+html: <p align="center"> <img src="assets/common-lisp.svg" width="300"/> </p>
+
+library toolset that provides a template for Modern Common Lisp projects/libraries.
+
+confr: Confers a project/library template.
+
+** Roadmap
+
+ - [ ] WIP
+
+
+** References:
+ - TBD
+
