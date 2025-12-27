@@ -33,7 +33,6 @@
   (:export #:define-page
            #:define-section)
   (:documentation "Declarative layout definitions and page registry."))
-
 (in-package #:ui/layouts)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

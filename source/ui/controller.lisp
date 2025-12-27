@@ -29,7 +29,6 @@
   (:export #:with-widget
            #:with-controller-widgets)
   (:documentation "Application state management and business logic."))
-
 (in-package #:ui/controller)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

@@ -15,7 +15,6 @@
 ;;;   DUNTRACE - same syntax as UNTRACE
 
 (defpackage #:learn-cl/dtrace
-  (:nicknames #:dtrace)
   (:use #:cl)
   (:export #:dtrace
            #:duntrace
@@ -25,7 +24,6 @@
            #:*dtrace-print-pretty*
 	   #:*dtrace-print-array*)
   (:documentation "DTRACE - a portable tracing tool for Common Lisp"))
-
 (in-package #:learn-cl/dtrace)
 
 

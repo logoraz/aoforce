@@ -1,0 +1,21 @@
+#+title: learn-cl - A library containing examples of Common Lisp
+#+author: logoraz
+#+date: 2025-12-26
+#+options: toc:nil
+#+startup: overview
+#+startup: inlineimages
+:meta:
+:end:
+
+Title says it all...
+
+** Roadmap
+
+ - [ ] Add examples as I come across them
+ - [ ] Simply/optimize examples
+
+
+** References:
+
+ - TBD
+

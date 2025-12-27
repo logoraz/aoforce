@@ -22,7 +22,6 @@
   (:export #:set-margins
            #:set-expand)
   (:documentation "Reusable widget constructors for libadwaita UI components."))
-
 (in-package #:ui/widgets)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

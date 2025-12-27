@@ -1,7 +1,6 @@
-(defpackage #:core/confrdb
+(defpackage #:confr/core/database
   (:use #:cl)
   (:import-from #:bt2)
   (:export )
   (:documentation "A Simple Database."))
-
-(in-package #:core/confrdb)
+(in-package #:confr/core/database)

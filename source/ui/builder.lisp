@@ -7,7 +7,6 @@
            #:build-page
            #:build-application-window)
   (:documentation "UI builder that constructs widgets from layout definitions."))
-
 (in-package #:ui/builder)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

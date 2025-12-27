@@ -7,7 +7,6 @@
   (:import-from #:print-licenses)
   (:export )
   (:documentation "Documentation system for aoforce")  )
-
 (in-package #:docs/aoforce-docs)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

@@ -97,13 +97,10 @@ learning tool (a cons cell visual aid) in this project as follows:
 
 #+begin_src lisp
 
-  ;; Load Library Systems
-  (asdf:load-system :aoforce/libraries)
+  (aoforce:sdraw '(This (is a (test!))))
+  ;; or
+  ;; (aofr:sdraw '(This (is a (test!))))
 
-  ;; Enter into learn-cl/sdraw package
-  (in-package :learn-cl/sdraw)
-
-  (sdraw '(This (is a (test!))))
   ;; =>
   ;; [*|*]--->[*|*]--->NIL
   ;;  |        |
@@ -143,6 +140,8 @@ Then you can run the adw tutorial package as follows:
   ;; Re-run to finish building successfully
   (asdf:load-system :aoforce)
   (aoforce:ui)
+  ;; or
+  ;; (aofr:ui)
 
 #+end_src
 

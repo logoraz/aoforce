@@ -1,12 +1,11 @@
-(defpackage #:tests/suite
+(defpackage #:aofr/tests/suite
   (:use #:cl
         #:5am
-        #:utils/syntax
+        #:aofr/utils/syntax
         #:aoforce)
   (:export )
   (:documentation "Base Test Suite"))
-
-(in-package #:tests/suite)
+(in-package #:aofr/tests/suite)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;

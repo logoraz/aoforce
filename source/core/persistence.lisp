@@ -1,6 +1,6 @@
-(defpackage #:core/persistence
+(defpackage #:aofr/core/persistence
   (:use #:cl
-        #:core/config-manager)
+        #:aofr/core/config-manager)
   (:import-from #:uiop/filesystem
                 #:ensure-all-directories-exist)
   (:import-from #:uiop/configuration
@@ -36,7 +36,7 @@ This module provides:
 Requires: cl-dbi (SQLite3 backend)
 "))
 
-(in-package #:core/persistence)
+(in-package #:aofr/core/persistence)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Database Configuration

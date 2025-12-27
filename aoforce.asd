@@ -15,8 +15,8 @@
    "cl-gtk4"
    "cl-gtk4.adw"
    "cl-gdk4"
-   ;; Local Systems (aka libraries)
-   "chem-manager"
+   ;; Independent Local Systems (aka libraries)
+   "learn-cl"
    "confr")
   :components
   ((:module "source"
@@ -52,7 +52,7 @@ configuration resources, tools, and a playground for building new projects.")
 ;; provides the package is not the same as the package name
 ;; (converted to lower case).
 (register-system-packages "iterate" '(:iter))
-(register-system-packages "bordeaux-threads" '(:bt :bt2 :bordeaux-threads-2))
+(register-system-packages "bordeaux-threads" '(:bt :bt2))
 (register-system-packages "fiveam" '(:5am))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

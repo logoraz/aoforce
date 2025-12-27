@@ -1,6 +1,6 @@
-(defpackage #:core/config-manager
+(defpackage #:aofr/core/config-manager
   (:use #:cl 
-        #:utils/syntax
+        #:aofr/utils/syntax
         #:trivial-gray-streams)
   (:import-from #:osicat
                 #:make-link
@@ -43,7 +43,7 @@
            #:deployment-error)
   (:documentation "CLOS-based Configuration Manager"))
 
-(in-package #:core/config-manager)
+(in-package #:aofr/core/config-manager)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;

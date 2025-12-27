@@ -6,9 +6,15 @@
                 #:deploy)
   (:import-from #:ui/app
                 #:start-app)
+  (:import-from #:learn-cl/sdraw
+                #:sdraw)
+  (:import-from #:learn-cl/dtrace
+                #:dtrace)
   (:local-nicknames (#:it #:iterate))
   ;; Tests/Play
-  (:export #:simple-test
+  (:export #:sdraw
+           #:dtrace
+           #:simple-test
            #:simple-test2)
   ;; Setup
   (:export #:outline
@@ -16,7 +22,6 @@
   ;; UI
   (:export #:ui)
   (:documentation "Main package of AOFORCE"))
-
 (in-package #:aoforce)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

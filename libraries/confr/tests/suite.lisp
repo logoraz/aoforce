@@ -2,17 +2,16 @@
   (:use #:cl
         #:5am
         #:utils/strings
-        #:utils/shell
-        #:rpm)
-  (:export )
+        #:utils/shell)
+  (:export ) ;; TODO let's export when we are ready
   (:documentation "Base Test Suite"))
-
 (in-package #:tests/suite)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Define the test suite
 ;;;
-(def-suite :suite :description "cl-rpm test suite")
+
+(def-suite :suite :description "confr test suite")
 (in-suite :suite)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

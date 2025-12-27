@@ -21,7 +21,6 @@
 ;;;
 
 (defpackage #:learn-cl/sdraw
-  (:nicknames #:sdraw)
   (:use #:cl)
   (:export #:sdraw
            #:sdraw-loop
@@ -29,7 +28,6 @@
            #:*sdraw-print-circle*
            #:*sdraw-leading-arrow*)
   (:documentation "SDRAW  - draws cons cell structures."))
-
 (in-package #:learn-cl/sdraw)
 
 

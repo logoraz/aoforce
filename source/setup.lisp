@@ -1,7 +1,7 @@
 (defpackage #:setup
   (:use #:cl
-        #:core/config-manager
-        #:core/persistence)
+        #:aofr/core/config-manager
+        #:aofr/core/persistence)
   ;; Basic Setup
   (:export #:outline
            #:deploy)
@@ -14,7 +14,6 @@
            #:load-snapshot
            #:snapshots)
   (:documentation "Setup script to scaffold CL configuration/environment."))
-
 (in-package #:setup)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

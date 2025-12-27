@@ -21,7 +21,6 @@ To extend the UI, you can:
   - Create custom section builders
 
 "))
-
 (in-package #:ui/app)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
