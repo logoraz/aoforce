@@ -41,6 +41,7 @@
 
 ;; Common Lisp Environment
 ;; 3.  ~/Work/aoforce/files/common-lisp/dot-sbclrc.lisp --> ~/.sbclrc
+;; Already handled in bootstrap... though adding here for completion
 (add-config *config-mgr*
             "SBCL Config"
             "~/Work/aoforce/files/common-lisp/dot-sbclrc.lisp"
@@ -48,34 +49,13 @@
             :spec :symlink
             :type :file)
 
-;; 4.  ~/Work/aoforce/files/common-lisp/dot-ccl-init.lisp --> ~/.ccl-init.lisp
-(add-config *config-mgr*
-            "CCL Config"
-            "~/Work/aoforce/files/common-lisp/dot-ccl-init.lisp"
-            "~/.ccl-init.lisp"
-            :spec :symlink
-            :type :file)
+;; Common Lisp Programs
 
-;; Common Lisp Programs (XDG_DATA_HOME/common-lisp/bin)
-;; 5.  ~/Work/builds/ccl/lx86cl64 --> $HOME/.local/bin/ccl
-(add-config *config-mgr*
-            "CCL Executable"
-            "~/Work/builds/ccl/lx86cl64"
-            "~/.local/bin/ccl"
-            :spec :symlink
-            :type :file)
 
-;; 6.  ~/Work/aoforce/files/common-lisp/dot-clasprc.lisp --> ~/.clasprc
-(add-config *config-mgr*
-            "CCL Config"
-            "~/Work/aoforce/files/common-lisp/dot-clasprc.lisp"
-            "~/.clasprc"
-            :spec :symlink
-            :type :file)
-
-;;; =============================================================================
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
 ;;; Deploy config-objects (Original - no persistence)
-;;; =============================================================================
+
 (defun outline ()
   "List your Configuration Environment outline."
   (unless *print-pretty*
@@ -90,9 +70,10 @@
   (let ((stream (make-instance 'colored-stream :target *standard-output*)))
     (deploy-configs *config-mgr* stream)))
 
-;;; =============================================================================
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
 ;;; Deploy with Persistence
-;;; =============================================================================
+
 (defun deploy-and-record (&key (notes nil))
   "Deploy configurations and record to the database.
 Optional NOTES can describe this deployment (e.g., 'Initial setup', 'Added emacs config').
@@ -108,9 +89,10 @@ Example:
         (format stream "~%Deployment ID: ~A, Status: ~A~%" deployment-id status)
         (values deployment-id status)))))
 
-;;; =============================================================================
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
 ;;; History & Rollback
-;;; =============================================================================
+
 (defun history (&key (limit 10))
   "Show recent deployment history.
 
@@ -147,9 +129,10 @@ Example:
           (format t "~%Rolled back ~A of ~A actions.~%" rolled-back total))
       (values rolled-back total))))
 
-;;; =============================================================================
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
 ;;; Snapshots - Save/Load Configuration Sets
-;;; =============================================================================
+
 (defun save-snapshot (name &key (description nil))
   "Save the current configuration as a named snapshot.
 Snapshots let you save different configuration sets and switch between them.

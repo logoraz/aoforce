@@ -78,9 +78,9 @@ configuration as follows:
   ;; cd to ~/Work/aoforce/ (or location of this repo)
   (asdf:load-system :aoforce)
   ;; First visualize your deployment plan
-  (setup::list-configs)
+  (aoforce:outline)
   ;; Deploy!
-  (setup:deploy)
+  (aoforce:deploy)
 
 #+end_src
 
