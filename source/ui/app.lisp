@@ -1,171 +1,97 @@
 (defpackage #:ui/app
-  (:use #:cl #:gtk4
-        #:ui/widgets
-        #:ui/layouts
-        #:ui/controller
-        #:ui/builder)
+  (:use #:cl #:gtk4)
   (:export #:main
            #:start-app
            #:aoforce-app)
-  (:documentation "Main renderer application package.
-
-This module includes:
-  - Action definitions for business logic
-  - Page layout definitions
-  - Application entry point
-
-To extend the UI, you can:
-  - Define new actions with define-action
-  - Create new page layouts with define-page
-  - Add new sections to existing pages
-  - Create custom section builders
-
-"))
+  (:documentation "Main renderer application package."))
 (in-package #:ui/app)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Actions - Business Logic
-
-(define-action :parse-expression (controller entry text)
-  "Parse the input text as a Lisp expression."
-  (let ((expr (ignore-errors (read-from-string text))))
-    (set-state controller :current-expression expr)
-    ;; Update validation styling
-    (funcall (if expr #'widget-remove-css-class #'widget-add-css-class)
-             entry "error")
-    expr))
-
-(define-action :evaluate (controller entry)
-  "Evaluate the current expression and display the result."
-  (declare (ignore entry))
-  (let ((expr (get-state controller :current-expression)))
-    (when expr
-      (let ((result (handler-case (eval expr)
-                      (error (err) err))))
-        ;; Update status page description with result
-        (with-widget controller :main-status
-          (lambda (page)
-            (setf (adw:status-page-description page) 
-                  (princ-to-string result)))))
-      ;; Clear state and input
-      (set-state controller :current-expression nil)
-      (with-widget controller :repl-input-entry
-        (lambda (entry)
-          (setf (entry-buffer-text (entry-buffer entry)) "")
-          (widget-remove-css-class entry "error"))))))
-
-(define-action :exit (controller)
-  "Exit the application."
-  (with-widget controller :window
-    (lambda (window)
-      (window-destroy window))))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
-;;; Page Layouts
-;;;
-;;; The main REPL page layout
-
-(define-page :repl-page (:title "REPL" :icon "utilities-terminal-symbolic")
-  ;; Branding/Status section at top
-  (status-section :main-status
-                  :title "AOFORCE"
-                  :description " "
-                  :paintable-path "assets/lisp-logo.png")
-  
-  ;; Input section for REPL
-  (input-section :repl-input
-                 :prompt (format nil "~A> " 
-                                 (or (car (package-nicknames *package*))
-                                     (package-name *package*)))
-                 :on-changed :parse-expression
-                 :on-activate :evaluate
-                 :error-class "error")
-  
-  ;; Action buttons
-  (button-section :actions
-                  :buttons '((:label "Exit" :action :exit :style nil)
-                             (:label "Eval" :action :evaluate :style :suggested))
-                  :layout :horizontal))
-
-;;; Example settings page layout (for future expansion)
-(define-page :settings-page (:title "Settings" :icon "emblem-system-symbolic")
-  (preferences-section :appearance
-                       :title "Appearance"
-                       :description "Customize the look and feel"
-                       :rows '((:type :switch
-                                :id :dark-mode-switch
-                                :title "Dark Mode"
-                                :subtitle "Use dark color scheme"
-                                :active t
-                                :on-toggled :toggle-dark-mode)
-                               (:type :combo
-                                :id :theme-combo
-                                :title "Theme"
-                                :items ("Default" "High Contrast" "Solarized")
-                                :selected 0
-                                :on-selected :select-theme)))
-  
-  (preferences-section :editor
-                       :title "Editor"
-                       :description "REPL configuration"
-                       :rows '((:type :entry
-                                :id :prompt-entry
-                                :title "Custom Prompt"
-                                :subtitle "Leave empty for default"
-                                :on-activate :set-prompt)
-                               (:type :switch
-                                :id :auto-eval-switch
-                                :title "Auto-Evaluate"
-                                :subtitle "Evaluate expressions on Enter"
-                                :active t))))
-
-;;; Settings actions (stubs for now)
-(define-action :toggle-dark-mode (controller switch state)
-  (declare (ignore controller switch))
-  (let ((scheme (if state 
-                    adw:+color-scheme-force-dark+
-                    adw:+color-scheme-force-light+)))
-    (setf (adw:style-manager-color-scheme (adw:style-manager-default)) scheme)))
-
-(define-action :select-theme (controller dropdown index)
-  (declare (ignore controller dropdown))
-  (format t "Theme selected: ~A~%" index))
-
-(define-action :set-prompt (controller entry)
-  (declare (ignore controller))
-  (let ((text (entry-buffer-text (entry-buffer entry))))
-    (format t "Prompt set to: ~A~%" text)))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
-;;; Application Definition
-;;;
-;;; Forward declaration for the macro-generated function
-
-(declaim (ftype function aoforce-app))
+;;; Define ADW Application
 
 (define-application (:name aoforce-app
-                     :id "org.aoforce.app")
-    (define-main-window (window (adw:make-application-window :app *application*))
-        (let ((controller (make-instance 'app-controller)))
-          ;; Register window in controller
-          (register-widget controller :window window)
-
-          ;; Build the UI from the page definition
-          (build-application-window
-           controller window
-           (get-page-definition :repl-page)
-           :header t
-           :use-carousel t
-           :window-size '(400 600)
-           :style-classes '("devel")
-           :color-scheme :force-dark)
-
-          ;; Present the window
-          (unless (widget-visible-p window)
-            (window-present window)))))
+                     :id "org.logoraz.aoforce")
+  (define-main-window (window (adw:make-application-window :app *application*))
+    (let ((expression nil))
+      (widget-add-css-class window "devel")
+      (setf (widget-size-request window) '(400 600))
+      (let ((box (make-box :orientation +orientation-vertical+
+                           :spacing 0)))
+        (setf (adw:window-content window) box)
+        (let ((header-bar (adw:make-header-bar)))
+          (setf (adw:header-bar-title-widget header-bar)
+                (adw:make-window-title :title (lisp-implementation-type)
+                                       :subtitle (lisp-implementation-version)))
+          (box-append box header-bar))
+        (let ((carousel (adw:make-carousel)))
+          (setf (widget-hexpand-p carousel) t
+                (widget-vexpand-p carousel) t
+                (adw:carousel-interactive-p carousel) t)
+          (let ((page (adw:make-status-page)))
+            (setf (widget-hexpand-p page) t
+                  (widget-vexpand-p page) t
+                  (adw:status-page-icon-name page) "utilities-terminal-symbolic"
+                  (adw:status-page-title page) "Simple Lisp REPL"
+                  (adw:status-page-description page) " ")
+            (flet ((eval-expression (widget)
+                     (declare (ignore widget))
+                     (when expression
+                       (setf (adw:status-page-description page)
+                             (princ-to-string
+                              (handler-case (eval expression)
+                                (error (err) err)))))))
+              (let ((box (make-box :orientation +orientation-vertical+
+                                   :spacing 0)))
+                (let ((group (adw:make-preferences-group)))
+                  (setf (widget-margin-all group) 10)
+                  (let ((row (adw:make-action-row)))
+                    (setf (adw:preferences-row-title row)
+                          (format nil "~A>" (or (car (package-nicknames *package*))
+                                                (package-name *package*))))
+                    (let ((entry (make-entry)))
+                      (setf (widget-valign entry) +align-center+
+                            (widget-hexpand-p entry) t)
+                      (connect
+                       entry
+                       "changed"
+                       (lambda (entry)
+                         (setf expression
+                               (ignore-errors (read-from-string
+                                               (entry-buffer-text (entry-buffer entry)))))
+                                 (funcall
+                                  (if expression #'widget-remove-css-class
+                                      #'widget-add-css-class)
+                                  entry "error")))
+                      (connect entry "activate" #'eval-expression)
+                      (adw:action-row-add-suffix row entry))
+                    (adw:preferences-group-add group row))
+                  (box-append box group))
+                (let ((carousel-box box)
+                      (box (make-box :orientation +orientation-horizontal+
+                                     :spacing 0)))
+                  (setf (widget-hexpand-p box) t
+                        (widget-halign box) +align-fill+)
+                  (let ((button (make-button :label "Exit")))
+                    (setf (widget-css-classes button) '("pill")
+                          (widget-margin-all button) 10
+                          (widget-hexpand-p button) t)
+                    (connect button "clicked" (lambda (button)
+                                                (declare (ignore button))
+                                                (window-destroy window)))
+                    (box-append box button))
+                  (let ((button (make-button :label "Eval")))
+                    (setf (widget-css-classes button) '("suggested-action" "pill")
+                          (widget-margin-all button) 10
+                          (widget-hexpand-p button) t)
+                    (connect button "clicked" #'eval-expression)
+                    (box-append box button))
+                  (box-append carousel-box box))
+                (setf (adw:status-page-child page) box)))
+            (adw:carousel-append carousel page))
+          (box-append box carousel)))
+      (unless (widget-visible-p window)
+        (window-present window)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;

@@ -31,11 +31,7 @@
        (:file "persistence")))
      (:module "ui"
       :components
-      ((:file "widgets")
-       (:file "layouts")
-       (:file "controller")
-       (:file "builder")
-       (:file "app")))
+      ((:file "app")))
      ;; Finally scaffold aoforce
      (:file "setup"   :depends-on ("utils" "core"))
      (:file "aoforce" :depends-on ("utils" "core" "ui")))))
