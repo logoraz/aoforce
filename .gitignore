@@ -1,4 +1,5 @@
 # root
+.vscode
 /ocicl/*
 *.db
 

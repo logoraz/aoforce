@@ -25,11 +25,13 @@
 
 #-ocicl
 (ignore-errors
-  (when (probe-file (uiop:xdg-data-home #P"ocicl/ocicl-runtime.lisp"))
-    (load (uiop:xdg-data-home #P"ocicl/ocicl-runtime.lisp")))
+  (let ((ocicl-runtime (uiop:xdg-data-home #P"ocicl/ocicl-runtime.lisp")))
+    (when (probe-file ocicl-runtime)
+    (load ocicl-runtime)))
   (asdf:initialize-source-registry
    (list :source-registry
-         (list :tree (uiop:getcwd)) 
+         ;; Needed to store non-available ocicl systems in ocicl/
+         (list :tree (uiop:getcwd))
          :inherit-configuration)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
