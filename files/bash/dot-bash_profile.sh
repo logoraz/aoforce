@@ -9,12 +9,8 @@ fi
 
 ## General Env
 export LC_COLLATE=C
-export EDITOR=emacs
-if [[ $XDG_SESSION_TYPE == 'x11' ]]; then
-    export EDITOR=lem
-    export BROWSER=nyxt
-    export GTK_THEME='Adwaita:dark'
-fi
+export EDITOR="code --wait"
+export VISUAL="code --wait"
 
 ## XDG Env
 export XDG_CONFIG_HOME=$HOME/.config
@@ -23,4 +19,4 @@ export XDG_DATA_HOME=$HOME/.local/share
 export XDG_BIN_HOME=$HOME/.local/bin
 
 ## Update PATH
-# export PATH="lem:$PATH"
+# export PATH="tbd:$PATH"

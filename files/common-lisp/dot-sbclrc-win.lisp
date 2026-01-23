@@ -1,4 +1,4 @@
-;;;; dot-sbclrc.lisp -> .sbclrc - SBCL Initialization File
+;;;; dot-sbclrc.lisp -> .sbclrc - SBCL Initialization File (Windows)
 
 ;;; Enable Advanced SBCL Features
 (ignore-errors (require :asdf)
@@ -56,7 +56,8 @@
 
 #-ocicl
 (ignore-errors
- (let ((ocicl-runtime (uiop:xdg-data-home #P"ocicl/ocicl-runtime.lisp")))
+ (let ((ocicl-runtime (merge-pathnames "AppData/Local/ocicl/ocicl-runtime.lisp"
+                                       (user-homedir-pathname))))
    (when (probe-file ocicl-runtime)
      (load ocicl-runtime)))
  (asdf:initialize-source-registry
