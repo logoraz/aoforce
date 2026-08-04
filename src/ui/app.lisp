@@ -1,10 +1,12 @@
-(defpackage #:ui/app
-  (:use #:cl #:gtk4)
+(defpackage :aoforce/ui/app
+  (:use :cl :gtk4)
+  (:import-from :adw)
   (:export #:main
            #:start-app
            #:aoforce-app)
   (:documentation "Main renderer application package."))
-(in-package #:ui/app)
+
+(in-package :aoforce/ui/app)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;

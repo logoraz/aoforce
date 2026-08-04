@@ -1,11 +1,11 @@
-(defpackage #:aofr/core/persistence
-  (:use #:cl
-        #:aofr/core/config-manager)
-  (:import-from #:uiop/filesystem
+(defpackage :aoforce/core/persistence
+  (:use :cl
+        :aoforce/core/config-manager)
+  (:import-from :uiop/filesystem
                 #:ensure-all-directories-exist)
-  (:import-from #:uiop/configuration
+  (:import-from :uiop/configuration
                 #:xdg-data-home)
-  (:import-from #:uiop/os
+  (:import-from :uiop/os
                 #:getenv)
   (:local-nicknames (#:u #:uiop)
                     (#:db #:dbi))
@@ -36,7 +36,7 @@ This module provides:
 Requires: cl-dbi (SQLite3 backend)
 "))
 
-(in-package #:aofr/core/persistence)
+(in-package :aoforce/core/persistence)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Database Configuration

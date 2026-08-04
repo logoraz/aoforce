@@ -1,16 +1,16 @@
-(defpackage #:aofr/core/config-manager
-  (:use #:cl 
-        #:aofr/utils/syntax
-        #:trivial-gray-streams)
-  (:import-from #:osicat
+(defpackage :aoforce/core/config-manager
+  (:use :cl
+        :aoforce/utils/syntax
+        :trivial-gray-streams)
+  (:import-from :osicat
                 #:make-link
                 #:read-link
                 #:file-kind)
-  (:import-from #:cl-ppcre
+  (:import-from :cl-ppcre
                 #:regex-replace-all)
-  (:local-nicknames (#:u #:uiop)
-                    (#:ufs #:uiop/filesystem)
-                    (#:upn #:uiop/pathname))
+  (:local-nicknames (#:u :uiop)
+                    (#:ufs :uiop/filesystem)
+                    (#:upn :uiop/pathname))
   ;; Classes
   (:export #:config-object
            #:config-manager
@@ -43,7 +43,7 @@
            #:deployment-error)
   (:documentation "CLOS-based Configuration Manager"))
 
-(in-package #:aofr/core/config-manager)
+(in-package :aoforce/core/config-manager)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -53,7 +53,7 @@
   ((config :initarg :config :reader config-error-config))
   (:documentation "Base condition for config-manager errors."))
 
-(define-condition source-not-found (config-error)
+(define-condition source-not-found (warning)
   ((path :initarg :path :reader source-not-found-path))
   (:report (lambda (c stream)
              (format stream "Source path does not exist: ~A" 

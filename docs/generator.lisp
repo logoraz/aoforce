@@ -1,13 +1,14 @@
-(defpackage #:docs/aoforce-docs
+(defpackage :aoforce-docs/generator
   (:nicknames #:docs)
-  (:use #:cl
-        #:aoforce)
+  (:use :cl
+        :aoforce)
   (:import-from #:3bmd)
   (:import-from #:colorize)
   (:import-from #:print-licenses)
   (:export )
   (:documentation "Documentation system for aoforce")  )
-(in-package #:docs/aoforce-docs)
+
+(in-package :aoforce-docs/generator)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;

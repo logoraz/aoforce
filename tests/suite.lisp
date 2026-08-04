@@ -1,18 +1,18 @@
-(defpackage #:aofr/tests/suite
-  (:use #:cl
-        #:5am
-        #:aofr/utils/syntax
-        #:aoforce)
+(defpackage :aoforce-tests/suite
+  (:use :cl
+        :5am
+        :aoforce/utils/syntax
+        :aoforce)
   (:export )
   (:documentation "Base Test Suite"))
-(in-package #:aofr/tests/suite)
+(in-package :aoforce-tests/suite)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; Define the test suite
 
-(def-suite :suite :description "AOFORCE test suite")
-(in-suite :suite)
+(def-suite suite :description "AOFORCE test suite")
+(in-suite suite)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;

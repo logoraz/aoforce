@@ -1,10 +1,11 @@
-(defpackage #:aofr/utils/syntax
-  (:use #:cl)
-  (:local-nicknames (#:it #:iterate))
+(defpackage :aoforce/utils/syntax
+  (:use :cl)
+  (:local-nicknames (#:it :iterate))
   (:export #:concat
            #:nlet)
   (:documentation "Syntactic Language Extensions."))
-(in-package #:aofr/utils/syntax)
+
+(in-package :aoforce/utils/syntax)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;

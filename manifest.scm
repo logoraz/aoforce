@@ -1,0 +1,28 @@
+;; Guix Development Package Manifest
+;;
+;; Run:
+;;
+;; guix shell -m manifest.scm
+;;
+;; export LD_LIBRARY_PATH="$GUIX_ENVIRONMENT/lib"
+;;
+;; sbcl
+;;
+
+(use-modules (gnu packages))
+
+(specifications->manifest
+  (list
+    "sbcl"                   ; Common Lisp implementation
+
+    ;; CFFI / FFI substrate
+    "libffi"                 ; runtime: CFFI's foreign-call backend
+    "pkg-config"             ; build: locates C library cflags/libs
+    "gcc-toolchain"          ; build: compiles cffi-grovel .c output
+    "libfixposix"            ; build+runtime: iolib's POSIX bindings
+                             ;   (transitive dep, pulled in by dbus)
+
+    ;; GTK4 / Libadwaita UI stack
+    "gobject-introspection"  ; runtime: typelib discovery for GI bindings
+    "gtk"                    ; runtime: GTK4 C library
+    "libadwaita"))           ; runtime: Libadwaita widgets (Adw*)

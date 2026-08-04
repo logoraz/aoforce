@@ -3,14 +3,13 @@
   :author "Erik P Almaraz <erikalmaraz@fastmail.com"
   :license "Various/Apache-2.0"
   :version (:read-file-form "version.sexp" :at (0 1))
-  :depends-on ()
-  :components
-  ((:module "source"
-    :components
-    ((:file "sdraw")
-     (:file "dtrace")
-     (:file "fcalc")
-     (:file "scalc"))))
+  :class :package-inferred-system
+  :pathname "src"
+  :depends-on ("learn-cl/main")
   :long-description "
 A library exibiting how to setup a library staging various learnings.
 ")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Register Systems

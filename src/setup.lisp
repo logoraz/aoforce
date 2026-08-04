@@ -1,7 +1,7 @@
-(defpackage #:setup
-  (:use #:cl
-        #:aofr/core/config-manager
-        #:aofr/core/persistence)
+(defpackage :aoforce/setup
+  (:use :cl
+        :aoforce/core/config-manager
+        :aoforce/core/persistence)
   ;; Basic Setup
   (:export #:outline
            #:deploy)
@@ -14,7 +14,8 @@
            #:load-snapshot
            #:snapshots)
   (:documentation "Setup script to scaffold CL configuration/environment."))
-(in-package #:setup)
+
+(in-package :aoforce/setup)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;

@@ -1,16 +1,16 @@
-(defpackage #:aoforce
+(defpackage :aoforce
   (:nicknames #:aofr)
   (:use #:cl)
-  (:import-from #:setup
+  (:import-from :aoforce/setup
                 #:outline
                 #:deploy)
-  (:import-from #:ui/app
+  (:import-from :aoforce/ui/app
                 #:start-app)
-  (:import-from #:learn-cl/sdraw
+  (:import-from :learn-cl/sdraw
                 #:sdraw)
-  (:import-from #:learn-cl/dtrace
+  (:import-from :learn-cl/dtrace
                 #:dtrace)
-  (:local-nicknames (#:it #:iterate))
+  (:local-nicknames (#:it :iterate))
   ;; Tests/Play
   (:export #:sdraw
            #:dtrace
@@ -21,8 +21,11 @@
            #:deploy)
   ;; UI
   (:export #:ui)
+  ;; Main Entry
+  (:export #:main)
   (:documentation "Main package of AOFORCE"))
-(in-package #:aoforce)
+
+(in-package :aoforce)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -48,7 +51,6 @@
   "Main entry point for the executable."
   (start-app))
 
-#+(or)
 (defun main ()
   "Main entry point for the executable."
   (format t "Hello from Common Lisp! Arguments: ~A~%" 'no-args)

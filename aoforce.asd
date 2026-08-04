@@ -3,39 +3,11 @@
   :author "Erik P Almaraz <erikalmaraz@fastmail.com>"
   :license "Apache-2.0"
   :version (:read-file-form "version.sexp" :at (0 1))
-  :depends-on ; External Dependencies
-  ("iterate"
-   "bordeaux-threads"
-   "lparallel"
-   "cl-ppcre"
-   "osicat"
-   "trivial-gray-streams"
-   "cl-dbi"
-   ;; UI
-   "cl-gtk4"
-   "cl-gtk4.adw"
-   "cl-gdk4"
-   ;; Independent Local Systems (aka libraries)
-   "learn-cl"
-   "confr")
-  :components
-  ((:module "source"
-    :components
-    ((:module "utils"
-      :components
-      ((:file "syntax")))
-     (:module "core"
-      :depends-on ("utils")
-      :components
-      ((:file "config-manager")
-       (:file "persistence")))
-     (:module "ui"
-      :components
-      ((:file "app")))
-     ;; Finally scaffold aoforce
-     (:file "setup"   :depends-on ("utils" "core"))
-     (:file "aoforce" :depends-on ("utils" "core" "ui")))))
-  :in-order-to ((test-op (test-op "aoforce/tests")))
+  :class :package-inferred-system
+  :pathname "src"
+  :depends-on
+  ("aoforce/aoforce")
+  :in-order-to ((test-op (test-op "aoforce-tests")))
   :long-description "A collection of Common Lisp development environment
 configuration resources, tools, and a playground for building new projects.")
 
@@ -43,45 +15,20 @@ configuration resources, tools, and a playground for building new projects.")
 ;;;
 ;;; Register Systems
 
-;; The function `register-system-packages' must be called to register packages
-;; used or provided by your system when the name of the system/file that
-;; provides the package is not the same as the package name
-;; (converted to lower case).
 (register-system-packages "iterate" '(:iter))
 (register-system-packages "bordeaux-threads" '(:bt :bt2))
-(register-system-packages "fiveam" '(:5am))
+(register-system-packages "cl-dbi" '(:dbi))
+(register-system-packages "cl-gtk4" '(:gtk4))
+(register-system-packages "cl-gtk4.adw" '(:adw))
+(register-system-packages "cl-gdk4" '(:gdk4))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Secondary Systems
-
-(defsystem "aoforce/tests"
-  :description "Unit tests"
-  :depends-on ("aoforce"
-               "fiveam")
-  :components
-  ((:module "tests"
-    :components
-    ((:file "suite"))))
-  :perform (test-op (o c)
-                    (symbol-call :fiveam :run! :suite)))
-
-(defsystem "aoforce/docs"
-  :description "Documentation framework"
-  :depends-on ("aoforce"
-               "3bmd"
-               "colorize"
-               "print-licenses")
-  :components
-  ((:module "docs"
-    :components
-    ((:file "aoforce-docs")))))
+;;; Subsystems
 
 (defsystem "aoforce/libraries"
   :description "Extra libraries to bring in if needed"
-  :depends-on ("confr"
-               "chemgr"
-               "learn-cl"))
+  :depends-on ("learn-cl"))
 
 (defsystem "aoforce/executable"
   :description "Build executable"
