@@ -22,7 +22,9 @@
     "libfixposix"            ; build+runtime: iolib's POSIX bindings
                              ;   (transitive dep, pulled in by dbus)
 
-    ;; GTK4 / Libadwaita UI stack
-    "gobject-introspection"  ; runtime: typelib discovery for GI bindings
+    ;; GTK4 UI stack
     "gtk"                    ; runtime: GTK4 C library
-    "libadwaita"))           ; runtime: Libadwaita widgets (Adw*)
+    "pango"
+    "cairo"
+    "gdk-pixbuf"
+    "graphene"))

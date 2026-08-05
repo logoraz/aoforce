@@ -1,110 +1,57 @@
 (defpackage :aoforce/ui/app
-  (:use :cl :gtk4)
-  (:import-from :adw)
-  (:export #:main
-           #:start-app
-           #:aoforce-app)
+  (:use :cl)
+  (:import-from :gtk
+                #:application
+                #:application-window
+                #:box
+                #:button
+                #:window-close
+                #:box-append
+                #:window-child
+                #:widget-visible)
+  (:import-from :gobject
+                #:signal-connect)
+  (:import-from :gio
+                #:application-run)
+  (:export #:aoforce-app)
   (:documentation "Main renderer application package."))
 
 (in-package :aoforce/ui/app)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Define ADW Application
+;;; Define GTK4 Application
 
-(define-application (:name aoforce-app
-                     :id "org.logoraz.aoforce")
-  (define-main-window (window (adw:make-application-window :app *application*))
-    (let ((expression nil))
-      (widget-add-css-class window "devel")
-      (setf (widget-size-request window) '(400 600))
-      (let ((box (make-box :orientation +orientation-vertical+
-                           :spacing 0)))
-        (setf (adw:window-content window) box)
-        (let ((header-bar (adw:make-header-bar)))
-          (setf (adw:header-bar-title-widget header-bar)
-                (adw:make-window-title :title (lisp-implementation-type)
-                                       :subtitle (lisp-implementation-version)))
-          (box-append box header-bar))
-        (let ((carousel (adw:make-carousel)))
-          (setf (widget-hexpand-p carousel) t
-                (widget-vexpand-p carousel) t
-                (adw:carousel-interactive-p carousel) t)
-          (let ((page (adw:make-status-page)))
-            (setf (widget-hexpand-p page) t
-                  (widget-vexpand-p page) t
-                  (adw:status-page-icon-name page) "utilities-terminal-symbolic"
-                  (adw:status-page-title page) "Simple Lisp REPL"
-                  (adw:status-page-description page) " ")
-            (flet ((eval-expression (widget)
-                     (declare (ignore widget))
-                     (when expression
-                       (setf (adw:status-page-description page)
-                             (princ-to-string
-                              (handler-case (eval expression)
-                                (error (err) err)))))))
-              (let ((box (make-box :orientation +orientation-vertical+
-                                   :spacing 0)))
-                (let ((group (adw:make-preferences-group)))
-                  (setf (widget-margin-all group) 10)
-                  (let ((row (adw:make-action-row)))
-                    (setf (adw:preferences-row-title row)
-                          (format nil "~A>" (or (car (package-nicknames *package*))
-                                                (package-name *package*))))
-                    (let ((entry (make-entry)))
-                      (setf (widget-valign entry) +align-center+
-                            (widget-hexpand-p entry) t)
-                      (connect
-                       entry
-                       "changed"
-                       (lambda (entry)
-                         (setf expression
-                               (ignore-errors (read-from-string
-                                               (entry-buffer-text (entry-buffer entry)))))
-                                 (funcall
-                                  (if expression #'widget-remove-css-class
-                                      #'widget-add-css-class)
-                                  entry "error")))
-                      (connect entry "activate" #'eval-expression)
-                      (adw:action-row-add-suffix row entry))
-                    (adw:preferences-group-add group row))
-                  (box-append box group))
-                (let ((carousel-box box)
-                      (box (make-box :orientation +orientation-horizontal+
-                                     :spacing 0)))
-                  (setf (widget-hexpand-p box) t
-                        (widget-halign box) +align-fill+)
-                  (let ((button (make-button :label "Exit")))
-                    (setf (widget-css-classes button) '("pill")
-                          (widget-margin-all button) 10
-                          (widget-hexpand-p button) t)
-                    (connect button "clicked" (lambda (button)
-                                                (declare (ignore button))
-                                                (window-destroy window)))
-                    (box-append box button))
-                  (let ((button (make-button :label "Eval")))
-                    (setf (widget-css-classes button) '("suggested-action" "pill")
-                          (widget-margin-all button) 10
-                          (widget-hexpand-p button) t)
-                    (connect button "clicked" #'eval-expression)
-                    (box-append box button))
-                  (box-append carousel-box box))
-                (setf (adw:status-page-child page) box)))
-            (adw:carousel-append carousel page))
-          (box-append box carousel)))
-      (unless (widget-visible-p window)
-        (window-present window)))))
+(defun aoforce-app ()
+  "Create and run a minimal GTK4 application window with a close button."
+  (let ((app (make-instance 'application
+                             :application-id "org.aoforce.app"
+                             :flags 0)))
+    (signal-connect app "activate"
+      (lambda (application)
+        (let* ((window (make-instance 'application-window
+                                       :application application
+                                       :title "aoforce"
+                                       :default-width 400
+                                       :default-height 300))
+               (box (make-instance 'box
+                                    :orientation :vertical
+                                    :spacing 6
+                                    :margin-top 12
+                                    :margin-bottom 12
+                                    :margin-start 12
+                                    :margin-end 12))
+               (close-button (make-instance 'button :label "Close")))
+          (signal-connect close-button "clicked"
+            (lambda (button)
+              (declare (ignore button))
+              (window-close window)))
+          (box-append box close-button)
+          (setf (window-child window) box)
+          (setf (widget-visible window) t))))
+    (application-run app nil)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; Public API
 
-(defun main ()
-  "Main entry point for the application."
-  (unless (adw:initialized-p)
-    (adw:init))
-  (aoforce-app))
-
-(defun start-app ()
-  "Alias for main."
-  (main))

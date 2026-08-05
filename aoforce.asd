@@ -18,9 +18,13 @@ configuration resources, tools, and a playground for building new projects.")
 (register-system-packages "iterate" '(:iter))
 (register-system-packages "bordeaux-threads" '(:bt :bt2))
 (register-system-packages "cl-dbi" '(:dbi))
-(register-system-packages "cl-gtk4" '(:gtk4))
-(register-system-packages "cl-gtk4.adw" '(:adw))
-(register-system-packages "cl-gdk4" '(:gdk4))
+(register-system-packages "cl-cffi-gtk4" '(:gtk :gdk))
+;; cl-cffi-gtk4 dependencies
+(register-system-packages "cl-cffi-glib" '(:gobject :glib :gio))
+(register-system-packages "cl-cffi-gdk-pixbuf" '(:gdk-pixbuf))
+(register-system-packages "cl-cffi-graphene" '(:graphene))
+(register-system-packages "cl-cffi-pango" '(:pango))
+(register-system-packages "cl-cffi-cairo" '(:cairo))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;

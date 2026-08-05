@@ -5,7 +5,7 @@
                 #:outline
                 #:deploy)
   (:import-from :aoforce/ui/app
-                #:start-app)
+                #:aoforce-app)
   (:import-from :learn-cl/sdraw
                 #:sdraw)
   (:import-from :learn-cl/dtrace
@@ -19,8 +19,6 @@
   ;; Setup
   (:export #:outline
            #:deploy)
-  ;; UI
-  (:export #:ui)
   ;; Main Entry
   (:export #:main)
   (:documentation "Main package of AOFORCE"))
@@ -47,17 +45,6 @@
 ;;;
 ;;; Entry Point
 
-(defun ui ()
-  "Main entry point for the executable."
-  (start-app))
-
 (defun main ()
   "Main entry point for the executable."
-  (format t "Hello from Common Lisp! Arguments: ~A~%" 'no-args)
-  #+or
-  (progn
-    #+clisp (ext:exit)
-    #+(and ecl clasp) (ext:quit)
-    #+ccl (ccl:quit)
-    #+sbcl (sb-ext:quit))
-  (uiop:quit))
+  (aoforce-app))
